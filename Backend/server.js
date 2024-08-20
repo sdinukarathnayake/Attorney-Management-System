@@ -8,6 +8,7 @@ const app = express();
 require("dotenv").config();
 const bodyParser = require("body-parser");
 
+
 // port number
 const PORT = process.env.PORT || 8070;
 
@@ -30,3 +31,9 @@ connection.once("open", () => {
 app.listen(PORT, () => {
     console.log(`Server is up and running on port : ${PORT}`);
 });
+
+//access to route for appointment request
+const appointmentRequestRouter = require("./routes/appointmentRequestRoute.js");
+app.use("/appointmentrequest", appointmentRequestRouter);
+
+
