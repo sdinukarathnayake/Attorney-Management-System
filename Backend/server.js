@@ -33,7 +33,10 @@ app.listen(PORT, () => {
 });
 
 //access to route for appointment request
-const appointmentRequestRouter = require("./routes/appointmentRequestRoute.js");
+const appointmentRequestRouter = require("./routes/routes_apm_appointment_request.js");
 app.use("/appointmentrequest", appointmentRequestRouter);
 
+//access to route for appointment
+const appointmentRouter = require("./routes/routes_apm_appointment.js");
+app.use("/appointment", appointmentRouter);
 

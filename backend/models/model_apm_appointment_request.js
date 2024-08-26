@@ -1,3 +1,5 @@
+// created by : R.M.S.D. Rathnayake - IT22140616
+
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -11,12 +13,7 @@ const appointmentRequestSchema = new Schema({
     },
 
     // sender info
-    lawyerType : {
-        type :String,
-        required : true,
-    },
-
-    lawyerId : {
+      lawyerId : {
         type : String,
         required : true,
     },
@@ -27,13 +24,23 @@ const appointmentRequestSchema = new Schema({
         required : true,
     },
     
+    clientId : {
+        type :String,
+        required : true,
+    },
+    
     //appointment info
     appointmentType : {
         type : String,
         required : true,
     },
 
-    appointmentName : {
+    title : {
+        type : String,
+        required : true,
+    },
+
+    description : {
         type : String,
         required : true,
     },
@@ -48,10 +55,15 @@ const appointmentRequestSchema = new Schema({
         required : true,
     },
 
-    appointmentLocation : {
+    location : {
         type : String,
         required : true,
     },
+    
+    appointmentRequestStatus : {
+        type : String,
+        required : true,
+    }
 })
 
 const AppointmentRequest = mongoose.model("appointmentrequest", appointmentRequestSchema);
