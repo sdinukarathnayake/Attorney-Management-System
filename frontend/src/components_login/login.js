@@ -16,11 +16,11 @@ function Login(){
     const userRoleDataTop = [
         {
             icon: <EditCalendarIcon/>,
-            title: <a href="/apm_dashboard" style={{ textDecoration: 'none', color: 'inherit' }}>Appointment Manager</a>      
+            title: <a href="/login/appointment-manager" style={{ textDecoration: 'none', color: 'inherit' }}>Appointment Manager</a>      
         },
         {
             icon: <SupportAgentIcon/>,
-            title: <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Support Agent</a> 
+            title: <a href="/support-agent-dashboard" style={{ textDecoration: 'none', color: 'inherit' }}>Support Agent</a> 
         },
         {
             icon: <BalanceIcon/>,

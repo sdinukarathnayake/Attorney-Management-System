@@ -1,5 +1,3 @@
-// created by : R.M.S.D. Rathnayake - IT22140616
-
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -22,7 +20,7 @@ const URL = process.env.MONGODB_URL;
 mongoose.connect(URL);
 
 // opening connection
-const connection = mongoose.connection;
+const connection = mongoose.connection; 
 connection.once("open", () => {
     console.log("Mongodb Connection Success!!..");
 });
@@ -32,11 +30,26 @@ app.listen(PORT, () => {
     console.log(`Server is up and running on port : ${PORT}`);
 });
 
-//access to route for appointment request
+
+//appointment management
 const appointmentRequestRouter = require("./routes/routes_apm_appointment_request.js");
 app.use("/appointmentrequest", appointmentRequestRouter);
 
-//access to route for appointment
 const appointmentRouter = require("./routes/routes_apm_appointment.js");
 app.use("/appointment", appointmentRouter);
 
+
+//users - attorney management
+const appointmentManagerRouter = require("./routes/routes_atm_user_appointment_manager.js");
+app.use("/appointmentmanager", appointmentManagerRouter);
+
+const legalCaseManagerRouter = require("./routes/routes_atm_user_legal_case_manager.js");
+app.use("/legalcasemanager", legalCaseManagerRouter);
+
+const deedManagerRouter = require("./routes/routes_atm_user_deed_manager.js");
+app.use("/deedmanager", deedManagerRouter);
+
+
+//client
+const clientRouter = require("./routes/routes_cli_clients.js");
+app.use("/client", clientRouter);

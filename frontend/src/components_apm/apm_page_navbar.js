@@ -2,52 +2,50 @@ import React, { useState } from "react";
 import List from '@mui/material/List';
 import { Box, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
 
-import HomeIcon from "@mui/icons-material/Home"
-import InfoIcon from "@mui/icons-material/Info"
-import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded"
-import LoginIcon from '@mui/icons-material/Login';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import MenuIcon from '@mui/icons-material/Menu';
-import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 
-function HomeNavbar(){
+function ApmNavbar(){
 
     const [openMenu, setOpenMenu] = useState(false)
     const menuOptions = [
         {
-            text: "Home",
-            icon: <HomeIcon/>
+            text: "Dashboard",
+            icon: <DashboardIcon/>
         },
 
         {
-            text: "About",
-            icon: <InfoIcon/>
+            text: "View All Appointment",
+            icon: <CalendarMonthIcon/>
         },  
 
         {
-            text: "Contact",
-            icon: <AccessTimeFilledIcon/>
-        },
+            text: "Support Ticket",
+            icon: <SupportAgentIcon/>
+        }, 
 
         {
-            text: "Login",
-            icon: <LoginIcon/>
+            text: "Logout",
+            icon: <LogoutIcon/>
         }
     ] 
 
     return(
-        <nav className="home-navBar">
-            <div className="logo-container">
+        <nav className="apm-navBar">
+            <div className="apm-logo-container">
                 <p>AMS</p>
             </div>
 
-            <div className="navbar-links-container">
-                <a className="navbar-links-container-links" href="/home">Home</a>
-                <a className="navbar-links-container-links" href="/home">About</a>
-                <a className="navbar-links-container-links" href="/home">Contact</a>        
-                <a className="navbar-primary-button" href="/login">Login</a>
+            <div className="apm-navbar-links-container">
+                <a className="apm-navbar-links-container-links" href="/appointment-manager-dashboard">Dashboard</a>
+                <a className="apm-navbar-links-container-links" href="/user-support-dashboard/user456">Support Ticket</a>
+                <a className="apm-navbar-primary-button" href="/login">Logout</a>
             </div>
 
-            <div className="navbar-menu-container">
+            <div className="apm-navbar-menu-container">
                 <MenuIcon onClick = {() => setOpenMenu(true)}/>
             </div>
 
@@ -74,4 +72,4 @@ function HomeNavbar(){
     )
 }
 
-export default HomeNavbar;
+export default ApmNavbar;

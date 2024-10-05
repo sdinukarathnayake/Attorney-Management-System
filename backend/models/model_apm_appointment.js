@@ -1,38 +1,60 @@
-// created by : R.M.S.D. Rathnayake - IT22140616
-
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 const appointmentSchema = new Schema({
 
-    requestID : {
-        type : String,
-        required : true,
+    appointmentId : {
+        type : String,    
     },
 
-    discussedPoints : {
-        type : String
+    appointmentRequestId : {
+        type : String,    
     },
-    
+
+    appointmentManagerId : {
+        type : String,
+    },
+
+    lawyerId : {
+        type : String,
+    },
+
+    clientId : {
+        type :String,
+    },
+
+    appointmentCreationDate: {
+        type : String,
+    },
+
+    appointmentTitle : {
+        type : String,
+    },
+
+    appointmentDescription : {
+        type : String,
+    },
+
+    discussedPoints: {
+        type : String,
+    },
+
     agreedPayment : {
-        type : String
+        type : String,
     },
 
     requestedDocuments : {
-        type : String
+        type : String,
     },
-
+    
     nextAppointmentDate : {
-        type : Date
+        type : String,
     },
     
     appointmentStatus : {
         type : String,
-        required : true,
-    }
+    }   
 })
 
 const Appointment = mongoose.model("appointment", appointmentSchema);
-
 module.exports = Appointment;

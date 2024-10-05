@@ -1,3 +1,6 @@
+import './common.css';
+import './home.css';
+
 import React from "react";
 import NavBar from "./Home_NavBar"
 import Footer from "./Home_Footer"

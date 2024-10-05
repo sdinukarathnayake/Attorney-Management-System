@@ -174,7 +174,7 @@
 
   .primary-heading {
     font-size: clamp(1.5rem, 5vw, 2.5rem);
-    color: var(--dark-color-color);
+    color: var(--dark-color);
     max-width: 700px;
   }
 
