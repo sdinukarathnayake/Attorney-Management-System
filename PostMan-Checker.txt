@@ -1,0 +1,159 @@
+import './components_home/common.css';
+import './components_home/home.css';
+import './components_login/login.css';
+import './components_apm/appointment_management.css';
+import './components_sup/user_affairs.css';
+
+
+http://localhost:8070/appointmentmanager/add-appointment-manager
+
+{
+    "userId": "APM002",
+    "fName": "Dinuka",
+    "lName": "Rathnayake",
+    "nic": "123456789V",
+    "address": "No. 123 Main Street, Asgiriya, Gampaha",
+    "email": "dinuka.rathnayake@gmail.com",
+    "phoneNumber": "0771234567",
+    "education": "Diploma in Communication and Media Studies, GCE Advanced Level",
+    "password": "dinu123",
+    "createdDate": "2024/09/01",
+    "userStatus": "Active"
+}
+
+--------------------------------------------------------------------
+
+http://localhost:8070/legalcasemanager/add-legal-case-manager
+
+{
+    "userId": "LCM004",
+    "fName": "Yoshini",
+    "lName": "Jayasinghe",
+    "nic": "123456789V",
+    "address": "No. 123 Flower Street, Kaduwela",
+    "email": "yoshini.jayasinghe@gmail.com",
+    "phoneNumber": "0771234567",
+    "education": "LLB (Hons) Law - Sri Lanka",
+    "password": "yosh123",
+    "createdDate": "2024/09/04",
+    "userStatus": "Active"
+}
+
+--------------------------------------------------------------------
+
+http://localhost:8070/deedmanager/add-deed-manager
+
+{
+    "userId": "DEM003",
+    "fName": "Chaveen",
+    "lName": "Wijesinghe",
+    "nic": "123456789V",
+    "address": "No. 123 Flower Street, Kandy",
+    "email": "chaveen.wijesinghe@gmail.com",
+    "phoneNumber": "0771234567",
+    "education": "LLB (Hons) Law - Sri Lanka",
+    "password": "ch12",
+    "createdDate": "2024/09/14",
+    "userStatus": "Active"
+}
+
+
+--------------------------------------------------------------------
+
+http://localhost:8070/client/add-client
+
+{
+    "userId": "CLI002",
+    "fname": "Enith",
+    "lname": "Samarasinghe",
+    "nic": "123456789V",
+    "address": "No. 123 Flower Street, Gampaha",
+    "district": "Gampaha",
+    "province": "Western",
+    "email": "enith.samarasinghe@gmail.com",
+    "phone": "0771234567",
+    "password": "enith",
+    "createdDate": "2024/09/01",
+    "userStatus": "Active"
+}
+
+--------------------------------------------------------------------
+
+http://localhost:8070/appointmentrequest/add-appointment-request
+http://localhost:8070/appointmentrequest/update-appointment-request/APR0001
+http://localhost:8070/appointmentrequest/delete-appointment-request/APR0001
+
+{
+    "appointmentRequestId": "APR0001",
+    "appointmentRequestName": "Initial Consultation",
+    "appointmentRequestDate": "2024-10-04",
+    "appointmentRequestStatus": "Pending",
+    "lawyerId": "LCM004",
+    "clientId": "CLI002",
+    "appointmentType": "Consultation",
+    "appointmentDate": "2024-10-10",
+    "appointmentTime": "10:00 AM",
+    "appointmentLocation": "Meeting Room 1"
+}
+
+{
+    "appointmentRequestId": "APR0001",
+    "appointmentRequestName": "Legal Consultation",
+    "appointmentRequestDate": "2024-10-04",
+    "appointmentRequestStatus": "Completed",
+    "lawyerId": "LCM004",
+    "clientId": "CLI002",
+    "appointmentType": "Consultation",
+    "appointmentDate": "2024-10-10",
+    "appointmentTime": "10:00 AM",
+    "appointmentLocation": "Meeting Room 1"
+}
+
+--------------------------------------------------------------------
+http://localhost:8070/appointment/add-appointment
+
+{
+    "appointmentId": "AP001",
+    "appointmentRequestId": "APR0001",
+    "appointmentManagerId": "APM002",
+    "lawyerId": "LCM004",
+    "clientId": "CLI002",
+    "appointmentTitle": "Legal Consultation",
+    "appointmentDescription": "Initial legal consultation regarding property dispute.",
+    "discussedPoints": "Land ownership documents, legal procedures for settlement.",
+    "agreedPayment": "Rs. 25,000",
+    "requestedDocuments": "Land Deed", "Proof of Identity",
+    "nextAppointmentDate": "2024-11-15",
+    "appointmentStatus": "Pending"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
