@@ -3,7 +3,6 @@ let appointment = require("../models/model_apm_appointment");
 
 // add new appointment
 router.route("/add-appointment").post((req, res) => {
-    const appointmentId = req.body.appointmentId;
     const appointmentRequestId = req.body.appointmentRequestId;
     const appointmentManagerId = req.body.appointmentManagerId;
     const lawyerId = req.body.lawyerId;
@@ -19,7 +18,6 @@ router.route("/add-appointment").post((req, res) => {
 
     // creating new object
     const newAppointment = new appointment({
-        appointmentId,
         appointmentRequestId,
         appointmentManagerId,                
         lawyerId,
@@ -48,7 +46,7 @@ router.route("/add-appointment").post((req, res) => {
 router.route("/view-appointment/:id").get((req, res) => {
     const appointmentId = req.params.id;
         
-    appointment.findOne({appointmentId: appointmentId})
+    appointment.findById(appointmentId)
         .then((appointment) => {
             if (appointment) {
                 res.json(appointment);
@@ -69,7 +67,6 @@ router.route("/update-appointment/:id").put(async (req, res) => {
 
     // Object to hold updated fields
     const updatedAppointment = {
-        appointmentId: req.body.appointmentId,
         appointmentRequestId: req.body.appointmentRequestId,
         appointmentManagerId: req.body.appointmentManagerId,        
         lawyerId: req.body.lawyerId,
@@ -85,7 +82,7 @@ router.route("/update-appointment/:id").put(async (req, res) => {
     };
 
     try {
-        const result = await appointment.findOneAndUpdate({appointmentId: appointmentId}, updatedAppointment, { new: true });
+        const result = await appointment.findByIdAndUpdate(appointmentId, updatedAppointment, { new: true });
 
         if (result) {
             res.json("Appointment Updated Successfully");
@@ -103,13 +100,31 @@ router.route("/update-appointment/:id").put(async (req, res) => {
 router.route("/delete-appointment/:id").delete(async(req, res)=> {
     let appointmentId = req.params.id;
 
-    await appointment.findOneAndDelete({appointmentId: appointmentId}).then(()=> {
+    await appointment.findByIdAndDelete(appointmentId).then(()=> {
         res.status(200).send({status:"Appointment deleted"});
     }).catch((err)=> {
         console.log(err.messsage);
         res.status(500).send({status:"Error in delete appointment", error:err.messsage})
     })
 })
+
+
+//appointment manager dashboard - all pending appointments
+router.route("/appointments/pending").get((req, res) => {
+
+    appointment.find({ appointmentStatus: "Pending" })
+    .then((appointment) => {
+        if (appointment.length > 0) {
+            res.json(appointment);
+        } else {
+            res.status(404).json("Appointment Request Not Found");
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json("Error in Retrieving Appointment Request");
+    });
+});
 
 module.exports = router;
 

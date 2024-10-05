@@ -54,9 +54,9 @@ router.route("/view-all-deed-managers").get((req, res)=> {
 
 // Get a specific userRegistration by ID
 router.route("/view-deed-manager/:id").get((req, res) => {
-    const userRegistrationId = req.params.id;
+    const userId = req.params.id;
 
-    userRegistration.findById(userRegistrationId)
+    userRegistration.findOne({userId : userId})
         .then((userRegistration) => {
             if (userRegistration) {
                 res.json(userRegistration);

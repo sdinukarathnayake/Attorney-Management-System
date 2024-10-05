@@ -3,10 +3,6 @@ const Schema = mongoose.Schema;
 
 const appointmentSchema = new Schema({
 
-    appointmentId : {
-        type : String,    
-    },
-
     appointmentRequestId : {
         type : String,    
     },
@@ -24,7 +20,7 @@ const appointmentSchema = new Schema({
     },
 
     appointmentCreationDate: {
-        type : String,
+        type : Date,
     },
 
     appointmentTitle : {
@@ -48,7 +44,7 @@ const appointmentSchema = new Schema({
     },
     
     nextAppointmentDate : {
-        type : String,
+        type : Date,
     },
     
     appointmentStatus : {

@@ -95,19 +95,20 @@ router.route("/delete-client/:id").delete(async (req, res)=> {
 
 
 router.route("/view-client/:id").get(async (req, res) => {
-    let userId = req.params.id;
+    const clientId = req.params.id;
 
-    try {
-        const user = await Client.findById(userId);
-        if (user) {
-            res.status(200).send({ status: "user fetched", user: user });
-        } else {
-            res.status(404).send({ status: "user not found" });
-        }
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send({ status: "Error with get user", error: err.message });
-    }
+    Client.findOne({clientId : clientId})
+        .then((Client) => {
+            if (Client) {
+                res.json(Client);
+            } else {
+                res.status(404).json("Client Not Found");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json("Error in Retrieving Client");
+        });
 });
 
 

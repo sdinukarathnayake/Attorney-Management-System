@@ -51,11 +51,13 @@ router.route("/view-all-legal-case-managers").get((req, res)=> {
 })
 
 
+
+
 // Get a specific userRegistration by ID
 router.route("/view-legal-case-manager/:id").get((req, res) => {
-    const userRegistrationId = req.params.id;
+    const userId = req.params.id;
 
-    userRegistration.findById(userRegistrationId)
+    userRegistration.findOne({userId : userId})
         .then((userRegistration) => {
             if (userRegistration) {
                 res.json(userRegistration);
@@ -68,6 +70,7 @@ router.route("/view-legal-case-manager/:id").get((req, res) => {
             res.status(500).json("Error in Retrieving Legal Case Manager");
         });
 });
+
 
 // Update userRegistration 
 router.route("/update-legal-case-manager/:id").put(async (req, res) => {

@@ -54,9 +54,9 @@ router.route("/view-all-appointment-managers").get((req, res)=> {
 
 // Get a specific userRegistration by ID
 router.route("/view-appointment-manager/:id").get((req, res) => {
-    const userRegistrationId = req.params.id;
+    const userId = req.params.id;
 
-    userRegistration.findById(userRegistrationId)
+    userRegistration.findOne({userId : userId})
         .then((userRegistration) => {
             if (userRegistration) {
                 res.json(userRegistration);
@@ -116,6 +116,26 @@ router.route("/delete-appointment-manager/:id").delete(async (req, res) => {
             console.log(err.message);
             res.status(500).send({ status: "Error in delete Appointment Manager", error: err.message });
         });
+});
+
+
+//login
+router.route("/login-appointment-manager").post(async (req, res) => {
+    const { userId, password } = req.body;
+
+    try {
+        const appointmentManager = await userRegistration.findOne({ userId, password });
+
+        if (!appointmentManager) {
+            return res.status(400).json({ message: "Invalid email or password" });
+        }
+
+        res.status(200).json({ appointmentManager: appointmentManager });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
 });
 
 module.exports = router;

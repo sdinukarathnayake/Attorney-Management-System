@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components_home/Home_Footer';
 import HomeNavbar from '../components_home/Home_NavBar';
 
-const ClientLogin = () => {
-    const [email, setEmail] = useState('');
+const AppointmentManagerLogin = () => {
+
+    const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -15,35 +16,37 @@ const ClientLogin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8070/client/loginClient', { email, password });
+            const response = await axios.post('http://localhost:8070/appointmentmanager/login-appointment-manager', { userId, password });
             if (response.status === 200) {
                 // Store the user ID, NIC, and clientName in localStorage
-                localStorage.setItem('userId', response.data.user._id);
-                localStorage.setItem('userName', response.data.user.fname);
-                localStorage.setItem('userNic', response.data.user.nic); // Store NIC in localStorage
+                localStorage.setItem('userId', response.data.appointmentManager.userId);
+                localStorage.setItem('userName', response.data.appointmentManager.fName);
+                localStorage.setItem('userNic', response.data.appointmentManager.nic);
 
                 // Redirect to ClientPortalHome with the user's ID
-                navigate(`/clientHome/${response.data.user._id}`);
+                navigate(`/appointment-manager-dashboard/${response.data.appointmentManager.userId}`);
             }
         } catch (err) {
             setError('Invalid email or password');
         }
     };
+    
 
     return (
         <div>
             <HomeNavbar />
-            <div className="login-container-client">
-                <h2 className="login-title">Login</h2>
-                <form onSubmit={handleLogin} className="login-form">
-                    <div className="form-group">
-                        <label htmlFor="email" className="form-label">Email:</label>
+            <div className="">
+                <h2 className="">Login</h2>
+
+                <form onSubmit={handleLogin} className="">
+                    <div className="">
+                        <label htmlFor="email" className="">Email:</label>
                         <input 
-                            type="email" 
+                            type="text" 
                             id="email"
                             className="form-input" 
-                            value={email} 
-                            onChange={(e) => setEmail(e.target.value)} 
+                            value={userId} 
+                            onChange={(e) => setUserId(e.target.value)} 
                             required 
                         />
                     </div>
@@ -67,4 +70,4 @@ const ClientLogin = () => {
     );
 };
 
-export default ClientLogin;
+export default AppointmentManagerLogin;

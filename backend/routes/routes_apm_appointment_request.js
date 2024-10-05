@@ -41,7 +41,7 @@ router.route("/add-appointment-request").post((req, res) => {
 router.route("/view-appointment-request/:id").get((req, res) => {
     const appointmentRequestId = req.params.id;
 
-    appointmentRequest.findOne({appointmentRequestId : appointmentRequestId})
+    appointmentRequest.findById(appointmentRequestId)
         .then((appointmentRequest) => {
             if (appointmentRequest) {
                 res.json(appointmentRequest);
@@ -75,7 +75,7 @@ router.route("/update-appointment-request/:id").put(async (req, res) => {
     };
 
     try {
-        const result = await appointmentRequest.findOneAndUpdate({appointmentRequestId: appointmentRequestId}, updatedAppointmentRequest, { new: true });
+        const result = await appointmentRequest.findByIdAndUpdate(appointmentRequestId, updatedAppointmentRequest, { new: true });
 
         if (result) {
             res.json("Appointment Request Updated Successfully");
@@ -93,13 +93,51 @@ router.route("/update-appointment-request/:id").put(async (req, res) => {
 router.route("/delete-appointment-request/:id").delete(async(req, res)=> {
     let appointmentRequestId = req.params.id;
 
-    await appointmentRequest.findOneAndDelete({appointmentRequestId : appointmentRequestId}).then(()=> {
+    await appointmentRequest.findByIdAndDelete(appointmentRequestId).then(()=> {
         res.status(200).send({status:"Appointment Request Deleted"});
     }).catch((err)=> {
         console.log(err.messsage);
         res.status(500).send({status:"Error in Appointment Request Delete", error:err.messsage})
     })
 })
+
+
+//appointment manager dashboard - all pending appointment requets
+router.route("/appointment-requests/pending").get((req, res) => {
+
+    appointmentRequest.find({ appointmentRequestStatus: "Pending" })
+    .then((appointmentRequests) => {
+        if (appointmentRequests.length > 0) {
+            res.json(appointmentRequests);
+        } else {
+            res.status(404).json("Appointment Request Not Found");
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json("Error in Retrieving Appointment Request");
+    });
+});
+
+
+// Get a specific appointment request by ID
+router.route("/appointment-manager/view-appointment-request/:id").get((req, res) => {
+    const appointmentRequestId = req.params.id;
+
+    appointmentRequest.findById(appointmentRequestId)
+        .then((appointmentRequest) => {
+            if (appointmentRequest) {
+                res.json(appointmentRequest);
+            } else {
+                res.status(404).json("Appointment Request Not Found");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json("Error in Retrieving Appointment Request");
+        });
+});
+
 
 
 module.exports = router;
