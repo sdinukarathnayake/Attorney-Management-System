@@ -287,8 +287,10 @@
 }
 
 .apm-form-button {
-  width: 100%;
-  padding: 10px;
+  display: block;
+  width: 170px;
+  margin: 20px 0 20px auto;
+  padding: 8px;
   background-color: #543310;
   color: #fff;
   border: none;
@@ -385,9 +387,9 @@
 }
 
 .form-divider{
-  border: 0.2rem solid var(--accent-color);
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
+  width: 55%;
+  border: 0.05rem solid var(--accent-color);
+  margin: 2rem auto 2rem auto;
 }
 
 .form-divider-text {
@@ -395,3 +397,5 @@
   color: var(--accent-color);
   margin-bottom: 2rem;
 }
+
+

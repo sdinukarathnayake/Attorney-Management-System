@@ -44,7 +44,7 @@ const appointmentRequestSchema = new Schema({
 
     appointmentLocation : {
         type : String,
-        required : true,
+        required : true, 
     } 
 })
 

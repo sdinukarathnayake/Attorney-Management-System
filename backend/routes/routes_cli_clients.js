@@ -94,7 +94,7 @@ router.route("/delete-client/:id").delete(async (req, res)=> {
 });
 
 
-router.route("/view-client/:id").get(async (req, res) => {
+router.route("/:id").get(async (req, res) => {
     const clientId = req.params.id;
 
     Client.findOne({clientId : clientId})
@@ -110,6 +110,25 @@ router.route("/view-client/:id").get(async (req, res) => {
             res.status(500).json("Error in Retrieving Client");
         });
 });
+
+
+// Route to search client by NIC
+router.route("/search-client/nic/:nic").get(async (req, res) => {
+    const nic = req.params.nic;
+
+    try {
+        const client = await Client.findOne({ nic: nic });
+        if (client) {
+            res.json(client);
+        } else {
+            res.status(404).json("Client Not Found");
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json("Error in Retrieving Client");
+    }
+});
+
 
 
 router.route("/login-client").post(async (req, res) => {

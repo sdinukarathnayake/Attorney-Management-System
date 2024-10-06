@@ -3,11 +3,12 @@ import Footer from "./apm_page_footer";
 import './appointment_management.css';
 
 import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function Dashboard() {
-    const formatDate = new Date();
 
+    const { id } = useParams();
     const [appointmentrequest, setAppointmentRequests] = useState([]);
     const [appointment, setAppointments] = useState([]);
     const [lawyerDetails, setLawyerDetails] = useState({});
@@ -16,7 +17,7 @@ function Dashboard() {
     // Get appointment request details
     useEffect(() => {
         function getAppointmentRequests() {
-            axios.get("http://localhost:8070/appointmentrequest/appointment-requests/pending").then((res) => {
+            axios.get("http://localhost:8070/appointmentrequest/pending").then((res) => {
                 console.log(res.data);
                 setAppointmentRequests(res.data);
 
@@ -57,18 +58,19 @@ function Dashboard() {
     }, [lawyerDetails, clientDetails]);
 
 
-    // Get appointment details
+    // get all pending appointments (for specific appointment manager)
     useEffect(() => {
-        function getAppointments() {
-            axios.get("http://localhost:8070/appointment/appointments/pending").then((res) => {
+        function getAppointments(){
+            axios.get(`http://localhost:8070/appointment/pending/appointment-manager/${id}`).then((res) => {
                 console.log(res.data);
                 setAppointments(res.data);
             }).catch((err) => {
                 alert(err.message);
-            });
+            })
         }
         getAppointments();
-    }, []);
+    }, [id])
+
 
     return (
         <div>
@@ -84,11 +86,12 @@ function Dashboard() {
                     <thead>
                         <tr className="apm-summary-table-row">
                             <th className="apm-summary-table-header">Request Date</th>
-                            <th className="apm-summary-table-header">Request Name</th>
+                            <th className="apm-summary-table-header">Request Name</th>                            
+                            <th className="apm-summary-table-header">Request Type</th>
                             <th className="apm-summary-table-header">Lawyer Name</th>
                             <th className="apm-summary-table-header">Lawyer Mobile</th>
                             <th className="apm-summary-table-header">Client Name</th>
-                            <th className="apm-summary-table-header">Type</th>
+                            <th className="apm-summary-table-header">Client Mobile</th>
                             <th className="apm-summary-table-header">Action</th>
                         </tr>
                     </thead>

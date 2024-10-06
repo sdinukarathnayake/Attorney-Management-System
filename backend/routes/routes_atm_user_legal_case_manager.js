@@ -2,7 +2,7 @@ const router = require("express").Router();
 let userRegistration = require("../models/model_atm_legal_case_manager");
 
 // add new userRegistration
-router.route("/add-legal-case-manager").post((req, res)=> {
+router.route("/add").post((req, res)=> {
     
     const userId = req.body.userId;
     const fName = req.body.fName;
@@ -42,7 +42,7 @@ router.route("/add-legal-case-manager").post((req, res)=> {
 })
 
 // view all userRegistrations 
-router.route("/view-all-legal-case-managers").get((req, res)=> {
+router.route("/").get((req, res)=> {
     userRegistration.find().then((userRegistration) => {
         res.json(userRegistration)
     }).catch((err) => {
@@ -54,7 +54,7 @@ router.route("/view-all-legal-case-managers").get((req, res)=> {
 
 
 // Get a specific userRegistration by ID
-router.route("/view-legal-case-manager/:id").get((req, res) => {
+router.route("/:id").get((req, res) => {
     const userId = req.params.id;
 
     userRegistration.findOne({userId : userId})
@@ -73,7 +73,7 @@ router.route("/view-legal-case-manager/:id").get((req, res) => {
 
 
 // Update userRegistration 
-router.route("/update-legal-case-manager/:id").put(async (req, res) => {
+router.route("/update/:id").put(async (req, res) => {
     const userRegistrationId = req.params.id;
 
     // Object to hold updated fields
@@ -107,7 +107,7 @@ router.route("/update-legal-case-manager/:id").put(async (req, res) => {
 });
 
 // delete userRegistration 
-router.route("/delete-legal-case-manager/:id").delete(async (req, res) => {
+router.route("/delete/:id").delete(async (req, res) => {
     let userRegistrationId = req.params.id;
 
     await userRegistration.findByIdAndDelete(userRegistrationId)

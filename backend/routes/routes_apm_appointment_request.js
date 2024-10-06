@@ -2,7 +2,6 @@ const router = require("express").Router();
 let appointmentRequest = require("../models/model_apm_appointment_request");
 
 router.route("/add-appointment-request").post((req, res) => {
-    const appointmentRequestId = req.body.appointmentRequestId;
     const appointmentRequestName = req.body.appointmentRequestName;
     const appointmentRequestDate = new Date(req.body.appointmentRequestDate);
     const appointmentRequestStatus = req.body.appointmentRequestStatus;
@@ -13,10 +12,8 @@ router.route("/add-appointment-request").post((req, res) => {
     const appointmentTime = req.body.appointmentTime;
     const appointmentLocation = req.body.appointmentLocation;    
 
-
     // creating new object
     const newAppointmentRequest = new appointmentRequest({
-        appointmentRequestId,        
         appointmentRequestName,
         appointmentRequestDate,
         appointmentRequestStatus,
@@ -38,7 +35,7 @@ router.route("/add-appointment-request").post((req, res) => {
 
 
 // Get a specific appointment request by ID
-router.route("/view-appointment-request/:id").get((req, res) => {
+router.route("/:id").get((req, res) => {
     const appointmentRequestId = req.params.id;
 
     appointmentRequest.findById(appointmentRequestId)
@@ -57,14 +54,13 @@ router.route("/view-appointment-request/:id").get((req, res) => {
 
 
 // Update appointment request
-router.route("/update-appointment-request/:id").put(async (req, res) => {
+router.route("/update/:id").put(async (req, res) => {
     const appointmentRequestId = req.params.id;
 
     // Object to hold updated fields
     const updatedAppointmentRequest = {
-        appointmentRequestId : req.body.appointmentRequestId,
         appointmentRequestName: req.body.appointmentRequestName,
-        appointmentRequestDate: new Date(req.body.appointmentRequestDate), // Use new Date() to create a Date object
+        appointmentRequestDate: new Date(req.body.appointmentRequestDate),
         appointmentRequestStatus: req.body.appointmentRequestStatus,
         lawyerId: req.body.lawyerId,
         clientId: req.body.clientId,              
@@ -90,7 +86,7 @@ router.route("/update-appointment-request/:id").put(async (req, res) => {
 
 
 // delete appointment request
-router.route("/delete-appointment-request/:id").delete(async(req, res)=> {
+router.route("/delete/:id").delete(async(req, res)=> {
     let appointmentRequestId = req.params.id;
 
     await appointmentRequest.findByIdAndDelete(appointmentRequestId).then(()=> {
@@ -102,8 +98,10 @@ router.route("/delete-appointment-request/:id").delete(async(req, res)=> {
 })
 
 
-//appointment manager dashboard - all pending appointment requets
-router.route("/appointment-requests/pending").get((req, res) => {
+// -------- dashboards ------------
+//appointment manager dashboard - all pending appointments (for any appointment manager)
+router.route("/pending").get((req, res) => {
+    const appointmentManagerId = req.params.id;
 
     appointmentRequest.find({ appointmentRequestStatus: "Pending" })
     .then((appointmentRequests) => {
@@ -120,63 +118,11 @@ router.route("/appointment-requests/pending").get((req, res) => {
 });
 
 
-// Get a specific appointment request by ID
-router.route("/appointment-manager/view-appointment-request/:id").get((req, res) => {
-    const appointmentRequestId = req.params.id;
+//appointment manager dashboard - all pending appointments (for specific appointment manager)
+router.route("/pending/appointment-manager/:id").get((req, res) => {
+    const appointmentManagerId = req.params.id;
 
-    appointmentRequest.findById(appointmentRequestId)
-        .then((appointmentRequest) => {
-            if (appointmentRequest) {
-                res.json(appointmentRequest);
-            } else {
-                res.status(404).json("Appointment Request Not Found");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json("Error in Retrieving Appointment Request");
-        });
-});
-
-
-
-module.exports = router;
-
-
-/*
-
-// view all appointment request
-router.route("/appointment-requests").get((req, res)=> {
-    appointmentRequest.find().then((appointmentrequests) => {
-        res.json(appointmentrequests)
-    }).catch((err) => {
-        console.log(err);
-    })
-})
-
-//where appointmentRequestStatus == Pending
-    router.route("/appointment-requests/pending").get((req, res) => {
-
-        appointmentRequest.find({ appointmentRequestStatus: "Pending" })
-        .then((appointmentRequests) => {
-            if (appointmentRequests.length > 0) {
-                res.json(appointmentRequests);
-            } else {
-                res.status(404).json("Appointment Request Not Found");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json("Error in Retrieving Appointment Request");
-        });
-    });
-
-
-//where appointmentRequestStatus == Pending & lawyer Id
-router.route("/appointment-requests/pending/lawyer/:id").get((req, res) => {
-    const lawyerId = req.params.id;
-
-    appointmentRequest.find({ appointmentRequestStatus: "Pending", lawyerId: lawyerId})
+    appointmentRequest.find({ appointmentRequestStatus: "Pending", appointmentManagerId: appointmentManagerId })
     .then((appointmentRequests) => {
         if (appointmentRequests.length > 0) {
             res.json(appointmentRequests);
@@ -190,8 +136,66 @@ router.route("/appointment-requests/pending/lawyer/:id").get((req, res) => {
     });
 });
 
-//all appointmentRequest & lawyer Id
-router.route("/appointment-requests/lawyer/:id").get((req, res) => {
+
+//lawyer dashboard - all pending appointments (for specific lawyer)
+router.route("/pending/lawyer/:id").get((req, res) => {
+    const lawyerId = req.params.id;
+
+    appointmentRequest.find({ appointmentRequestStatus: "Pending", lawyerId: lawyerId })
+    .then((appointmentRequests) => {
+        if (appointmentRequests.length > 0) {
+            res.json(appointmentRequests);
+        } else {
+            res.status(404).json("Appointment Request Not Found");
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json("Error in Retrieving Appointment Request");
+    });
+});
+
+
+//client dashboard - all pending appointments (for specific client)
+router.route("/pending/client/:id").get((req, res) => {
+    const clientId = req.params.id;
+
+    appointmentRequest.find({ appointmentRequestStatus: "Pending", clientId: clientId })
+    .then((appointmentRequests) => {
+        if (appointmentRequests.length > 0) {
+            res.json(appointmentRequests);
+        } else {
+            res.status(404).json("Appointment Request Not Found");
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json("Error in Retrieving Appointment Request");
+    });
+});
+
+
+//appointment manager dashboard - all appointments (for specific appointment manager)
+router.route("/appointment-manager/:id").get((req, res) => {
+    const appointmentManagerId = req.params.id;
+
+    appointmentRequest.find({ appointmentManagerId: appointmentManagerId })
+    .then((appointmentRequests) => {
+        if (appointmentRequests.length > 0) {
+            res.json(appointmentRequests);
+        } else {
+            res.status(404).json("Appointment Request Not Found");
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json("Error in Retrieving Appointment Request");
+    });
+});
+
+
+//lawyer dashboard - all appointments (for specific lawyer)
+router.route("/lawyer/:id").get((req, res) => {
     const lawyerId = req.params.id;
 
     appointmentRequest.find({ lawyerId: lawyerId })
@@ -209,4 +213,22 @@ router.route("/appointment-requests/lawyer/:id").get((req, res) => {
 });
 
 
-*/
+//client dashboard - all appointments (for specific client)
+router.route("/client/:id").get((req, res) => {
+    const clientId = req.params.id;
+
+    appointmentRequest.find({ clientId: clientId })
+    .then((appointmentRequests) => {
+        if (appointmentRequests.length > 0) {
+            res.json(appointmentRequests);
+        } else {
+            res.status(404).json("Appointment Request Not Found");
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json("Error in Retrieving Appointment Request");
+    });
+});
+
+module.exports = router;
