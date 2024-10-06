@@ -39,7 +39,7 @@ router.route("/add-client").post((req,res)=> {
 
 });
 
-router.route("/view-all-clients").get((req,res)=> {
+router.route("/").get((req,res)=> {
 
     Client.find().then((clients)=>{
         res.json(clients)
@@ -50,7 +50,7 @@ router.route("/view-all-clients").get((req,res)=> {
 });
 
 
-router.route("/update-client/:id").put(async (req, res) => {
+router.route("/update/:id").put(async (req, res) => {
     let userIdCeck = req.params.id;
 
     // Destructure the fields from req.body
@@ -81,7 +81,7 @@ router.route("/update-client/:id").put(async (req, res) => {
 });
 
 
-router.route("/delete-client/:id").delete(async (req, res)=> {
+router.route("/delete/:id").delete(async (req, res)=> {
     let userId = req.params.id;
 
     await Client.findByIdAndDelete(userId)
@@ -94,26 +94,8 @@ router.route("/delete-client/:id").delete(async (req, res)=> {
 });
 
 
-router.route("/:id").get(async (req, res) => {
-    const clientId = req.params.id;
-
-    Client.findOne({clientId : clientId})
-        .then((Client) => {
-            if (Client) {
-                res.json(Client);
-            } else {
-                res.status(404).json("Client Not Found");
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json("Error in Retrieving Client");
-        });
-});
-
-
 // Route to search client by NIC
-router.route("/search-client/nic/:nic").get(async (req, res) => {
+router.route("/search/:nic").get(async (req, res) => {
     const nic = req.params.nic;
 
     try {
@@ -130,8 +112,7 @@ router.route("/search-client/nic/:nic").get(async (req, res) => {
 });
 
 
-
-router.route("/login-client").post(async (req, res) => {
+router.route("/login").post(async (req, res) => {
     const { email, password } = req.body;
 
     try {
@@ -148,14 +129,22 @@ router.route("/login-client").post(async (req, res) => {
     }
 });
 
-router.get('/getClient/:id', async (req, res) => {
-    try {
-        const client = await Client.findById(req.params.id);
-        if (!client) return res.status(404).json({ message: "Client not found" });
-        res.json({ user: client });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-}); 
+// Get a specific userRegistration by ID
+router.route("/:id").get((req, res) => {
+    const clientId = req.params.id;
+
+    Client.findOne({clientId : clientId})
+        .then((Client) => {
+            if (Client) {
+                res.json(Client);
+            } else {
+                res.status(404).json("Client Not Found");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json("Error in Retrieving Client");
+        });
+});
 
 module.exports = router;

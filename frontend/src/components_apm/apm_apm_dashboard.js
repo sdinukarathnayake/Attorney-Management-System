@@ -11,20 +11,21 @@ function Dashboard() {
     const { id } = useParams();
     const [appointmentrequest, setAppointmentRequests] = useState([]);
     const [appointment, setAppointments] = useState([]);
+    const [appointmentManager, setAppointmentManager] = useState({});
     const [lawyerDetails, setLawyerDetails] = useState({});
     const [clientDetails, setClientDetails] = useState({});
 
     // Get appointment request details
     useEffect(() => {
         function getAppointmentRequests() {
-            axios.get("http://localhost:8070/appointmentrequest/pending").then((res) => {
+            axios.get("http://localhost:8070/appointmentrequest/pending/all").then((res) => {
                 console.log(res.data);
-                setAppointmentRequests(res.data);
-
+                setAppointmentRequests(res.data); 
+ 
                 res.data.forEach(appointmentRequest => {
                     const userId = appointmentRequest.lawyerId;
                     if (!lawyerDetails[userId]) {
-                        axios.get(`http://localhost:8070/legalcasemanager/view-legal-case-manager/${userId}`)
+                        axios.get(`http://localhost:8070/legalcasemanager/${userId}`)
                             .then(response => {
                                 setLawyerDetails(prevDetails => ({
                                     ...prevDetails,
@@ -38,7 +39,7 @@ function Dashboard() {
 
                     const clientId = appointmentRequest.clientId;
                     if (!clientDetails[clientId]) {
-                        axios.get(`http://localhost:8070/client/view-client/${clientId}`)
+                        axios.get(`http://localhost:8070/client/${clientId}`)
                             .then(response => {
                                 setClientDetails(prevDetails => ({
                                     ...prevDetails,
@@ -71,6 +72,19 @@ function Dashboard() {
         getAppointments();
     }, [id])
 
+    //get details related to appointment manager
+    useEffect(() => {
+        function getAppointmentManager(){
+            axios.get(`http://localhost:8070/appointmentmanager/${id}`).then((res) => {
+                console.log(res.data);
+                setAppointmentManager(res.data);
+            }).catch((err) => {
+                alert(err.message);
+            })
+        }
+        getAppointmentManager();
+    }, [id])
+
 
     return (
         <div>
@@ -79,7 +93,9 @@ function Dashboard() {
 
             <div className="apm-container">
                 <h1 className="apm-header">Appointment Manager Dashboard</h1>
-                <p className="apm-user-welcome">Welcome Dinuka Rathnayake..</p>
+
+                <p className="apm-user-welcome">Welcome {appointmentManager.fName} {appointmentManager.lName}</p>
+                <p className="apm-user-welcome">User ID : {appointmentManager.userId}</p>
 
                 <h2>Received Appointment Requests</h2>
                 <table border='1' className="apm-summary-table">
@@ -105,6 +121,7 @@ function Dashboard() {
                                         }
                                         </td>
                                         <td className="apm-summary-table-data">{appointmentrequest.appointmentRequestName}</td>
+                                        <td className="apm-summary-table-data">{appointmentrequest.appointmentType}</td>
                                         <td className="apm-summary-table-data">
                                             {lawyerDetails[appointmentrequest.lawyerId]
                                                 ? `${lawyerDetails[appointmentrequest.lawyerId].fName} ${lawyerDetails[appointmentrequest.lawyerId].lName}`
@@ -118,10 +135,12 @@ function Dashboard() {
                                         <td className="apm-summary-table-data">
                                             {clientDetails[appointmentrequest.clientId]
                                                 ? `${clientDetails[appointmentrequest.clientId].fname} ${clientDetails[appointmentrequest.clientId].lname}`
-                                                : 'Loading...'}
+                                                : 'Loading...'} 
                                         </td>
                                         <td className="apm-summary-table-data">{appointmentrequest.appointmentType}</td>
-                                        <td className="apm-summary-table-action"><a className="apm-summary-table-button" href={`/appointment-manager/view-appointment-request/${appointmentrequest._id}`}>View Request</a></td>
+                                        <td className="apm-summary-table-action">
+                                            <a className="apm-summary-table-button" href={`/appointment-manager-dashboard/view-appointment-request/${appointmentrequest._id}/${id}`}>View Request</a>
+                                        </td>
                                     </tr>
                                 )
                             })
@@ -129,7 +148,7 @@ function Dashboard() {
                     </tbody>
                 </table>
 
-                <a className="apm-view-button" href="/appointment-manager-dashboard/view-all-appointment-requests">View Previous Appointment Requests</a>
+                <a className="apm-view-button" href="/appointment-manager-dashboard/view-all-appointment-requests/">View Previous Appointment Requests</a>
 
                 <h2>Upcoming Appointments</h2>
                 <table border='1' className="apm-summary-table">
@@ -140,6 +159,7 @@ function Dashboard() {
                             <th className="apm-summary-table-header">Lawyer Name</th>
                             <th className="apm-summary-table-header">Lawyer Mobile</th>
                             <th className="apm-summary-table-header">Client Name</th>
+                            <th className="apm-summary-table-header">Client Mobile</th>
                             <th className="apm-summary-table-header">Type</th>
                             <th className="apm-summary-table-header">Action</th>
                         </tr>
@@ -168,9 +188,15 @@ function Dashboard() {
                                             {clientDetails[appointment.clientId]
                                                 ? `${clientDetails[appointment.clientId].fname} ${clientDetails[appointment.clientId].lname}`
                                                 : 'Loading...'}
+                                        </td>                                        
+                                        <td className="apm-summary-table-data">
+                                            {clientDetails[appointment.clientId]
+                                                ? clientDetails[appointment.clientId].phone
+                                                : 'Loading...'}
                                         </td>
-                                        <td className="apm-summary-table-data"></td>
-                                        <td className="apm-summary-table-action"><a className="apm-summary-table-button" href={`/appointment-manager/view-appointment-request/${appointment._id}`}>View Request</a></td>
+
+                                        <td className="apm-summary-table-data">{appointment.appointmentStatus}</td>
+                                        <td className="apm-summary-table-action"><a className="apm-summary-table-button" href={`/appointment-manager-dashboard/view-appointment/${appointment._id}`}>View Request</a></td>
                                     </tr>
                                 )
                             })
@@ -178,7 +204,7 @@ function Dashboard() {
                     </tbody>
                 </table>
 
-                <a className="apm-view-button" href="/appointment-manager-dashboard/view-all-appointments/">View Previous Appointments</a>
+                <a className="apm-view-button" href={`/appointment-manager-dashboard/view-all-appointments/${id}`}>View Previous Appointments</a>
 
             </div>
             <Footer />

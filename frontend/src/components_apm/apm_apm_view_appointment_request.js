@@ -1,94 +1,59 @@
-import NavBar from "./apm_page_navbar";
-import Footer from "./apm_page_footer";
+import React, { useState, useEffect } from 'react';
 import './appointment_management.css';
-
 import axios from "axios";
 import { useParams, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
 
-function Apm_Create_Appointment(){
-    const { id } = useParams(); 
+function Apm_View_AppointmentRequest() {
+    const { id, appointmentManagerId } = useParams(); 
     const navigate = useNavigate();
-    const [appointmentrequest, setAppointmentRequest] = useState(null);
+    const [appointmentrequest, setAppointmentRequests] = useState(null);
+    const [clientDetails, setClientDetails] = useState({});
 
     useEffect(() => {
-        axios.get(`http://localhost:8070/appointmentrequest/appointment-request/${id}`, appointmentrequest)
-            .then((response) => {
-                setAppointmentRequest(response.data);
-            })
-            .catch((err) => {
-                console.error(err);
-                alert("Error in fetching appointment request data");
-            });
-    }, [id]);
-    
-    const [appointmentRequestName, setappointmentRequestName] = useState("");
-    const [appointmentRequestDate, setappointmentRequestDate] = useState("");
-    const [appointmentRequestStatus, setappointmentRequestStatus] = useState("");
-    const [lawyerId, setlawyerId] = useState("");
-    const [lawyerName, setlawyerName] = useState("");
-    const [lawyerPhone, setlawyerPhone] = useState("");
-    const [clientId, setclientId] = useState("C789");
-    const [clientName, setclientName] = useState("");
-    const [clientPhone, setclientPhone] = useState("");
-    const [appointmentCreationDate, setappointmentCreationDate] = useState("");
-    const [appointmentTitle, setappointmentTitle] = useState("");
-    const [appointmentDescription, setappointmentDescription] = useState("");
-    const [appointmentType, setappointmentType] = useState("");
-    const [appointmentDate, setappointmentDate] = useState("");
-    const [appointmentTime, setappointmentTime] = useState("");
-    const [appointmentLocation, setappointmentLocation] = useState("");
-    
+        function getAppointmentRequests() {
+            axios.get(`http://localhost:8070/appointmentrequest/${id}`)
+                .then((res) => {
+                    setAppointmentRequests(res.data);
 
- 
-    function sendData(e) {
-        e.preventDefault();
+                    const clientId = res.data.clientId;
+                    if (!clientDetails[clientId]) {
+                        axios.get(`http://localhost:8070/client/${clientId}`)
+                            .then(response => {
+                                setClientDetails(prevDetails => ({
+                                    ...prevDetails,
+                                    [clientId]: response.data
+                                }));
+                            })
+                            .catch(error => {
+                                console.error("Error fetching client details:", error);
+                            });
+                    }
+                })
+                .catch((err) => {
+                    alert(err.message);
+                });
+        }
+        getAppointmentRequests();
+    }, [clientDetails, id]);
 
-        const newAppointment = {
-            appointmentRequestName,
-            appointmentRequestDate,
-            appointmentRequestStatus,
-            lawyerId,
-            lawyerName,
-            lawyerPhone,
-            clientId,
-            clientName,
-            clientPhone,
-            appointmentCreationDate,
-            appointmentTitle,
-            appointmentDescription,
-            appointmentType,
-            appointmentDate,
-            appointmentTime,
-            appointmentLocation,
-            
-        };
-
-        axios.post("http://localhost:8070/appointment/add-appointment", newAppointment)
-        .then(() => {
-            alert("Appointment Added Successfully");
-            navigate("/appointment-manager-dashboard");  
-        })
-        .catch((err) => {
-            alert(err);
-        });
-    
-    }
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setAppointmentRequests(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
     if (!appointmentrequest) {
         return <div>Loading...</div>;
     }
 
-    return(
+    return (
         <div className="apm-form-container">
-            <NavBar />
+            <hr />
+            <h2 className='apm-header'>Lawyer Appointment Request Details</h2>
 
-            <hr/>
-
-            <h2 className='apm-header'>Appointment Manager Appointment Request View</h2>
-
-            <form className="apm-form" onSubmit={sendData}>
-         
+            <form className="apm-form">            
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="appointmentRequestName">
                     Request Name
@@ -98,11 +63,12 @@ function Apm_Create_Appointment(){
                     type="text"
                     id="appointmentRequestName"
                     name="appointmentRequestName"
-                    value={appointmentrequest.appointmentRequestName}
-                    onChange={(e) => setappointmentRequestName(e.target.value)}
+                    value={appointmentrequest.appointmentRequestName || ''}
+                    onChange={handleChange}
                     required
                 />
                 </div>
+
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="appointmentRequestDate">
                     Request Date
@@ -112,70 +78,28 @@ function Apm_Create_Appointment(){
                     type="text"
                     id="appointmentRequestDate"
                     name="appointmentRequestDate"
-                    value={appointmentrequest.appointmentRequestDate}
-                    onChange={(e) => setappointmentRequestDate(e.target.value)}
+                    value={new Date(appointmentrequest.appointmentRequestDate).toISOString().split('T')[0]}
+                    onChange={handleChange}
                     required
                 />
                 </div>
-                <div className="apm-form-group">
-                <label className="apm-form-label" htmlFor="appointmentRequestStatus">
-                    Request Status
-                </label>
-                <select
-                    className="apm-form-input-select"
-                    id="appointmentRequestStatus"
-                    name="appointmentRequestStatus"
-                    onChange={(e) => setappointmentRequestStatus(e.target.value)}
-                    required
-                >
-                    <option value={appointmentrequest.appointmentRequestStatus}>{appointmentrequest.appointmentRequestStatus}</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Approved">Approved</option>
-                </select>
-                </div>   
-
+                
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="lawyerId">
                     Lawyer ID
                 </label>
                 <input
                     className="apm-form-input"
+                    style={{ backgroundColor: '#EEEEEE' }}
                     type="text"
                     id="lawyerId"
                     name="lawyerId"
-                    value={appointmentrequest.lawyerId}
-                    onChange={(e) => setlawyerId(e.target.value)}
-                    required
+                    value={appointmentrequest.lawyerId || ''}
+                    onChange={handleChange}
+                    readOnly
                 />
                 </div>
-                <div className="apm-form-group">
-                <label className="apm-form-label" htmlFor="lawyerName">
-                    Lawyer Name
-                </label>
-                <input
-                    className="apm-form-input"
-                    type="text"
-                    id="lawyerName"
-                    name="lawyerName"
-                    value={appointmentrequest.lawyerName}
-                    onChange={(e) => setlawyerName(e.target.value)}
-                    required
-                />
-                </div>
-                <div className="apm-form-group">
-                <label className="apm-form-label" htmlFor="lawyerPhone">
-                    Lawyer Phone
-                </label>
-                <input
-                    className="apm-form-input"
-                    type="text"
-                    id="lawyerPhone"
-                    name="lawyerPhone"
-                    value={appointmentrequest.lawyerPhone}
-                    onChange={(e) => setlawyerPhone(e.target.value)}
-                    required
-                />
-                </div>
+
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="clientId">
                     Client ID
@@ -185,39 +109,44 @@ function Apm_Create_Appointment(){
                     type="text"
                     id="clientId"
                     name="clientId"
-                    value={appointmentrequest.clientId}
-                    onChange={(e) => setclientId(e.target.value)}
+                    value={appointmentrequest.clientId || ''}
+                    onChange={handleChange}
                     required
                 />
                 </div>
+
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="clientName">
                     Client Name
                 </label>
                 <input
                     className="apm-form-input"
+                    style={{ backgroundColor: '#EEEEEE' }}
                     type="text"
                     id="clientName"
                     name="clientName"
-                    value={appointmentrequest.clientName}
-                    onChange={(e) => setclientName(e.target.value)}
-                    required
+                    value={clientDetails[appointmentrequest.clientId]
+                        ? `${clientDetails[appointmentrequest.clientId].fname} ${clientDetails[appointmentrequest.clientId].lname}`
+                        : 'Loading...'}
+                    readOnly
                 />
                 </div>
+
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="clientPhone">
                     Client Phone
                 </label>
                 <input
                     className="apm-form-input"
+                    style={{ backgroundColor: '#EEEEEE' }}
                     type="text"
                     id="clientPhone"
                     name="clientPhone"
-                    value={appointmentrequest.clientPhone}
-                    onChange={(e) => setclientPhone(e.target.value)}
-                    required
+                    value={clientDetails[appointmentrequest.clientId]?.phone || ''}
+                    readOnly
                 />
                 </div>
+
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="appointmentType">
                     Appointment Type
@@ -226,7 +155,8 @@ function Apm_Create_Appointment(){
                     className="apm-form-input-select"
                     id="appointmentType"
                     name="appointmentType"
-                    onChange={(e) => setappointmentType(e.target.value)}
+                    value={appointmentrequest.appointmentType}
+                    onChange={handleChange}
                     required
                 >
                     <option value={appointmentrequest.appointmentType}>{appointmentrequest.appointmentType}</option>
@@ -235,6 +165,7 @@ function Apm_Create_Appointment(){
                     <option value="other">Other</option>
                 </select>
                 </div>
+
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="appointmentDate">
                     Appointment Date
@@ -244,25 +175,27 @@ function Apm_Create_Appointment(){
                     type="text"
                     id="appointmentDate"
                     name="appointmentDate"
-                    value={appointmentrequest.appointmentDate}
-                    onChange={(e) => setappointmentDate(e.target.value)}
+                    value={new Date(appointmentrequest.appointmentDate).toISOString().split('T')[0]}
+                    onChange={handleChange}
                     required
                 />
                 </div>
+
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="appointmentTime">
                     Appointment Time
                 </label>
                 <input
                     className="apm-form-input"
-                    type="time"
+                    type="text"
                     id="appointmentTime"
                     name="appointmentTime"
                     value={appointmentrequest.appointmentTime}
-                    onChange={(e) => setappointmentTime(e.target.value)}
+                    onChange={handleChange}
                     required
                 />
                 </div>
+
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="appointmentLocation">
                     Appointment Location
@@ -272,69 +205,94 @@ function Apm_Create_Appointment(){
                     type="text"
                     id="appointmentLocation"
                     name="appointmentLocation"
-                    value={appointmentrequest.appointmentLocation}
-                    onChange={(e) => setappointmentLocation(e.target.value)}
+                    value={appointmentrequest.appointmentLocation || ''}
+                    onChange={handleChange}
                     required
                 />
-                </div>
-
-                <hr className="form-divider"/>
+                </div>         
 
                 <div className="apm-form-group">
-                    <p className="form-divider-text">Enter required information to create appointment</p>
-                </div>
-
-
-                <div className="apm-form-group">
-                <label className="apm-form-label" htmlFor="appointmentCreationDate">
-                    Appointment Creation Date
+                <label className="apm-form-label" htmlFor="appointmentRequestStatus">
+                    Request Status
                 </label>
                 <input
                     className="apm-form-input"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    type="text"
+                    id="appointmentRequestStatus"
+                    name="appointmentRequestStatus"
+                    value={appointmentrequest.appointmentRequestStatus}
+                    onChange={handleChange}
+                    readOnly/>
+                </div>       
+            </form>
+
+            <hr className="form-divider" />
+
+            <form className="apm-form" onSubmit="">
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentCreationDate">Appointment Creation Date</label>
+                <input className='apm-form-input'
                     type="date"
+                    style={{ backgroundColor: '#EEEEEE' }}
                     id="appointmentCreationDate"
                     name="appointmentCreationDate"
-                    value={appointmentCreationDate}
-                    onChange={(e) => setappointmentCreationDate(e.target.value)}
-                    required
+                    value={new Date().toISOString().split('T')[0]}
+                    onChange={handleChange}
+                    readOnly
                 />
-                </div>
+            </div>
 
-                <div className="apm-form-group">
-                <label className="apm-form-label" htmlFor="appointmentTitle">
-                    Appointment Title
-                </label>
-                <input
-                    className="apm-form-input"
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentTitle">Appointment Title</label>
+                <input className='apm-form-input'
                     type="text"
                     id="appointmentTitle"
                     name="appointmentTitle"
-                    value={appointmentTitle}
-                    onChange={(e) => setappointmentTitle(e.target.value)}
-                    required
+                    onChange={handleChange}
                 />
-                </div>
-
-                <div className="apm-form-group">
-                <label className="apm-form-label" htmlFor="appointmentDescription">
-                    Appointment Description
-                </label>
-                <textarea
-                    className="apm-form-input-textarea"
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentDescription">Description</label>
+                <textarea className='apm-form-input-textarea'
                     id="appointmentDescription"
                     name="appointmentDescription"
-                    value={appointmentDescription}
-                    onChange={(e) => setappointmentDescription(e.target.value)}
-                    required>
-                </textarea>
-                </div>    
-
-                <button className='apm-form-button' type="submit">Submit</button>
-            </form>
-
-            <Footer/>
-        </div>        
-    )
+                    onChange={handleChange}
+                ></textarea>
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentManagerId">Appointment Manager Id</label>
+                <input className='apm-form-input'
+                    type="text"
+                    id="appointmentManagerId"
+                    name="appointmentManagerId"
+                    value={appointmentManagerId}
+                    onChange={handleChange}
+                />
+            </div>    
+            
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentStatus">Appointment Status</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="appointmentStatus"
+                    name="appointmentStatus"
+                    value="Pending"
+                    onChange={handleChange}
+                    readOnly
+                />
+            </div>
+    
+            <div className="apm-button-box">                
+                <button type="submit" className="apm-table-link-button">Mark As Complete</button>
+            </div>    
+        </form>
+        </div>
+    );
 }
 
-export default Apm_Create_Appointment;
+export default Apm_View_AppointmentRequest;

@@ -120,137 +120,15 @@ function Apm_View_Appointment() {
                 <label className='apm-form-label' htmlFor="appointmentCreationDate">Appointment Creation Date</label>
                 <input className='apm-form-input'
                     type="date"
+                    style={{ backgroundColor: '#EEEEEE' }}
                     id="appointmentCreationDate"
                     name="appointmentCreationDate"
                     value={new Date(appointment.appointmentCreationDate).toISOString().split('T')[0]}
                     onChange={handleChange}
+                    readOnly
                 />
             </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="appointmentManagerId">Appointment Manager Id</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="appointmentManagerId"
-                    name="appointmentManagerId"
-                    value={appointment.appointmentManagerId}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="appointmentManagerName">Appointment Manager Name</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="appointmentManagerName"
-                    name="appointmentManagerName"
-                    value={appointmentManagerDetails[appointment.appointmentManagerId]
-                        ? `${appointmentManagerDetails[appointment.appointmentManagerId].fName} ${appointmentManagerDetails[appointment.appointmentManagerId].lName}`
-                        : 'Loading...'}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="appointmentManagerMobile">Appointment Manager Mobile</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="appointmentManagerMobile"
-                    name="appointmentManagerMobile"
-                    value={appointmentManagerDetails[appointment.appointmentManagerId]
-                        ? appointmentManagerDetails[appointment.appointmentManagerId].phoneNumber
-                        : 'Loading...'}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="lawyerId">Lawyer ID</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="lawyerId"
-                    name="lawyerId"
-                    value={appointment.lawyerId}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="clientId">Client ID</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="clientId"
-                    name="clientId"
-                    value={appointment.clientId}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="clientName">Client Name</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="clientName"
-                    name="clientName"
-                    value={clientDetails[appointment.clientId]
-                        ? `${clientDetails[appointment.clientId].fname} ${clientDetails[appointment.clientId].lname}`
-                        : 'Loading...'}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="clientPhone">Client Phone</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="clientPhone"
-                    name="clientPhone"
-                    value={clientDetails[appointment.clientId]
-                        ? clientDetails[appointment.clientId].phone
-                        : 'Loading...'}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="appointmentType">Appointment Type</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="appointmentType"
-                    name="appointmentType"
-                    value={appointmentRequestDetails[appointment.appointmentRequestId]
-                        ? appointmentRequestDetails[appointment.appointmentRequestId].appointmentType
-                        : 'Loading...'}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="appointmentDate">Appointment Date</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="appointmentDate"
-                    name="appointmentDate"
-                    value={appointmentRequestDetails[appointment.appointmentRequestId]
-                        ? new Date(appointmentRequestDetails[appointment.appointmentRequestId].appointmentDate).toISOString().split('T')[0]
-                        : 'Loading...'}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="appointmentTime">Appointment Time</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="appointmentTime"
-                    name="appointmentTime"
-                    value={appointmentRequestDetails[appointment.appointmentRequestId]
-                        ? appointmentRequestDetails[appointment.appointmentRequestId].appointmentTime
-                        : 'Loading...'}
-                    onChange={handleChange}
-                />
-            </div>
-    
+
             <div className="apm-form-group">
                 <label className='apm-form-label' htmlFor="appointmentTitle">Appointment Title</label>
                 <input className='apm-form-input'
@@ -273,15 +151,157 @@ function Apm_View_Appointment() {
             </div>
     
             <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentManagerId">Appointment Manager Id</label>
+                <input className='apm-form-input'
+                    type="text"
+                    id="appointmentManagerId"
+                    name="appointmentManagerId"
+                    value={appointment.appointmentManagerId}
+                    onChange={handleChange}
+                />
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentManagerName">Appointment Manager Name</label>
+                <input className='apm-form-input'
+                    type="text"
+                    id="appointmentManagerName"
+                    name="appointmentManagerName"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    value={appointmentManagerDetails[appointment.appointmentManagerId]
+                        ? `${appointmentManagerDetails[appointment.appointmentManagerId].fName} ${appointmentManagerDetails[appointment.appointmentManagerId].lName}`
+                        : 'Loading...'}
+                    onChange={handleChange}
+                    readOnly
+                />
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentManagerMobile">Appointment Manager Mobile</label>
+                <input className='apm-form-input'
+                    type="text"
+                    id="appointmentManagerMobile"
+                    name="appointmentManagerMobile"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    value={appointmentManagerDetails[appointment.appointmentManagerId]
+                        ? appointmentManagerDetails[appointment.appointmentManagerId].phoneNumber
+                        : 'Loading...'}
+                    onChange={handleChange}
+                    readOnly
+                />
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="lawyerId">Lawyer ID</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="lawyerId"
+                    name="lawyerId"
+                    value={appointment.lawyerId}
+                    onChange={handleChange}
+                    readOnly
+                />
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="clientId">Client ID</label>
+                <input className='apm-form-input'
+                    type="text"
+                    id="clientId"
+                    name="clientId"
+                    value={appointment.clientId}
+                    onChange={handleChange}
+                />
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="clientName">Client Name</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="clientName"
+                    name="clientName"
+                    value={clientDetails[appointment.clientId]
+                        ? `${clientDetails[appointment.clientId].fname} ${clientDetails[appointment.clientId].lname}`
+                        : 'Loading...'}
+                    onChange={handleChange}
+                    readOnly
+                />
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="clientPhone">Client Phone</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="clientPhone"
+                    name="clientPhone"
+                    value={clientDetails[appointment.clientId]
+                        ? clientDetails[appointment.clientId].phone
+                        : 'Loading...'}
+                    onChange={handleChange}
+                    readOnly
+                />
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentType">Appointment Type</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="appointmentType"
+                    name="appointmentType"
+                    value={appointmentRequestDetails[appointment.appointmentRequestId]
+                        ? appointmentRequestDetails[appointment.appointmentRequestId].appointmentType
+                        : 'Loading...'}
+                    onChange={handleChange}
+                    readOnly
+                />
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentDate">Appointment Date</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="appointmentDate"
+                    name="appointmentDate"
+                    value={appointmentRequestDetails[appointment.appointmentRequestId]
+                        ? new Date(appointmentRequestDetails[appointment.appointmentRequestId].appointmentDate).toISOString().split('T')[0]
+                        : 'Loading...'}
+                    onChange={handleChange}
+                    readOnly
+                />
+            </div>
+    
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentTime">Appointment Time</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="appointmentTime"
+                    name="appointmentTime"
+                    value={appointmentRequestDetails[appointment.appointmentRequestId]
+                        ? appointmentRequestDetails[appointment.appointmentRequestId].appointmentTime
+                        : 'Loading...'}
+                    onChange={handleChange}
+                    readOnly
+                />
+            </div> 
+           
+            <div className="apm-form-group">
                 <label className='apm-form-label' htmlFor="appointmentLocation">Location</label>
                 <input className='apm-form-input'
                     type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
                     id="appointmentLocation"
                     name="appointmentLocation"
                     value={appointmentRequestDetails[appointment.appointmentRequestId]
                         ? appointmentRequestDetails[appointment.appointmentRequestId].appointmentLocation
                         : 'Loading...'}
                     onChange={handleChange}
+                    readOnly
                 />
             </div>
     
@@ -331,15 +351,20 @@ function Apm_View_Appointment() {
                 <label className='apm-form-label' htmlFor="appointmentStatus">Appointment Status</label>
                 <input className='apm-form-input'
                     type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
                     id="appointmentStatus"
                     name="appointmentStatus"
                     value={appointment.appointmentStatus}
                     onChange={handleChange}
+                    readOnly
                 />
             </div>
     
-            <div className="apm-button-box">
+            <div className="apm-button-box">                
                 <button type="submit" className="apm-table-link-button">Update Request</button>
+                <button type="submit" className="apm-table-link-button">Mark As Complete</button>
+            </div>
+            <div className="apm-button-box">               
                 <button
                     type="button"
                     className="apm-table-negative-button"

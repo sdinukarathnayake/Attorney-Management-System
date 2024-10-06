@@ -34,6 +34,16 @@ router.route("/add-appointment-request").post((req, res) => {
 })
 
 
+// view all appointment request
+router.route("/").get((req, res)=> {
+    appointmentRequest.find().then((appointmentrequests) => {
+        res.json(appointmentrequests)
+    }).catch((err) => {
+        console.log(err);
+    })
+})
+
+
 // Get a specific appointment request by ID
 router.route("/:id").get((req, res) => {
     const appointmentRequestId = req.params.id;
@@ -100,22 +110,22 @@ router.route("/delete/:id").delete(async(req, res)=> {
 
 // -------- dashboards ------------
 //appointment manager dashboard - all pending appointments (for any appointment manager)
-router.route("/pending").get((req, res) => {
-    const appointmentManagerId = req.params.id;
-
+router.route("/pending/all").get((req, res) => {
+ 
     appointmentRequest.find({ appointmentRequestStatus: "Pending" })
     .then((appointmentRequests) => {
         if (appointmentRequests.length > 0) {
-            res.json(appointmentRequests);
+            res.status(200).json(appointmentRequests);  
         } else {
-            res.status(404).json("Appointment Request Not Found");
+            res.status(404).json({ message: "Appointment Request Not Found" });
         }
     })
     .catch((err) => {
-        console.log(err);
-        res.status(500).json("Error in Retrieving Appointment Request");
+        console.error(err); 
+        res.status(500).json({ message: "Error in Retrieving Appointment Request", error: err.message });
     });
 });
+
 
 
 //appointment manager dashboard - all pending appointments (for specific appointment manager)
