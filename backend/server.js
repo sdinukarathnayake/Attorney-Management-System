@@ -39,6 +39,38 @@ const appointmentRouter = require("./routes/routes_apm_appointment.js");
 app.use("/appointment", appointmentRouter);
 
 
+//support agent
+const supportTicketRouter = require("./routes/routes_sup_support_ticket.js");
+app.use("/supportticket", supportTicketRouter);
+
+const replyTicketRouter = require("./routes/routes_sup_reply_ticket.js");
+app.use("/replyticket", replyTicketRouter); 
+
+
+// Route for new cases
+const newcaseRouter = require("./routes/routes_lcm_newcase.js");
+app.use("/case", newcaseRouter);
+
+
+//access to route for document
+const documentRequestRouter = require("./routes/routes_dcm_document_request.js");
+app.use("/document_request", documentRequestRouter);
+
+//access to route for document
+const documentCallRouter = require("./routes/routes_dcm_document_call.js");
+app.use("/document_call", documentCallRouter);
+
+
+//client
+const clientRouter = require("./routes/routes_cli_clients.js");
+app.use("/client", clientRouter);
+
+
+//deed management
+const deedsRouter = require("./routes/routes_deed");
+app.use("/deeds", deedsRouter);
+
+
 //users - attorney management
 const appointmentManagerRouter = require("./routes/routes_atm_user_appointment_manager.js");
 app.use("/appointmentmanager", appointmentManagerRouter);
@@ -49,7 +81,9 @@ app.use("/legalcasemanager", legalCaseManagerRouter);
 const deedManagerRouter = require("./routes/routes_atm_user_deed_manager.js");
 app.use("/deedmanager", deedManagerRouter);
 
+const supportAgentRouter = require("./routes/routes_atm_support_agent.js");
+app.use("/supportagent", supportAgentRouter);
 
-//client
-const clientRouter = require("./routes/routes_cli_clients.js");
-app.use("/client", clientRouter);
+// law firm
+const lawfirmRouter = require("./routes/routes_atm_lawfirm.js"); 
+app.use("/lawfirm", lawfirmRouter);

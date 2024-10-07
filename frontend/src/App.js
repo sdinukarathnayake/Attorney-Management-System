@@ -25,6 +25,23 @@ import ClientAppointmentDashboard from './components_apm/apm_cli_dashboard';
 import ClientViewAppointment from './components_apm/apm_cli_view_appointment';
 import ClientViewAllAppointments from './components_apm/apm_cli_view_all_appointments';
 
+
+// Support Ticket Management
+import ClientSupportTicketDashboard from './components_uam/uam_cli_dashboard';
+import ClientCreateSupportTicket from './components_uam/uam_cli_create_support_ticket';
+import ClientViewSupportTicket from './components_uam/uam_cli_view_support_ticket';
+import ClientViewTicketReply from './components_uam/uam_cli_view_reply_ticket';
+import ClientViewAllSupportTickets from './components_uam/uam_cli_view_all_support_tickets';
+import ClientViewAllTicketReplies from './components_uam/uam_cli_view_all_replies';
+
+import SupportAgentDashboard from './components_uam/uam_sup_dashboard';
+import SupportAgentViewSupportTicket from './components_uam/uam_sup_view_support_ticket';
+import SupportAgentViewTicketReply from './components_uam/uam_sup_view_reply_ticket';
+import SupportAgentViewAllSupportTickets from './components_uam/uam_sup_view_all_support_tickets';
+import SupportAgentViewAllTicketReplies from './components_uam/uam_sup_view_all_reply_tickets';
+
+
+
 function App() {
   return (
     <Router>
@@ -55,6 +72,21 @@ function App() {
           <Route path="/client-portal/appointments/:id" exact element={<ClientAppointmentDashboard />} />
           <Route path="/client-portal/view-appointment/:id" exact element={<ClientViewAppointment />} />
           <Route path="/client-portal/view-all-appointments/:id" exact element={<ClientViewAllAppointments />} />
+
+
+          {/* User Affairs Management */}
+          <Route path="/client-portal/support/:id" exact element={<ClientSupportTicketDashboard />} />
+          <Route path="/client-portal/create-support-ticket/:id" exact element={<ClientCreateSupportTicket />} />
+          <Route path="/client-portal/view-support-ticket/:id" exact element={<ClientViewSupportTicket />} />
+          <Route path="/client-portal/view-ticket-reply/:id" exact element={<ClientViewTicketReply />} />
+          <Route path="/client-portal/view-all-support-tickets/:id" exact element={<ClientViewAllSupportTickets />} />
+          <Route path="/client-portal/view-all-ticket-replies/:id" exact element={<ClientViewAllTicketReplies />} />
+
+          <Route path="/support-agent-dashboard/:id" exact element={<SupportAgentDashboard />} />
+          <Route path="/support-agent-dashboard/view-support-ticket/:id" exact element={<SupportAgentViewSupportTicket />} />
+          <Route path="/support-agent-dashboard/view-ticket-reply/:id" exact element={<SupportAgentViewTicketReply />} />
+          <Route path="/support-agent-dashboard/view-all-support-tickets" exact element={<SupportAgentViewAllSupportTickets />} />
+          <Route path="/support-agent-dashboard/view-all-ticket-replies/:id" exact element={<SupportAgentViewAllTicketReplies />} />
 
         </Routes>
       </div>
