@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components_home/Home_Footer';
 import HomeNavbar from '../components_home/Home_NavBar';
 
-const AppointmentManagerLogin = () => {
+const SupportAgentLogin = () => {
 
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
@@ -19,12 +19,12 @@ const AppointmentManagerLogin = () => {
             const response = await axios.post('http://localhost:8070/appointmentmanager/login-appointment-manager', { userId, password });
             if (response.status === 200) {
                 // Store the user ID, NIC, and clientName in localStorage
-                localStorage.setItem('userId', response.data.appointmentManager.userId);
-                localStorage.setItem('userName', response.data.appointmentManager.fName);
-                localStorage.setItem('userNic', response.data.appointmentManager.nic);
+                localStorage.setItem('userId', response.data.supportAgent.userId);
+                localStorage.setItem('userName', response.data.supportAgent.fName);
+                localStorage.setItem('userNic', response.data.supportAgent.nic);
 
                 // Redirect to ClientPortalHome with the user's ID
-                navigate(`/appointment-manager-dashboard/${response.data.appointmentManager.userId}`);
+                navigate(`/support-agent-dashboard/${response.data.supportAgent.userId}`);
             }
         } catch (err) {
             setError('Invalid email or password');
@@ -39,7 +39,7 @@ const AppointmentManagerLogin = () => {
         <hr/>
             <div class="homeNavbar" />
             <div className="login-form-container">
-                <h2 className="login-form-head-text">Login Appointment manager</h2>
+                <h2 className="login-form-head-text">Login Support Agent</h2>
 
                 <form onSubmit={handleLogin} className="login-form">
                     <div className="form-group">
@@ -73,4 +73,4 @@ const AppointmentManagerLogin = () => {
     );
 };
 
-export default AppointmentManagerLogin;
+export default SupportAgentLogin;

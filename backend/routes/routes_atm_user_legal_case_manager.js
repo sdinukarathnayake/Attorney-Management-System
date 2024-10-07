@@ -51,8 +51,6 @@ router.route("/").get((req, res)=> {
 })
 
 
-
-
 // Get a specific userRegistration by ID
 router.route("/:id").get((req, res) => {
     const userId = req.params.id;
@@ -118,6 +116,25 @@ router.route("/delete/:id").delete(async (req, res) => {
             console.log(err.message);
             res.status(500).send({ status: "Error in delete Legal Case Manager", error: err.message });
         });
+});
+
+//login
+router.route("/login/legal-case-manager").post(async (req, res) => {
+    const { userId, password } = req.body;
+
+    try {
+        const legalCaseManager = await userRegistration.findOne({ userId, password });
+
+        if (!legalCaseManager) {
+            return res.status(400).json({ message: "Invalid email or password" });
+        }
+
+        res.status(200).json({ legalCaseManager: legalCaseManager });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
 });
 
 module.exports = router;

@@ -118,4 +118,24 @@ router.route("/delete-deed-manager/:id").delete(async (req, res) => {
         });
 });
 
+
+//login
+router.route("/login/deed-manager").post(async (req, res) => {
+    const { userId, password } = req.body;
+
+    try {
+        const deedManager = await userRegistration.findOne({ userId, password });
+
+        if (!deedManager) {
+            return res.status(400).json({ message: "Invalid email or password" });
+        }
+
+        res.status(200).json({ deedManager: deedManager });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 module.exports = router;

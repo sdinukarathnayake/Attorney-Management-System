@@ -157,7 +157,7 @@ router.route("/pending/lawyer/:id").get((req, res) => {
             res.json(appointmentRequests);
         } else {
             res.status(404).json("Appointment Request Not Found");
-        }
+        } 
     })
     .catch((err) => {
         console.log(err);

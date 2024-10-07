@@ -1,6 +1,8 @@
 import React from "react";
 import NavBar from "../components_home/Home_NavBar"
 import Footer from "../components_home/Home_Footer"
+import "./login.css"
+
 
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
@@ -20,22 +22,22 @@ function Login(){
         },
         {
             icon: <SupportAgentIcon/>,
-            title: <a href="/support-agent-dashboard" style={{ textDecoration: 'none', color: 'inherit' }}>Support Agent</a> 
+            title: <a href="/login/support-agent" style={{ textDecoration: 'none', color: 'inherit' }}>Support Agent</a> 
         },
         {
             icon: <BalanceIcon/>,
-            title: <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Legal Case Manager</a>     
+            title: <a href="/login/legal-case-manager" style={{ textDecoration: 'none', color: 'inherit' }}>Legal Case Manager</a>     
         },
         {
             icon: <FileCopyIcon/>,
-            title: <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Document Manager</a> 
+            title: <a href="/login/document-manager" style={{ textDecoration: 'none', color: 'inherit' }}>Document Manager</a> 
         }
       ];
     
       const userRoleDataBottom = [
         {
             icon: <MonetizationOnIcon/>,
-            title: <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Finance Manager</a>      
+            title: <a href="/login/finance-manager" style={{ textDecoration: 'none', color: 'inherit' }}>Finance Manager</a>      
         },
         {
             icon: <SensorOccupiedIcon/>,
@@ -43,36 +45,38 @@ function Login(){
         },
         {
           icon: <AccountBalanceIcon/>,    
-          title: <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Attorney Manager</a>     
+          title: <a href="/login/attorney-manager" style={{ textDecoration: 'none', color: 'inherit' }}>Attorney Manager</a>     
         },
         {
           icon: <ReceiptLongIcon/>,
-          title: <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Deed Manager</a> 
+          title: <a href="/login/deed-manager" style={{ textDecoration: 'none', color: 'inherit' }}>Deed Manager</a> 
         }
       ];
 
        return(
-        <div className="login-container">
+        <div className="login-main-container">
             <NavBar />
 
-            <div className="login-section">
-                <div className="login-section-top">
+            <hr />
+
+            <div className="login-main-section">
+                <div className="login-main-section-top">
                     <h1>Select Your User Role</h1>
                 </div>
 
-                <div className="login-section-bottom">
+                <div className="login-main-section-bottom">
                     {userRoleDataTop.map((data) => (
-                    <div className="login-section-info" key={data.title}>
-                        <div className="login-section-icon">{data.icon}</div>
+                    <div className="login-main-section-info" key={data.title}>
+                        <div className="login-main-section-icon">{data.icon}</div>
                         <h2>{data.title}</h2>
                     </div>
                     ))}
                 </div>
 
-                <div className="login-section-bottom">
+                <div className="login-main-section-bottom">
                     {userRoleDataBottom.map((data) => (
-                    <div className="login-section-info" key={data.title}>
-                        <div className="login-section-icon">{data.icon}</div>
+                    <div className="login-main-section-info" key={data.title}>
+                        <div className="login-main-section-icon">{data.icon}</div>
                         <h2>{data.title}</h2>
                     </div>
                     ))}

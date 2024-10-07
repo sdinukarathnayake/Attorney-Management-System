@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 
-const LegalCaseManagerSchema = new Schema({
+const FinanceManagerSchema = new Schema({
 
     userId: { 
         type : String,  
@@ -53,9 +53,9 @@ const LegalCaseManagerSchema = new Schema({
     },
 
     userStatus: { 
-        type: String,  
+        type: String, 
     }         
 })
 
-const LegalCaseManager = mongoose.model("legalCaseManager", LegalCaseManagerSchema);
-module.exports = LegalCaseManager;
+const FinanceManager = mongoose.model("FinanceManager", FinanceManagerSchema);
+module.exports = FinanceManager;

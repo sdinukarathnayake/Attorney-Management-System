@@ -120,7 +120,7 @@ router.route("/delete-appointment-manager/:id").delete(async (req, res) => {
 
 
 //login
-router.route("/login-appointment-manager").post(async (req, res) => {
+router.route("/login/appointment-manager").post(async (req, res) => {
     const { userId, password } = req.body;
 
     try {

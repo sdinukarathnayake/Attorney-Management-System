@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components_home/Home_Footer';
 import HomeNavbar from '../components_home/Home_NavBar';
 
-const AppointmentManagerLogin = () => {
+const DeedManagerLogin = () => {
 
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
@@ -19,12 +19,12 @@ const AppointmentManagerLogin = () => {
             const response = await axios.post('http://localhost:8070/appointmentmanager/login-appointment-manager', { userId, password });
             if (response.status === 200) {
                 // Store the user ID, NIC, and clientName in localStorage
-                localStorage.setItem('userId', response.data.appointmentManager.userId);
-                localStorage.setItem('userName', response.data.appointmentManager.fName);
-                localStorage.setItem('userNic', response.data.appointmentManager.nic);
+                localStorage.setItem('userId', response.data.deedManager.userId);
+                localStorage.setItem('userName', response.data.deedManager.fName);
+                localStorage.setItem('userNic', response.data.deedManager.nic);
 
                 // Redirect to ClientPortalHome with the user's ID
-                navigate(`/appointment-manager-dashboard/${response.data.appointmentManager.userId}`);
+                navigate(`/deed-manager-dashboard/${response.data.deedManager.userId}`);
             }
         } catch (err) {
             setError('Invalid email or password');
@@ -39,7 +39,7 @@ const AppointmentManagerLogin = () => {
         <hr/>
             <div class="homeNavbar" />
             <div className="login-form-container">
-                <h2 className="login-form-head-text">Login Appointment manager</h2>
+                <h2 className="">Login Deed manager</h2>
 
                 <form onSubmit={handleLogin} className="login-form">
                     <div className="form-group">
@@ -73,4 +73,4 @@ const AppointmentManagerLogin = () => {
     );
 };
 
-export default AppointmentManagerLogin;
+export default DeedManagerLogin;

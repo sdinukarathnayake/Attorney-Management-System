@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 
-const deedManagerSchema = new Schema({
+const DeedManagerSchema = new Schema({
 
     userId: { 
         type : String,  
@@ -57,5 +57,5 @@ const deedManagerSchema = new Schema({
     }         
 })
 
-const deedManager = mongoose.model("deedManager", deedManagerSchema);
-module.exports = deedManager;
+const DeedManager = mongoose.model("deedManager", DeedManagerSchema);
+module.exports = DeedManager;

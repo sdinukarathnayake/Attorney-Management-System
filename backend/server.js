@@ -75,14 +75,25 @@ app.use("/deeds", deedsRouter);
 const appointmentManagerRouter = require("./routes/routes_atm_user_appointment_manager.js");
 app.use("/appointmentmanager", appointmentManagerRouter);
 
+const supportAgentRouter = require("./routes/routes_atm_user_support_agent.js");
+app.use("/supportagent", supportAgentRouter);
+
+const documentManagerRouter = require("./routes/routes_atm_user_document_manager.js");
+app.use("/documentmanager", documentManagerRouter);
+
 const legalCaseManagerRouter = require("./routes/routes_atm_user_legal_case_manager.js");
 app.use("/legalcasemanager", legalCaseManagerRouter);
+
+const financeManagerRouter = require("./routes/routes_atm_user_finance_manager.js");
+app.use("/financemanager", financeManagerRouter);
 
 const deedManagerRouter = require("./routes/routes_atm_user_deed_manager.js");
 app.use("/deedmanager", deedManagerRouter);
 
-const supportAgentRouter = require("./routes/routes_atm_support_agent.js");
-app.use("/supportagent", supportAgentRouter);
+const attorneyManagerRouter = require("./routes/routes_atm_user_attorney_manager.js");
+app.use("/attorneymanager", attorneyManagerRouter);
+
+
 
 // law firm
 const lawfirmRouter = require("./routes/routes_atm_lawfirm.js"); 

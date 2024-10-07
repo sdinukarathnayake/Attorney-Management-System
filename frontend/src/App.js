@@ -6,6 +6,12 @@ import Home from './components_home/Home';
 // Login
 import Login from './components_login/login';
 import LoginAppointmentManager from './components_login/login_appointment_manager';
+import LoginSupportAgent from './components_login/login_support_agent';
+import LoginLegalCaseManager from './components_login/login_legal_case_manager';
+import LoginDocumentManager from './components_login/login_document_manager';
+import LoginFinanceManager from './components_login/login_finance_manager';
+import LoginDeedManager from './components_login/login_deed_manager';
+import LoginAttorneyManager from './components_login/login_attorney_manager';
 
 // Appointment Management
 import LawyerAppointmentDashboard from './components_apm/apm_law_dashboard';
@@ -54,6 +60,13 @@ function App() {
           {/* Login */}
           <Route path="/login" exact element={<Login />} />
           <Route path="/login/appointment-manager" exact element={<LoginAppointmentManager />} />
+          <Route path="/login/support-agent" exact element={<LoginSupportAgent />} />
+          <Route path="/login/legal-case-manager" exact element={<LoginLegalCaseManager />} />
+          <Route path="/login/document-manager" exact element={<LoginDocumentManager />} />
+          <Route path="/login/finance-manager" exact element={<LoginFinanceManager />} />
+          <Route path="/login/deed-manager" exact element={<LoginDeedManager />} />
+          <Route path="/login/attorney-manager" exact element={<LoginAttorneyManager />} />
+
 
           {/* Appointment Management */}
           <Route path="/lawyer-dashboard/appointments/:id" exact element={<LawyerAppointmentDashboard />} />

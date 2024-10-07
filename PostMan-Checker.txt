@@ -128,7 +128,22 @@ http://localhost:8070/appointment/add-appointment
 }
 
 
+-------------------------------------------------
+http://localhost:8070/appointmentmanager/add-appointment-manager
 
+{
+    "userId": "ATM001",
+    "fName": "Shehara",
+    "lName": "Manathunga",
+    "nic": "200223789V",
+    "address": "No. 123 Main Street, Asgiriya, Kandy",
+    "email": "shehara.manathunga@gmail.com",
+    "phoneNumber": "0741234567",
+    "education": "LLB (Hons) Law - Sri Lanka",
+    "password": "rash456",
+    "createdDate": "2024/09/04",
+    "userStatus": "Active"
+}
 
 
 
