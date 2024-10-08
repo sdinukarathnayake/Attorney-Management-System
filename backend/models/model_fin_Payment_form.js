@@ -32,12 +32,9 @@ const paymentRQSchema = new Schema({
 
     Amount : {
         type : Number
-    },
-    
-    PaymentMethod : {
-        type : String,
-        required : true,
     }
+    
+   
 })
 
 const paymentRQ = mongoose.model("paymentRQ", paymentRQSchema);

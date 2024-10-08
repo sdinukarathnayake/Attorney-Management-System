@@ -5,11 +5,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const paymentProofSchema = new Schema({
-    ProofId: {
-        type: String,
-        required: true,  // Unique ID for the proof
-    },
-
+    
     RequestId: {
         type: String,
         required: true,  // Unique ID for the Request
@@ -23,10 +19,7 @@ const paymentProofSchema = new Schema({
         type: String,
         required: true,  // Unique ID for the client
     },
-    FinanceManagerId: {
-        type: String,
-        required: true,  // Unique ID for the finance manager 
-    },
+    
 
     PaymentDate: {
         type: String,  // Date when the payment was made
@@ -39,13 +32,18 @@ const paymentProofSchema = new Schema({
         required: true,
     },
 
-    ServiceType: {
-        type: String,  // Type of service provided
+    PhoneNumber: {
+        type: Number,  // Type of service provided
         required: true,
     },
 
     PaymentType: {
         type: String,  // Method or type of payment (e.g., credit card, bank transfer)
+       
+    },
+
+    Amount: {
+        type: Number,  // Payment amount
         required: true,
     }
 });

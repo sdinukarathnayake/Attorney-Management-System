@@ -67,6 +67,13 @@ app.use("/document_call", documentCallRouter);
 const clientRouter = require("./routes/routes_cli_clients.js");
 app.use("/client", clientRouter);
 
+//finance management
+const paymentRQRouter = require("./routes/routes_fin_Payement_form.js");
+app.use("/paymentRQ", paymentRQRouter);
+
+const paymentProofRouter = require("./routes/routes_fin_payment_proof.js");
+app.use("/paymentProof", paymentProofRouter);
+
 
 //deed management
 const deedsRouter = require("./routes/routes_deed");

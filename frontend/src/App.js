@@ -77,6 +77,27 @@ import CaseReport from './components_lcm/Lcm_CaseReport';
 import ClientCDashboard from './components_lcm/Lcm_ClientCDashboard';
 
 
+
+//finance management
+import Fin_payment_RQ from './components_fin/lawyer_payment_request/Fin_Payment_RQ'
+import Fin_nav_login from './components_login/login'
+import Fin_Payment_RQ_details from './components_fin/lawyer_payment_request/DIsplay/Fin_payment_RQ_Display'
+import Fin_Payment_RQ_Insert from "./components_fin/lawyer_payment_request/insert/Fin_Payment_RQ_Insert"
+import Fin_Payment_RQ_Update from "./components_fin/lawyer_payment_request/update/Fin_payment_RQ_Update"
+import Delete_Payment_RQ from './components_fin/lawyer_payment_request/delete/Delete_Payment_RQ'
+import Fin_payment_proofs from './components_fin/Client_payment_proof/Display_proofs/PaymentProofDisplay'
+import Fin_payment_proof_form from './components_fin/Client_payment_proof/Inser_proofs/PaymentProofInsert'
+import Fin_payment_proof_update from './components_fin/Client_payment_proof/update_proofs/PaymentProofUpdate'
+import Fin_payment_proof_delete from './components_fin/Client_payment_proof/Delete_proofs/Delete_PaymentProof'
+import PaymentRequestDetails from './components_fin/lawyer_payment_request/PaymentRequestDetails'; 
+import Payment_proofs_details from './components_fin/lawyer_payment_request/PaymentProofDetails'
+import Back_dashboard from './components_fin/lawyer_payment_request/Fin_Payment_RQ';
+import Fin_client_PAyemnt_Submit from './components_fin/Client__FIN_Dashbord/FIN_Client_RQs_form'
+import Fin_proofs_spec_client from './components_fin/Client__FIN_Dashbord/FIN_client_display_proofs'
+import Fin_proofs_Spec_lawyer from './components_fin/Lwyer_FIN_dashboard/FIN_lawyer_Dashboard_rq'
+import PaymentProofDetails from './components_fin/Client__FIN_Dashbord/PaymentProofDetails'; // Assuming this is the correct path
+
+
 // Deed Management
 import DemDashboard from './components_dem/Dem_Dashboard';
 import DemAddDeed from './components_dem/Dem_addDeed';
@@ -190,6 +211,34 @@ function App() {
 
 
           {/* Finance Management */}
+          <Route path="/finance-manager-dashboard" exact element={<Fin_payment_RQ/>}/>
+        <Route path="/mainHome" exact element={<Home/>}/>
+        <Route path="/user_details" exact element={<Fin_Payment_RQ_details/>}/>
+        <Route path="/Fin_nav_Rq_form" exact element={<Fin_Payment_RQ_Insert/>}/>
+        <Route path="/user_details/:id" exact element={<Fin_Payment_RQ_Update/>}/>
+        <Route path="/delete_payment_rq/:id" exact element={<Delete_Payment_RQ/>} />
+
+        <Route path="/payment_proofs_lists" exact element={<Fin_payment_proofs/>} />
+        <Route path="/payment_proofs_form" exact element={<Fin_payment_proof_form/>} />
+        <Route path="/payment_proof_update/:id" exact element={<Fin_payment_proof_update/>} />
+        <Route path="/delete_payment_proof/:id" exact element={<Fin_payment_proof_delete/>} />
+
+        <Route path="/payment_request_details/:id" exact element={<PaymentRequestDetails/>} />
+        <Route path="/payment_proofs_details/:id" exact element={<Payment_proofs_details/>} />
+
+        <Route path="/View_all_requests" exact element={<Fin_Payment_RQ_details/>} />
+        <Route path="/View_all_proofs" exact element={<Fin_payment_proofs/>} />
+        <Route path="/back_dashboard" exact element={<Back_dashboard/>} />
+
+
+
+
+        <Route path="/client/:clientId" exact element={<Fin_proofs_spec_client />} />
+
+        <Route path="/lawyer/:lawyerId" exact element={<Fin_proofs_Spec_lawyer />} />
+        <Route path="/payment_proof_details/:id" element={<PaymentProofDetails />} />
+
+        <Route path="/payment_request_details_client/:id" exact element={<Fin_client_PAyemnt_Submit />} />
           
 
 

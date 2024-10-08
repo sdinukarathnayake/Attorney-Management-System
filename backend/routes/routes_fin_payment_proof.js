@@ -5,31 +5,30 @@ let PaymentProof = require("../models/model_fin_payment_proof");
 
 // Add a new payment proof
 router.route("/add_paymentProof").post((req, res) => {
-    const ProofId = req.body.ProofId;
-    const RequestId = req.body.RequestId; // Added `RequestId`
-    const lawyerId = req.body.lawyerId; // Added `lawyerId`
-    const ClientId = req.body.ClientId; // Changed `ClientName` to `ClientId`
-    const FinanceManagerId = req.body.FinanceManagerId; // Corrected spelling for `FinanceManagerId`
+    const RequestId = req.body.RequestId;
+    const lawyerId = req.body.lawyerId;
+    const ClientId = req.body.ClientId;
     const PaymentDate = req.body.PaymentDate;
     const UploadDate = req.body.UploadDate;
-    const ServiceType = req.body.ServiceType;
+    const PhoneNumber = req.body.PhoneNumber;
     const PaymentType = req.body.PaymentType;
+    const Amount = req.body.Amount; // New field added
 
     // Creating new payment proof object
     const newPaymentProof = new PaymentProof({
-        ProofId,
-        RequestId, // Added `RequestId`
-        lawyerId, // Added `lawyerId`
-        ClientId, // Changed `ClientName` to `ClientId`
-        FinanceManagerId, // Corrected spelling for `FinanceManagerId`
+        RequestId,
+        lawyerId,
+        ClientId,
         PaymentDate,
         UploadDate,
-        ServiceType,
-        PaymentType
+        PhoneNumber,
+        PaymentType,
+        Amount, // Include the Amount field
     });
 
     // Saving payment proof to database
-    newPaymentProof.save()
+    newPaymentProof
+        .save()
         .then(() => {
             res.json("New Payment Proof Added");
         })
@@ -69,21 +68,71 @@ router.route("/paymentProof/:id").get((req, res) => {
         });
 });
 
+// Get payment proofs by a specific ClientId
+router.route("/paymentProofsByClient/:clientId").get((req, res) => {
+    const clientId = req.params.clientId;
+
+    PaymentProof.find({ ClientId: clientId })
+        .then((paymentProofs) => {
+            if (paymentProofs.length > 0) {
+                res.json(paymentProofs);
+            } else {
+                res.status(404).json("No Payment Proofs Found for the Client");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json("Error in Retrieving Payment Proofs");
+        });
+});
+
+router.route("/updatePaymentProofByClient/:clientId").put(async (req, res) => {
+    const clientId = req.params.clientId;
+
+    // Object to hold updated fields
+    const updatedPaymentProof = {
+        RequestId: req.body.RequestId,
+        lawyerId: req.body.lawyerId,
+        ClientId: req.body.ClientId,
+        PaymentDate: req.body.PaymentDate,
+        UploadDate: req.body.UploadDate,
+        PhoneNumber: req.body.PhoneNumber,
+        PaymentType: req.body.PaymentType,
+        Amount: req.body.Amount, // Include the Amount field
+    };
+
+    try {
+        const result = await PaymentProof.updateMany(
+            { ClientId: clientId }, // Ensure this matches your field name in the database
+            updatedPaymentProof,
+            { new: true }
+        );
+
+        if (result.nModified > 0) {
+            res.json(`${result.nModified} Payment Proof(s) Updated Successfully`);
+        } else {
+            res.status(404).json("No Payment Proofs Found to Update for the Client");
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json("Error in Updating Payment Proofs");
+    }
+});
+
 // Update a specific payment proof
 router.route("/update_paymentProof/:id").put(async (req, res) => {
     const paymentProofId = req.params.id;
 
     // Object to hold updated fields
     const updatedPaymentProof = {
-        ProofId: req.body.ProofId,
-        RequestId: req.body.RequestId, // Added `RequestId`
-        lawyerId: req.body.lawyerId, // Added `lawyerId`
-        ClientId: req.body.ClientId, // Changed `ClientName` to `ClientId`
-        FinanceManagerId: req.body.FinanceManagerId, // Corrected spelling for `FinanceManagerId`
+        RequestId: req.body.RequestId,
+        lawyerId: req.body.lawyerId,
+        ClientId: req.body.ClientId,
         PaymentDate: req.body.PaymentDate,
         UploadDate: req.body.UploadDate,
-        ServiceType: req.body.ServiceType,
-        PaymentType: req.body.PaymentType
+        PhoneNumber: req.body.PhoneNumber,
+        PaymentType: req.body.PaymentType,
+        Amount: req.body.Amount, // Include the Amount field
     };
 
     try {

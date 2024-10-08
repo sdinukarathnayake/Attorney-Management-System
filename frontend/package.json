@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.5",
     "chart.js": "^4.4.4",
+    "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.3",
     "pdf-lib": "^1.17.1",
@@ -24,6 +25,7 @@
     "react-scripts": "5.0.1",
     "react-to-print": "^3.0.1",
     "recharts": "^2.12.7",
+    "sweetalert2": "^11.14.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
