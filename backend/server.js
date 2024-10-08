@@ -53,11 +53,11 @@ app.use("/case", newcaseRouter);
 
 
 //access to route for document
-const documentRequestRouter = require("./routes/routes_dcm_document_request.js");
+const documentRequestRouter = require("./routes/routes_apm_document_request.js");
 app.use("/document_request", documentRequestRouter);
 
 //access to route for document
-const documentCallRouter = require("./routes/routes_dcm_document_call.js");
+const documentCallRouter = require("./routes/routes_apm_document_call.js");
 app.use("/document_call", documentCallRouter);
 
 
@@ -94,8 +94,9 @@ app.use("/deedmanager", deedManagerRouter);
 const attorneyManagerRouter = require("./routes/routes_atm_user_attorney_manager.js");
 app.use("/attorneymanager", attorneyManagerRouter);
 
+const userRegistrationRouter = require("./routes/routes_atm_user_registration.js");
+// Using routes
+app.use("/userRegistration", userRegistrationRouter);
 
-
-// law firm
-const lawfirmRouter = require("./routes/routes_atm_lawfirm.js"); 
+const lawfirmRouter = require("./routes/routes_atm_lawfirm.js");
 app.use("/lawfirm", lawfirmRouter);

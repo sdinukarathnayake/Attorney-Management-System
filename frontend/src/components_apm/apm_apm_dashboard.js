@@ -179,6 +179,9 @@ function Dashboard() {
                     <Pie data={pieData} options={pieOptions} />
                 </div>
 
+                {/* Bar Chart */}
+                <AppointmentBarChart />  
+
                 <table border='1' className="apm-summary-table">
                     <thead>
                         <tr className="apm-summary-table-row">
@@ -231,9 +234,7 @@ function Dashboard() {
 
                 <a className="apm-view-button" href="/appointment-manager-dashboard/view-all-appointment-requests/">View Previous Appointment Requests</a>
 
-                <h2>Upcoming Appointments</h2>
-
-                <AppointmentBarChart />        
+                <h2>Upcoming Appointments</h2>    
 
                 <table border='1' className="apm-summary-table">
                     <thead>

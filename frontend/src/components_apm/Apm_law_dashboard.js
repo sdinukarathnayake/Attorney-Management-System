@@ -1,5 +1,5 @@
-//import NavBar from "./apm_page_navbar";
-//import Footer from "./apm_page_footer";
+import NavBar from "../components_lcm/Lcm_NavBar";
+import Footer from "../components_lcm/Lcm_Footer";
 import './appointment_management.css';
 
 import React, { useState, useEffect } from "react";
@@ -91,7 +91,7 @@ function Dashboard() {
 
     return (
         <div>
-            {/* <NavBar /> */}
+            <NavBar />
             <hr />
 
             <div className="apm-container">
@@ -205,7 +205,7 @@ function Dashboard() {
                 <a className="apm-view-button" href={`/lawyer-dashboard/view-all-appointments/${id}`}>View Previous Appointments</a>
 
             </div>
-            {/* <Footer /> */}
+            <Footer />
 
         </div>
     )

@@ -1,5 +1,5 @@
-import NavBar from "./apm_page_navbar";
-import Footer from "./apm_page_footer";
+import NavBar from "../components_lcm/Lcm_NavBar";
+import Footer from "../components_lcm/Lcm_Footer";
 import './appointment_management.css';
 
 import axios from "axios";

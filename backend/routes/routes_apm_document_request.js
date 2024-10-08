@@ -1,14 +1,13 @@
 const router = require("express").Router();
-let document_request = require("../models/model_dcm_document_request");
-//const multer = require('multer');
-const path = require('path'); 
+const { application } = require("express");
+let document_request = require("../models/model_apm_document_request");
+const multer = require('multer');
+const path = require('path');
 
 
 // add document
 router.route("/add_document_request").post((req, res) => {
-    const {lawerID,  clientID, documentManagerID, docRequestStatues, documentDeadline, instruction} = req.body;
-    const documentRequestID = Number(req.body.documentRequestID);
-    const documentCallID = Number(req.body.documentCallID);
+    const {documentRequestID, documentCallID, lawerID,  clientID, documentManagerID, docRequestStatues, documentDeadline, instruction} = req.body;
 
     const newdocument_request = new document_request({
         documentRequestID,
@@ -41,6 +40,21 @@ router.route("/get_all_document_request").get((req, res) => {
         });
 });
 
+// Get the last document
+router.route("/get_last_document_request").get(async (req, res) => {
+    try {
+        const lastDocument = await document_request.findOne().sort({ createdAt: -1 }); // Descending order
+        if (lastDocument) {
+            res.status(200).json(lastDocument);
+        } else {
+            res.status(404).json({ message: "No documents found." });
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: "Failed to fetch the last document." });
+    }
+});
+
 router.route("/get_all_document_request/Request").get((req, res) => {
     document_request.find({docRequestStatues: "Request"})
         .then((documentrequest) => {
@@ -52,7 +66,7 @@ router.route("/get_all_document_request/Request").get((req, res) => {
         })
         .catch((err) => {
             console.log(err.message);
-            res.status(500).json({ error: "An error" }); 
+            res.status(500).json({ error: "An error" });
         });
 });
 
@@ -86,7 +100,7 @@ router.route("/get_all_document_request/Reviewing").get((req, res) => {
         });
 });
 
-// update  
+// update 
 router.route("/update/:id").put(async (req, res) => {
     let callId = req.params.id;
     const {docRequestStatues, documentDeadline, instruction} = req.body;
@@ -107,18 +121,20 @@ router.route("/update/:id").put(async (req, res) => {
     }
 });
 
-/*
-// Set up multer storage configuration
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/'); // Directory where PDFs will be saved
     },
     filename: function (req, file, cb) {
-        // Ensure the filename is unique
-        cb(null, Date.now() + path.extname(file.originalname));
+        // Get the original name and extension
+        const originalName = path.parse(file.originalname).name; // Original file name without extension
+        const ext = path.extname(file.originalname); // File extension
+        // Create a unique filename
+        const uniqueName = `${originalName}_${Date.now()}${ext}`;
+        cb(null, uniqueName);
     }
 });
-
 const upload = multer({ storage: storage });
 
 // update clien side
@@ -141,8 +157,7 @@ router.route("/update/client/:id").put(upload.single('pdf'), async (req, res) =>
         console.log(err.message);
         res.status(500).send({ status: "Document request Update Unsuccessful", error: err.message });
     }
-}); 
-*/
+});
 
 // delete
 router.route("/delete/:id").delete(async (req, res) => {
@@ -169,6 +184,27 @@ router.route("/get/:id").get(async(req,res)=>{
         res.status(500).send({status:"Error with get User", error: err.message});
     })
 
+});
+
+// get pdf
+router.route("/get_pdf/:id").get(async (req, res) => {
+    const callid = req.params.id;
+
+    try {
+        const documentrequest = await document_request.findById(callid);
+        if (!documentrequest) {
+            return res.status(404).send({ error: "Document request not found" });
+        }
+
+        // Send back only the filename
+        const uploadedFileUrl = documentrequest.uploadDocument
+            ? path.basename(documentrequest.uploadDocument)
+            : null;
+
+        res.status(200).send({ documentrequest, uploadedFileUrl });
+    } catch (err) {
+        res.status(500).send({ error: err.message });
+    }
 });
 
 module.exports = router;

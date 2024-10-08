@@ -1,0 +1,93 @@
+
+.table-container {
+    width: 80%;
+    margin: 150px auto 20px;
+    font-size: 1.1em;
+    position: relative;
+  }
+  
+  .back-button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: var(--dark-color);
+    cursor: pointer;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    padding: 5px;
+  }
+  
+  .back-button:hover {
+    color: var(--accent-color);
+  }
+  
+  .spacer {
+    height: 20px;
+  }
+  
+  .lawyer-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .lawyer-table th,
+  .lawyer-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+  }
+  
+  .lawyer-table thead tr {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+  }
+  
+  .lawyer-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .update-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100px;
+    height: 40px;
+  }
+  
+  .update-button:hover {
+    background-color: #23272b;
+  }
+  .remove-button{
+    background-color: rgb(196, 41, 41);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100px;
+    height: 40px;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 1.1em;
+    margin: 20px 0;
+  }
+  
+  /* Responsive table for small screens */
+  @media screen and (max-width: 768px) {
+    .lawyer-table {
+      font-size: 0.9em;
+    }
+  
+    button {
+      padding: 6px 12px;
+    }
+  }
+  

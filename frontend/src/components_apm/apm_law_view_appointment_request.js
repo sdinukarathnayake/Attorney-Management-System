@@ -1,3 +1,7 @@
+import NavBar from "../components_lcm/Lcm_NavBar";
+import Footer from "../components_lcm/Lcm_Footer";
+import './appointment_management.css';
+
 import React, { useState, useEffect } from 'react';
 import './appointment_management.css';
 import axios from "axios";
@@ -81,6 +85,8 @@ function Apm_View_AppointmentRequest() {
 
     return (
         <div className="apm-form-container">
+
+        <NavBar />
             <hr />
             <h2 className='apm-header'>Lawyer Appointment Request Details</h2>
 
@@ -268,6 +274,8 @@ function Apm_View_AppointmentRequest() {
                     </button>
                 </div> 
             </form>
+
+            <Footer/>
         </div>
     );
 }

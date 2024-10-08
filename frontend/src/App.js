@@ -49,6 +49,18 @@ import SupportAgentViewAllTicketReplies from './components_uam/uam_sup_view_all_
 
 // Document Management
 import Dom_Dashboard from './components_dom/Dom_Dashboard';
+import Dom_Request from './components_dom/Dom_Request';
+import Dom_Call from './components_dom/Dom_Call';
+import Dom_Call_Update from './components_dom/Dom_Call_Update';
+import Dom_Call_Dashboard from './components_dom/Dom_Call_Dashboard';
+import Dom_Call_View from './components_dom/Dom_Call_View';
+import Dom_Request_Dom from './components_dom/Dom_Request_Dom';
+import Dom_Request_View from './components_dom/Dom_Request_View';
+import Dom_Request_Update from './components_dom/Dom_Request_Update';
+import Dom_Client_Dashboard from './components_dom/Dom_Client_Dashboard';
+import Dom_Request_Submitted_View from './components_dom/Dom_Request_Submitted_View';
+import Dom_Request_Approval from './components_dom/Dom_Request_Approval';
+import Dom_Call_View_Requested from './components_dom/Dom_Call_View_Requested';
 
 
 
@@ -62,6 +74,21 @@ import DemAddDeed from './components_dem/Dem_addDeed';
 import DemReadAll from './components_dem/Dem_allDeed';
 import DemDeedDetail from './components_dem/Dem_deedDetail';
 import DemSearchResults from './components_dem/Dem_searchResult';
+
+
+// Attorney Mangement
+import Atm_Dashboard from './components_atm/Atm_Dashboard';
+
+import Atm_LawFrim_Add from './components_atm/Atm_LawFrim/Atm_LawFrim_Add';
+
+import Atm_LawFirm_Details from './components_atm/Atm_LawFrim/Atm_LawFirm_Details';
+import Atm_Lawyer_Display from'./components_atm/Atm_Lawyer_Details/Atm_Lawyer_Display';
+import Atm_Lawyer_Update from './components_atm/Atm_Lawyer_Update';
+import Atm_Lawyer_Delete from'./components_atm/Atm_Lawyer_Details/Atm_Lawyer_Delete';
+import Atm_LawFirm_Update from'./components_atm/Atm_LawFrim/Atm_LawFirm_Update';
+import ViewUserDetails from './components_atm/ViewUserDetails';
+
+import Atm_LawyerRegForm from './components_atm/Atm_LawyerRegistration/Atm_LawyerRegForm';
 
 
 
@@ -121,6 +148,18 @@ function App() {
 
           {/* Document Management */}
           <Route path="/dom_dashboard/:id" exact element={<Dom_Dashboard/>}/>
+          <Route path="/dom_request/:id" exact element={<Dom_Request/>}/>
+          <Route path="/dom_call" exact element={<Dom_Call/>}/>
+          <Route path="/update/:id" exact element={<Dom_Call_Update/>}/>
+          <Route path="/dom_call_dashboard" exact element={<Dom_Call_Dashboard/>}/>
+          <Route path="/dom_call_view/:id" exact element={<Dom_Call_View/>}/>
+          <Route path="/Dom_request_dom/:id/:document_manager_id" exact element={<Dom_Request_Dom/>}/>
+          <Route path="/Dom_request_view/:id" exact element={<Dom_Request_View/>}/>
+          <Route path="/Dom_request_update/:id" exact element={<Dom_Request_Update/>}/>
+          <Route path="/Dom_client_dashboard" exact element={<Dom_Client_Dashboard/>}/>
+          <Route path="/dom_request_approval_view/:id" exact element={<Dom_Request_Submitted_View/>}/>
+          <Route path="/dom_request_approval/:id" exact element={<Dom_Request_Approval/>}/>
+          <Route path="/document_requested_call_view/:id" exact element={<Dom_Call_View_Requested/>}/>
 
 
           {/* Legal Case Management */}
@@ -146,6 +185,19 @@ function App() {
 
 
           {/* Attorney Management */}
+          <Route path="/attorney-manager-dashboard/:id" exact element={<Atm_Dashboard/>}/>
+    
+          <Route path="/add-lawfrim" exact element={<Atm_LawFrim_Add/>}/>
+          
+          <Route path="Atm_LawFirm_Details_Dipsply" exact element={<Atm_LawFirm_Details/>}/>
+          <Route path="/lawfirm/details" element={<Atm_LawFirm_Details />} />
+          <Route path="/lawfirm/update/:id" element={<Atm_LawFirm_Update />} />
+
+          <Route path="/lawyer-details" exact element={<Atm_Lawyer_Display/>}/>
+          <Route path="/update-lawyer/:id" element={<Atm_Lawyer_Update />} />
+          <Route path="/delete-lawyer/:id" element={<Atm_Lawyer_Delete />} />
+          <Route path="/user_details/:id"  element={<ViewUserDetails />} />
+          <Route path="/add_lawyer" element={<Atm_LawyerRegForm />} />
 
         </Routes>
       </div>

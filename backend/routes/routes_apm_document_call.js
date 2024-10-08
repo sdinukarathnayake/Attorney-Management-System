@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let document_call = require("../models/model_dcm_document_call");
+let document_call = require("../models/model_apm_document_call");
 
 // add call
 router.route("/add_document_call").post((req, res) => {
@@ -87,16 +87,11 @@ router.route("/get_all_document_call/Requested").get((req, res) => {
 // update
 router.route("/update/:id").put(async (req, res) => {
     let callId = req.params.id;
-    const {lawerID, lawerName, lawerPhone, clientID, clientName, clientPhone, caseType, needDocument,docCallStatues} = req.body;
+    const {clientID, docCallStatues, caseNumber, needDocument} = req.body;
 
     const updateddocument_call = {
-        lawerID, 
-        lawerName,
-        lawerPhone,
         clientID,
-        clientName,
-        clientPhone, 
-        caseType, 
+        caseNumber, 
         needDocument,
         docCallStatues
     };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Footer from './Dom_Footer';
 import DomNavbar from './Dom_NavBar';
+import './document_management.css';
 import Call from '@mui/icons-material/PendingActions';
 import Request from '@mui/icons-material/ContentPasteGo';
 import Submit from '@mui/icons-material/FilePresent'; 
@@ -11,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { Bar, Pie } from 'react-chartjs-2';
 import {Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement} from 'chart.js';
 import { useParams } from 'react-router-dom';
+
 
 // Register the necessary components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
@@ -29,8 +31,8 @@ function Dom_Dashboard() {
     const [FilteredsRejectedApproved, setFilteredsRejectedApproved] = useState([]);
     const [FilteredsApproved, setFilteredsApproved] = useState([]);
     const [FilteredsRejected, setFilteredsRejected] = useState([]);
-
-    const { id } = useParams();
+	
+	const { id } = useParams();
 
     const document_manager_id = {id}; 
 
@@ -100,7 +102,11 @@ function Dom_Dashboard() {
 
   
   const document_request_submitted_view_page = (id) => {
-      navigate(`/dom_request_submitted_view/${id}`);
+      navigate(`/dom_request_approval_view/${id}`);
+  };
+
+  const dom_request_approval_page = (id) => {
+    navigate(`/dom_request_approval/${id}`); 
   };
 
 
@@ -138,7 +144,6 @@ const barData = {
         label: 'Number of Documents',
         data: [documentCall.length, documentRequest.length, documentSubmitted.length],
         backgroundColor: ['rgba(255,153,34)','rgba(255,153,34)','rgba(255,153,34)'],
-        borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1
     }]
 };
@@ -148,7 +153,7 @@ const barData = {
     return (
         <div>
             <DomNavbar />
-            <h2 className="dashboard-title">Document Manager Dashboard</h2>
+            <h2 className="dom-dashboard-dashboard-title">Document Manager Dashboard</h2>
 
             <div className="dom-dashboard-count-btn">
                 <div
@@ -188,24 +193,24 @@ const barData = {
                 </div>
             </div>
 
-            <div className="Charts">
+            <div className="dom-dashboard-Charts">
                 
-                <div className="pie">
+                <div className="dom-dashboard-pie">
                 <Pie data={pieData}  />
                 </div>
 
-                <div className="bar">
+                <div className="dom-dashboard-bar">
                 <Bar data={barData} options={{ responsive: true }} /> 
                 </div>
             </div>
 
-            <div className="tables">
+            <div className="dom-dashboard-tables">
             
-                <div className="search">
-                <h3 className="search-title1">Received Document Calls</h3><br />
+                <div className="dom-dashboard-search">
+                <h3 className="dom-dashboard-search-title1">Received Document Calls</h3><br />
                 <input
                         type="text"
-                        className="search-bar"
+                        className="dom-dashboard-search-bar"
                         placeholder="Search..."
                         value={searchCall}
                         onChange={(e) => setSearchCall(e.target.value)}
@@ -213,34 +218,34 @@ const barData = {
                     />
                 </div>
                 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Document Call ID</th>
-                            <th>Lawyer ID</th>
-                            <th>Client ID</th>
-                            <th>Case Number</th>
-                            <th>Need Document</th>
-                            <th>Document Status</th>
-                            <th>Action</th>
+                <table className="dom-dashboard-table">
+                    <thead className="dom-dashboard-thead">
+                        <tr className="dom-dashboard-tr">
+                            <th className="dom-dashboard-th">Document Call ID</th>
+                            <th className="dom-dashboard-th">Lawyer ID</th>
+                            <th className="dom-dashboard-th">Client ID</th>
+                            <th className="dom-dashboard-th">Case Number</th>
+                            <th className="dom-dashboard-th">Need Document</th>
+                            <th className="dom-dashboard-th">Document Status</th>
+                            <th className="dom-dashboard-th">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="dom-dashboard-tbody">
                         {filteredDocumentCalls.map((documentcall) => {
                             // Format the Document Call ID
                             const formattedId = `DOC-000${String(documentcall.documentCallID)}`;
                             return (
-                                <tr key={documentcall._id}>
-                                    <td>{formattedId}</td>
-                                    <td>{documentcall.lawerID}</td>
-                                    <td>{documentcall.clientID}</td>
-                                    <td>{documentcall.caseNumber}</td>
-                                    <td>{documentcall.needDocument}</td>
-                                    <td>{documentcall.docCallStatues}</td>
-                                    <td>
+                                <tr className="dom-dashboard-tr" key={documentcall._id}>
+                                    <td className="dom-dashboard-td">{formattedId}</td>
+                                    <td className="dom-dashboard-td">{documentcall.lawerID}</td>
+                                    <td className="dom-dashboard-td">{documentcall.clientID}</td>
+                                    <td className="dom-dashboard-td">{documentcall.caseNumber}</td>
+                                    <td className="dom-dashboard-td">{documentcall.needDocument}</td>
+                                    <td className="dom-dashboard-td">{documentcall.docCallStatues}</td>
+                                    <td className="dom-dashboard-td">
                                         <button 
                                             type="button" 
-                                            className="dom-call-dashboard-view" 
+                                            className="dom-dashboard-dom-call-dashboard-view" 
                                             onClick={() => document_call_view_page(documentcall._id)}>
                                             View
                                         </button>
@@ -254,42 +259,42 @@ const barData = {
 
 
 
-                <div className="search">
-                <h3 className="search-title2">Received Document Requests from Client</h3><br />
+                <div className="dom-dashboard-search">
+                <h3 className="dom-dashboard-search-title2">Received Document Requests from Client</h3><br />
                 <input
                         type="text"
-                        className="search-bar"
+                        className="dom-dashboard-search-bar"
                         placeholder="Search..."
                         value={searchRequest}
                         onChange={(e) => setSearchRequest(e.target.value)}
                         style={{ borderRadius: '18px', border: '2px solid #7a7a7a', width: '250px' }}
                     />
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Request ID</th>
-                            <th>Call ID</th>
-                            <th>Lawyer ID</th>
-                            <th>Client ID</th>
-                            <th>Deadline</th>
-                            <th>Document Status</th>
-                            <th>Action</th>
+                <table className="dom-dashboard-table">
+                    <thead className="dom-dashboard-thead">
+                        <tr className="dom-dashboard-tr">
+                            <th className="dom-dashboard-th">Request ID</th>
+                            <th className="dom-dashboard-th">Call ID</th>
+                            <th className="dom-dashboard-th">Lawyer ID</th>
+                            <th className="dom-dashboard-th">Client ID</th>
+                            <th className="dom-dashboard-th">Deadline</th>
+                            <th className="dom-dashboard-th">Document Status</th>
+                            <th className="dom-dashboard-th">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="dom-dashboard-tbody">
                     {filteredDocumentRequests.map((documentrequest) => {
                         const formattedId = `DOR-000${String(documentrequest.documentRequestID)}`;
                         return (
-                            <tr key={documentrequest._id}>
-                                <td>{formattedId}</td>
-                                <td>{documentrequest.documentCallID}</td>
-                                <td>{documentrequest.lawerID}</td>
-                                <td>{documentrequest.clientID}</td>
-                                <td>{documentrequest.documentDeadline}</td>
-                                <td>{documentrequest.docRequestStatues}</td>
-                                <td>
-                                    <button type="button" className="dom-call-dashboard-view" onClick={() => documentrequestView(documentrequest._id)}> View </button>
+                            <tr className="dom-dashboard-tr" key={documentrequest._id}>
+                                <td className="dom-dashboard-td">{formattedId}</td>
+                                <td className="dom-dashboard-td">{documentrequest.documentCallID}</td>
+                                <td className="dom-dashboard-td">{documentrequest.lawerID}</td>
+                                <td className="dom-dashboard-td">{documentrequest.clientID}</td>
+                                <td className="dom-dashboard-td">{documentrequest.documentDeadline}</td>
+                                <td className="dom-dashboard-td">{documentrequest.docRequestStatues}</td>
+                                <td className="dom-dashboard-td">
+                                    <button type="button" className="dom-dashboard-dom-call-dashboard-view" onClick={() => documentrequestView(documentrequest._id)}> View </button>
                                 </td>
                             </tr>
                         );
@@ -298,42 +303,42 @@ const barData = {
                 </table><br /><br /><br />
 
 
-                <div className="search">
-                <h3 className="search-title3">Received Document Submitted from Client</h3><br />
+                <div className="dom-dashboard-search">
+                <h3 className="dom-dashboard-search-title3">Received Document Submitted from Client</h3><br />
                 <input
                         type="text"
-                        className="search-bar"
+                        className="dom-dashboard-search-bar"
                         placeholder="Search..."
                         value={searchSubmitted}
                         onChange={(e) => setSearchSubmitted(e.target.value)}
                         style={{ borderRadius: '18px', border: '2px solid #7a7a7a', width: '250px' }}
                     />
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Request ID</th>
-                            <th>Call ID</th>
-                            <th>Lawer ID</th>
-                            <th>Client ID</th>
-                            <th>Deadline</th>
-                            <th>Document Statues</th>
-                            <th>Action</th>
+                <table className="dom-dashboard-table">
+                    <thead className="dom-dashboard-thead">
+                        <tr className="dom-dashboard-tr">
+                            <th className="dom-dashboard-th">Request ID</th>
+                            <th className="dom-dashboard-th">Call ID</th>
+                            <th className="dom-dashboard-th">Lawer ID</th>
+                            <th className="dom-dashboard-th">Client ID</th>
+                            <th className="dom-dashboard-th">Deadline</th>
+                            <th className="dom-dashboard-th">Document Statues</th>
+                            <th className="dom-dashboard-th">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="dom-dashboard-tbody">
                     {filteredDocumentSubmitted.map((documentrequest) => {
                             const formattedId = `DOR-000${String(documentrequest.documentRequestID)}`;
                             return (
-                                <tr key={documentrequest._id}>
-                                    <td>{formattedId}</td>
-                                    <td>{documentrequest.documentCallID}</td>
-                                    <td>{documentrequest.lawerID}</td>
-                                    <td>{documentrequest.clientID}</td>
-                                    <td>{documentrequest.documentDeadline}</td>
-                                    <td>{documentrequest.docRequestStatues}</td>
-                                    <td>
-                                    <button type="button" className="dom-call-dashboard-view" onClick={() => document_request_submitted_view_page(documentrequest._id)}> View </button>
+                                <tr className="dom-dashboard-tr" key={documentrequest._id}>
+                                    <td className="dom-dashboard-td">{formattedId}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.documentCallID}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.lawerID}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.clientID}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.documentDeadline}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.docRequestStatues}</td>
+                                    <td className="dom-dashboard-td">
+                                    <button type="button" className="dom-dashboard-dom-call-dashboard-view" onClick={() => dom_request_approval_page(documentrequest._id)}> View </button>
                                 </td>
                             </tr>
                             );
@@ -342,32 +347,32 @@ const barData = {
                 </table><br /><br /><br />
 
 
-                <h3 className="search-title3">Approve or Reject Document</h3><br />
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Request ID</th>
-                            <th>Call ID</th>
-                            <th>Lawer ID</th>
-                            <th>Client ID</th>
-                            <th>Deadline</th>
-                            <th>Document Statues</th>
-                            <th>Action</th>
+                <h3 className="dom-dashboard-search-title3">Approve or Reject Document</h3><br />
+                <table className="dom-dashboard-table">
+                    <thead className="dom-dashboard-thead">
+                        <tr className="dom-dashboard-tr">
+                            <th className="dom-dashboard-th">Request ID</th>
+                            <th className="dom-dashboard-th">Call ID</th>
+                            <th className="dom-dashboard-th">Lawer ID</th>
+                            <th className="dom-dashboard-th">Client ID</th>
+                            <th className="dom-dashboard-th">Deadline</th>
+                            <th className="dom-dashboard-th">Document Statues</th>
+                            <th className="dom-dashboard-th">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="dom-dashboard-tbody">
                     {FilteredsRejectedApproved.map((documentrequest) => {
                             const formattedId = `DOR-000${String(documentrequest.documentRequestID)}`;
                             return (
-                                <tr key={documentrequest._id}>
-                                    <td>{formattedId}</td>
-                                    <td>{documentrequest.documentCallID}</td>
-                                    <td>{documentrequest.lawerID}</td>
-                                    <td>{documentrequest.clientID}</td>
-                                    <td>{documentrequest.documentDeadline}</td>
-                                    <td>{documentrequest.docRequestStatues}</td>
-                                    <td>
-                                    <button type="button" className="dom-call-dashboard-view" onClick={() => document_request_submitted_view_page(documentrequest._id)}> View </button>
+                                <tr className="dom-dashboard-tr" key={documentrequest._id}>
+                                    <td className="dom-dashboard-td">{formattedId}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.documentCallID}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.lawerID}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.clientID}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.documentDeadline}</td>
+                                    <td className="dom-dashboard-td">{documentrequest.docRequestStatues}</td>
+                                    <td className="dom-dashboard-td">
+                                    <button type="button" className="dom-dashboard-dom-call-dashboard-view" onClick={() => document_request_submitted_view_page(documentrequest._id)}> View </button>
                                 </td>
                             </tr>
                             );

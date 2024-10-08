@@ -1,3 +1,7 @@
+import NavBar from "../components_lcm/Lcm_NavBar";
+import Footer from "../components_lcm/Lcm_Footer";
+import './appointment_management.css';
+
 import React, { useState, useEffect } from 'react';
 import './appointment_management.css';
 import axios from "axios";
@@ -114,6 +118,8 @@ function Apm_View_Appointment() {
 
     return (
         <div className="apm-form-container">
+            <NavBar/>
+
         <form className="apm-form" onSubmit={handleSubmit}>
     
             <div className="apm-form-group">
@@ -374,6 +380,7 @@ function Apm_View_Appointment() {
             </div>
     
         </form>
+        <Footer/>
     </div>
     
     );

@@ -10,7 +10,7 @@ const documentRequestSchema = new Schema({
     },
 
     documentCallID : {
-        type : Number,
+        type : String,
         required : true,  
     },
 
@@ -52,6 +52,10 @@ const documentRequestSchema = new Schema({
     comment : {
         type : String,
          
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now, // Automatically set the creation date
     },
 
 });
