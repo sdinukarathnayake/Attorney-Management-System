@@ -24,7 +24,7 @@ const LegalCaseManagerLogin = () => {
                 localStorage.setItem('userNic', response.data.legalCaseManager.nic);
 
                 // Redirect to ClientPortalHome with the user's ID
-                navigate(`/legeal-case-manager-dashboard/${response.data.legalCaseManager.userId}`);
+                navigate(`/Lcm_Dashboard/${response.data.legalCaseManager.userId}`);
             }
         } catch (err) {
             setError('Invalid email or password');

@@ -24,7 +24,7 @@ const DocumentManagerLogin = () => {
         localStorage.setItem('userNic', response.data.documentManager.nic);
 
         // Redirect to ClientPortalHome with the user's ID
-        navigate(`/document-manager-dashboard/${response.data.documentManager.userId}`);
+        navigate(`/dom_dashboard/${response.data.documentManager.userId}`);
       }
     } catch (err) {
       setError('Invalid email or password');

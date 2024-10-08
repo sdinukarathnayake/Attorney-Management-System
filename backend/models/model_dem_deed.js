@@ -37,9 +37,17 @@ const deedSchema = new Schema({
         ref: "Client",
         required: true
     },
+    grantorNic :{
+        type: String,
+        required: true
+    },
     grantee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Client",
+        required: true
+    },
+    granteeNic :{
+        type: String,
         required: true
     },
     deedNo: {
@@ -68,6 +76,6 @@ const deedSchema = new Schema({
     timestamps: true 
 });
 
-const Deed = mongoose.model("deed", deedSchema);
+const Deed = mongoose.model("Deed", deedSchema);
 
 module.exports = Deed;

@@ -47,6 +47,23 @@ import SupportAgentViewAllSupportTickets from './components_uam/uam_sup_view_all
 import SupportAgentViewAllTicketReplies from './components_uam/uam_sup_view_all_reply_tickets';
 
 
+// Document Management
+import Dom_Dashboard from './components_dom/Dom_Dashboard';
+
+
+
+// Legal Case Management
+import LegalCaseManagerDashboard from './components_lcm/Lcm_Dashboard';
+
+
+// Deed Management
+import DemDashboard from './components_dem/Dem_Dashboard';
+import DemAddDeed from './components_dem/Dem_addDeed';
+import DemReadAll from './components_dem/Dem_allDeed';
+import DemDeedDetail from './components_dem/Dem_deedDetail';
+import DemSearchResults from './components_dem/Dem_searchResult';
+
+
 
 function App() {
   return (
@@ -100,6 +117,35 @@ function App() {
           <Route path="/support-agent-dashboard/view-ticket-reply/:id" exact element={<SupportAgentViewTicketReply />} />
           <Route path="/support-agent-dashboard/view-all-support-tickets" exact element={<SupportAgentViewAllSupportTickets />} />
           <Route path="/support-agent-dashboard/view-all-ticket-replies/:id" exact element={<SupportAgentViewAllTicketReplies />} />
+
+
+          {/* Document Management */}
+          <Route path="/dom_dashboard/:id" exact element={<Dom_Dashboard/>}/>
+
+
+          {/* Legal Case Management */}
+          <Route path="/Lcm_Dashboard/:id" exact element={<LegalCaseManagerDashboard />} />
+
+
+          {/* Client Portal */}
+
+
+
+
+          {/* Finance Management */}
+          
+
+
+          {/* Deed Management */}
+          <Route path="/dem_dashboard/:id" exact element={<DemDashboard/>}/>
+          <Route path="/add_deed" exact element={<DemAddDeed/>}/>
+          <Route path="/read_all_deeds" exact element={<DemReadAll/>}/>
+          <Route path="/deed/:id" exact element={<DemDeedDetail />} />
+          <Route path="/search/:query" element={<DemSearchResults />} />
+
+
+
+          {/* Attorney Management */}
 
         </Routes>
       </div>

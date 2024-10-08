@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const Deed = require("../models/model_dem_deed"); 
+const Deed = require("../models/model_dem_deed");
 const Client = require("../models/model_cli_client");
-const Lawyer = require("../models/model_atm_deed_manager");
-//const PaymentRequest = require("../models/model_fin_payment_request"); //change according to charitha's file name for payment model
+const Lawyer = require("../models/model_atm_deed_manager"); 
+const AppointmentRequest = require("../models/model_apm_appointment_request");
+const PaymentRequest = require("../models/model_fin_Payment_form"); 
+ 
 
-
-// Search client with NIC --------------------------------------------------------------
-router.get("/search/:nic", async (req, res) => {
+// Search client with NIC ------------------------------ --------------------------------
+router.get("/search/nic/:nic", async (req, res) => {
     try {
         const client = await Client.findOne({ nic: req.params.nic });
         if (!client) {
@@ -55,7 +56,9 @@ router.post("/add", async (req, res) => {
             division,
             considerationValue: parseFloat(considerationValue).toFixed(2),
             grantor: grantor._id,
+            grantorNic,
             grantee: grantee._id,
+            granteeNic,
             deedNo,
             lawyerFee,
             taxFee,
@@ -198,7 +201,7 @@ router.get("/counts", async (req, res) => {
         const appointmentCount = await AppointmentRequest.countDocuments();
 
         // Count payment requests
-        //const paymentRequestCount = await PaymentRequest.countDocuments();
+        const paymentRequestCount = await PaymentRequest.countDocuments();
 
         // Send the counts as a JSON response
         res.status(200).json({
@@ -206,7 +209,7 @@ router.get("/counts", async (req, res) => {
             lawyerCount,
             clientCount,
             appointmentCount,
-            //paymentRequestCount
+            paymentRequestCount
         });
     } catch (error) {
         console.error("Error fetching counts:", error.message);
@@ -220,7 +223,7 @@ router.get("/counts", async (req, res) => {
 router.get("/nonRegisteredDeeds", async (req, res) => {
     try {
         const deeds = await Deed.find({ deedStatus: { $ne: "Registered" } })
-            .populate("assignedLawyer", "firstName lastName")
+            .populate("assignedLawyer", "fName lName")
             .populate("grantor", "fname lname")
             .populate("grantee", "fname lname");
         
@@ -230,24 +233,123 @@ router.get("/nonRegisteredDeeds", async (req, res) => {
     }
 });
 
-// Update deed status
-router.put("/updateStatus/:id", async (req, res) => {
-    const { id } = req.params;
-    const { deedStatus } = req.body;
+// Update status of a deed by ID -------------------------------------------------------------------------------
+router.route("/updateStatus/:id").put(async (req, res) => {
+    const deedID = req.params.id;
+    const { deedStatus } = req.body; 
+
+    const updateStatus = {
+        deedStatus
+    };
 
     try {
-        const deed = await Deed.findById(id);
-        if (!deed) {
-            return res.status(404).json({ message: "Deed not found" });
+        const updatedDeed = await Deed.findByIdAndUpdate(deedID, updateStatus, { new: true });
+        if (updatedDeed) {
+            res.status(200).json({ status: "Deed status updated", updatedDeed });
+        } else {
+            res.status(404).json({ status: "Deed not found" });
         }
-
-        deed.deedStatus = deedStatus;
-        await deed.save();
-
-        res.json({ message: "Deed status updated", deed });
-    } catch (error) {
-        res.status(500).json({ message: "Error updating deed status", error });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ status: "Error with updating deed status", error: err.message });
     }
 });
+
+// Search Deeds by lawyer name, client name, and other fields------------------------------------------------------
+router.get("/search/:query", async (req, res) => {
+    const searchQuery = req.params.query;
+
+    try {
+        // Step 1: Search for matching Lawyers
+        const lawyers = await Lawyer.find({
+            $or: [
+                { firstName: { $regex: searchQuery, $options: 'i' } },
+                { lastName: { $regex: searchQuery, $options: 'i' } }
+            ]
+        });
+
+        // Step 2: Search for matching Clients
+        const clients = await Client.find({
+            $or: [
+                { fname: { $regex: searchQuery, $options: 'i' } },
+                { lname: { $regex: searchQuery, $options: 'i' } }
+            ]
+        });
+
+        // Step 3: Extract the IDs of Lawyers and Clients
+        const lawyerIds = lawyers.map(lawyer => lawyer._id);
+        const clientIds = clients.map(client => client._id);
+
+        // Step 4: Search for Deeds that reference these Lawyer and Client IDs
+        const deeds = await Deed.find({
+            $or: [
+                { assignedLawyer: { $in: lawyerIds } },
+                { grantor: { $in: clientIds } },
+                { grantee: { $in: clientIds } },
+                { title: { $regex: searchQuery, $options: 'i' } },  
+                { deedType: { $regex: searchQuery, $options: 'i' } },
+                { preRegisteredNo: { $regex: searchQuery, $options: 'i' } },
+                { district: { $regex: searchQuery, $options: 'i' } },
+                { division: { $regex: searchQuery, $options: 'i' } },
+                { grantorNic: { $regex: searchQuery, $options: 'i' } },
+                { granteeNic: { $regex: searchQuery, $options: 'i' } }
+            ]
+        })
+        .populate('grantor', 'fname lname')
+        .populate('grantee', 'fname lname')
+        .populate('assignedLawyer', 'firstName lastName');
+
+        // Step 5: Return the result or handle if no deeds found
+        if (deeds.length === 0) {
+            return res.status(404).json({ message: "No deeds found matching your query." });
+        }
+
+        res.status(200).json(deeds);
+
+    } catch (error) {
+        res.status(500).json({ message: "Error searching deeds", error: error.message });
+    }
+});
+
+//Pie Chart-------------------------------------------------------------------------------------
+router.get("/deeds-per-lawyer", async (req, res) => {
+    try {
+        const deedsPerLawyer = await Deed.aggregate([
+            {
+                $group: {
+                    _id: "$assignedLawyer", // Group by lawyer ID
+                    deedCount: { $sum: 1 } // Count number of deeds
+                }
+            },
+            {
+                $lookup: {
+                    from: "lawyers", // Lookup lawyer details from the "lawyers" collection
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "lawyerInfo"
+                }
+            },
+            {
+                $unwind: "$lawyerInfo"
+            },
+            {
+                $project: {
+                    _id: 0,
+                    lawyerName: { $concat: ["$lawyerInfo.firstName", " ", "$lawyerInfo.lastName"] },
+                    deedCount: 1
+                }
+            }
+        ]);
+
+        res.json(deedsPerLawyer);
+    } catch (error) {
+        console.error("Error fetching deeds per lawyer:", error);
+        res.status(500).send("Server Error");
+    }
+});
+
+
+
+
 
 module.exports = router;

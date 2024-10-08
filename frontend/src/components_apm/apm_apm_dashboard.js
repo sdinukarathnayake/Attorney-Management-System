@@ -6,6 +6,13 @@ import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import AppointmentBarChart from './apm_bar_chart';
+
+//for charts
+import { Pie } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 function Dashboard() {
 
     const { id } = useParams();
@@ -14,6 +21,11 @@ function Dashboard() {
     const [appointmentManager, setAppointmentManager] = useState({});
     const [lawyerDetails, setLawyerDetails] = useState({});
     const [clientDetails, setClientDetails] = useState({});
+
+    const [pendingAppointmentRequest, setPendingAppointmentRequest] = useState(0);
+    const [createdAppointmentRequest, setCreatedAppointmentRequest] = useState(0); 
+
+
 
     // Get appointment request details
     useEffect(() => {
@@ -86,6 +98,69 @@ function Dashboard() {
     }, [id])
 
 
+    //pie chart
+    //getting count data
+
+    // Fetch pending appointment request count for the pie chart
+    useEffect(() => {
+        function getPendingAppointmentRequestCount() {
+            axios.get("http://localhost:8070/appointmentrequest/pending/count")
+                .then((res) => {
+                    console.log("Pending count: ", res.data.count);
+                    setPendingAppointmentRequest(res.data.count);  // Set the count
+                })
+                .catch((err) => {
+                    console.error("Error fetching pending appointment request count:", err);
+                });
+        }
+
+        getPendingAppointmentRequestCount();
+    }, []);
+
+    useEffect(() => {
+        function getCreatedAppointmentRequestCount() {
+            axios.get("http://localhost:8070/appointmentrequest/created/count")
+                .then((res) => {
+                    setCreatedAppointmentRequest(res.data.count);  
+                })
+                .catch((err) => {
+                    console.error("Error fetching pending appointment request count:", err);
+                });
+        }
+
+        getCreatedAppointmentRequestCount();
+    }, []);
+
+
+    // Prepare data for pie chart
+    const pieData = { 
+        labels: ['Pending', 'Created'],
+        datasets: [{
+            label: '# of Appointment Requests',
+            data: [pendingAppointmentRequest, createdAppointmentRequest],
+            backgroundColor: ['#F8F4E1', '#AF8F6F'],
+            borderColor: ['#543310', '#543310'],
+            borderWidth: 1,
+        }],
+    };
+
+    const pieOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function (tooltipItem) {
+                        return `${tooltipItem.label}: ${tooltipItem.raw}`;
+                    }
+                }
+            }
+        }
+    };
+
+
     return (
         <div>
             <NavBar />
@@ -98,6 +173,12 @@ function Dashboard() {
                 <p className="apm-user-welcome">User ID : {appointmentManager.userId}</p>
 
                 <h2>Received Appointment Requests</h2>
+
+                {/* Pie Chart */}
+                <div className="apm-chart-container">
+                    <Pie data={pieData} options={pieOptions} />
+                </div>
+
                 <table border='1' className="apm-summary-table">
                     <thead>
                         <tr className="apm-summary-table-row">
@@ -151,6 +232,9 @@ function Dashboard() {
                 <a className="apm-view-button" href="/appointment-manager-dashboard/view-all-appointment-requests/">View Previous Appointment Requests</a>
 
                 <h2>Upcoming Appointments</h2>
+
+                <AppointmentBarChart />        
+
                 <table border='1' className="apm-summary-table">
                     <thead>
                         <tr className="apm-summary-table-row">

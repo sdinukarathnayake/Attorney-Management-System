@@ -69,7 +69,8 @@ app.use("/client", clientRouter);
 //deed management
 const deedsRouter = require("./routes/routes_deed");
 app.use("/deeds", deedsRouter);
-
+app.use("/client", deedsRouter);
+app.use("/deedmanager", deedsRouter);
 
 //users - attorney management
 const appointmentManagerRouter = require("./routes/routes_atm_user_appointment_manager.js");

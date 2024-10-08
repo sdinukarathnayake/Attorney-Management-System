@@ -44,7 +44,7 @@ router.route("/add-appointment-manager").post((req, res)=> {
 
 // view all userRegistrations 
 router.route("/view-all-appointment-managers").get((req, res)=> {
-    userRegistration.find().then((userRegistration) => {
+    userRegistration.find().then(() => {
         res.json(userRegistration)
     }).catch((err) => {
         console.log(err);

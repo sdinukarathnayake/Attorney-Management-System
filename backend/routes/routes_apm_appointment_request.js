@@ -241,4 +241,55 @@ router.route("/client/:id").get((req, res) => {
     });
 });
 
+
+// count for chart data
+router.route("/pending/count").get((req, res) => {
+    appointmentRequest.countDocuments({ appointmentRequestStatus: "Pending" })
+    .then((count) => {
+        res.json({ count });
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err.message });
+    });
+});
+
+router.route("/created/count").get((req, res) => {
+    appointmentRequest.countDocuments({ appointmentRequestStatus: "Created" })
+    .then((count) => {
+        res.json({ count });
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err.message });
+    });
+});
+
+// bar chart
+router.route("/graph/appointments-by-date").get((req, res) => {
+    appointmentRequest.aggregate([
+        {
+            $match: { appointmentRequestStatus: "Pending" } // Match only pending appointment requests
+        },
+        {
+            $group: {
+                _id: { 
+                    $dateToString: { format: "%Y-%m-%d", date: "$appointmentDate", timezone: "Asia/Colombo" }
+                },
+                count: { $sum: 1 }
+            }
+        },
+        {
+            $sort: { _id: 1 }
+        }
+    ])
+    .then((data) => {
+        res.json(data);
+    })
+    .catch((err) => {
+        res.status(500).json({ error: err.message });
+    });
+});
+
+
 module.exports = router;

@@ -24,7 +24,7 @@ const DeedManagerLogin = () => {
                 localStorage.setItem('userNic', response.data.deedManager.nic);
 
                 // Redirect to ClientPortalHome with the user's ID
-                navigate(`/deed-manager-dashboard/${response.data.deedManager.userId}`);
+                navigate(`/dem_dashboard/${response.data.deedManager.userId}`);
             }
         } catch (err) {
             setError('Invalid email or password');
