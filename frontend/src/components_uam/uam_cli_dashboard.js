@@ -48,17 +48,17 @@ function Dashboard() {
                                   }));
                                 })
                                 .catch(error => {
-                                  console.error("Error fetching client details:", error);
+                                  console.error("Error fetching support agent details:", error);
                         });
                 }
 
-                const supportTicketId = replyTickets.supportTicketId;
-                        if (!supportTickeDetail[supportTicketId]) {
-                            axios.get(`http://localhost:8070/supportticket/${supportTicketId}`)
+                const _id = replyTickets.supportTicketId;
+                        if (!supportTickeDetail[_id]) {
+                            axios.get(`http://localhost:8070/supportticket/${_id}`)
                                 .then(response => {
                                     setSupportTicketDetails(prevDetails => ({
                                         ...prevDetails,
-                                        [supportTicketId]: response.data
+                                        [_id]: response.data
                                       }));
                                     })
                                     .catch(error => {
@@ -71,7 +71,7 @@ function Dashboard() {
                         });
                       }
                       getReplyTickets();
-    }, [supportAgent, id]);
+    }, [supportAgent, supportTickeDetail, id]);
 
 
   //get details related to client 
@@ -95,10 +95,10 @@ function Dashboard() {
         <div className="uam-container">
         <h1 className="uam-header">Client Support Dashboard</h1>
 
-        <p className="uam-user-welcome">Welcome {supportAgent.fName} {supportAgent.lName}</p>
-        <p className="uam-user-welcome">User ID : {supportAgent.userId}</p>
+        <p className="uam-user-welcome">Welcome {clientDetails.fname} {clientDetails.lname}</p>
+        <p className="uam-user-welcome">User ID : {clientDetails.clientId}</p>
 
-        <h2>Received Support Tickets</h2>
+        <h2>My Support Tickets..</h2>
         <table border='1' className="uam-summary-table">
         <thead>
             <tr className="uam-summary-table-row">
@@ -122,7 +122,7 @@ function Dashboard() {
                     <td className="uam-summary-table-data">{supportTicket.supTicketSubject}</td>
                     <td className="uam-summary-table-data">{supportTicket.supTicketStatus}</td>
                     <td className="uam-summary-table-action">
-                        <a className="uam-summary-table-button" href={`/support-agent-dashboard/view-support-ticket/${supportTicket._id}/${id}`}>View Request</a>
+                        <a className="uam-summary-table-button" href={`/client-portal/view-support-ticket/${supportTicket._id}/${id}`}>View Request</a>
                     </td>
                 </tr>
                 )
@@ -131,9 +131,12 @@ function Dashboard() {
         </tbody>
         </table>
 
-        <a className="uam-view-button" href="/support-agent-dashboard/view-all-support-tickets/">View Previous Support Tickets</a>
+        <div className="uam-button-box">
+                    <a className="uam-table-link-button" href={`/client-portal/create-support-ticket/${id}`}>Create New Ticket</a>
+                    <a className="uam-table-link-button" href={`/client-portal/view-all-support-tickets/${id}`}>View Previous Tickets</a>
+                </div>
 
-            <h2>Upcoming Reply Tickets</h2>
+            <h2>My Ticket Replies..</h2>
             <table border='1' className="uam-summary-table">
             <thead>
                 <tr className="uam-summary-table-row">
@@ -175,7 +178,7 @@ function Dashboard() {
                             : 'Loading...'}
                         </td>
                         <td className="uam-summary-table-data">{replyTicket.replyTicketstatus}</td>
-                        <td className="uam-summary-table-action"><a className="uam-summary-table-button" href={`/appointment-manager-dashboard/view-reply-ticket/${replyTicket._id}/${id}`}>View Reply</a></td>
+                        <td className="uam-summary-table-action"><a className="uam-summary-table-button" href={`/client-portal/view-ticket-reply/${replyTicket._id}/${id}`}>View Reply</a></td>
                     </tr>
                     )
                 })
@@ -183,7 +186,7 @@ function Dashboard() {
             </tbody>
             </table>
 
-            <a className="apm-view-button" href={`/appointment-manager-dashboard/view-all-appointments/${id}`}>View Previous Appointments</a>
+            <a className="apm-view-button" href={`/client-portal/view-all-ticket-replies/${id}`}>View Previous Replies</a>
 
         </div>
         <Footer />

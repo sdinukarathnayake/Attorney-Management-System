@@ -149,10 +149,15 @@
   text-align: center;
 }
 
+.uam-container h2{
+  margin-top: 2rem;
+}
+
 .uam-user-welcome {
-  margin-bottom: 2rem;
-  font-size: 1.7srem;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
   font-style: italic;
+  font-weight: 600;
   color: var(--dark-color);
 }
 
@@ -243,6 +248,7 @@
 }
 
 .uam-form-input[type="text"],
+.uam-form-input[type="email"],
 .uam-form-input[type="date"],
 .uam-form-input[type="time"] {
   width: 69%;

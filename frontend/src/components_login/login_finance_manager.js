@@ -16,7 +16,7 @@ const FinanceManagerLogin = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8070/appointmentmanager/login-appointment-manager', { userId, password });
+            const response = await axios.post('http://localhost:8070/financemanager/login', { userId, password });
             if (response.status === 200) {
                 // Store the user ID, NIC, and clientName in localStorage
                 localStorage.setItem('userId', response.data.financeManager.userId);
@@ -43,10 +43,10 @@ const FinanceManagerLogin = () => {
 
                 <form onSubmit={handleLogin} className="login-form">
                     <div className="form-group">
-                        <label htmlFor="email" className="form-label">Email:</label>
+                        <label htmlFor="un" className="form-label">User Name :</label>
                         <input 
                             type="text" 
-                            id="email"
+                            id="un"
                             className="form-input" 
                             value={userId} 
                             onChange={(e) => setUserId(e.target.value)} 

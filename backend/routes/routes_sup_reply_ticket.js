@@ -99,9 +99,9 @@ router.route("/delete/:id").delete(async (req, res) => {
 // -------- dashboards ------------
 //support agent dashboard - all pending reply tickets (for specific support agent)
 router.route("/pending/support-agent/:id").get((req, res) => {
-    const supportAgentId = req.params.id;
+    const supAgentId = req.params.id;
 
-    replyTicket.find({ replyStatus: "Pending", supportAgentId: supportAgentId})
+    replyTicket.find({ replyTicketstatus: "In Progress", supAgentId: supAgentId})
     .then((replyTicket) => {
         if (replyTicket.length > 0) {
             res.json(replyTicket);

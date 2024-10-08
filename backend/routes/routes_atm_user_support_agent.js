@@ -119,7 +119,7 @@ router.route("/delete/:id").delete(async (req, res) => {
 });
 
 // Login Support Agent
-router.route("/login/support-agent").post(async (req, res) => {
+router.route("/login").post(async (req, res) => {
     const { userId, password } = req.body;
 
     try {

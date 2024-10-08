@@ -17,7 +17,6 @@ const replyTicketSchema = new Schema({
 		
 		userType : {
             type : String,
-            required : true,
         },
 		
         clientId : {

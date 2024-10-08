@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let userRegistration = require("../models/model_atm_document_manager"); // Update model name
+let userRegistration = require("../models/model_atm_document_manager"); 
 
 // add new userRegistration
 router.route("/add").post((req, res) => {
@@ -114,7 +114,7 @@ router.route("/delete/:id").delete(async (req, res) => {
 });
 
 //login
-router.route("/login/document-manager").post(async (req, res) => {
+router.route("/login").post(async (req, res) => {
     const { userId, password } = req.body;
   
     try {

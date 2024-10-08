@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let userRegistration = require("../models/model_atm_document_manager"); // Update model name (might need adjustment)
+let userRegistration = require("../models/model_atm_finance_manager"); 
 
 // add new userRegistration
 router.route("/add").post((req, res) => {
@@ -32,7 +32,7 @@ router.route("/add").post((req, res) => {
 
   // creating userRegistration
   newUserRegistration.save().then(() => {
-    res.json("Finance Manager Added"); // Updated message
+    res.json("Finance Manager Added"); 
   }).catch((err) => {
     console.log(err);
     res.status(400).json("Error: " + err);
@@ -57,12 +57,12 @@ router.route("/:id").get((req, res) => {
       if (userRegistration) {
         res.json(userRegistration);
       } else {
-        res.status(404).json("Finance Manager Not Found"); // Updated message
+        res.status(404).json("Finance Manager Not Found"); 
       }
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).json("Error in Retrieving Finance Manager"); // Updated message
+      res.status(500).json("Error in Retrieving Finance Manager");
     });
 });
 
@@ -89,13 +89,13 @@ router.route("/update/:id").put(async (req, res) => {
     const result = await userRegistration.findByIdAndUpdate(userRegistrationId, updateduserRegistration, { new: true });
 
     if (result) {
-      res.json("Finance Manager Updated Successfully"); // Updated message
+      res.json("Finance Manager Updated Successfully"); 
     } else {
-      res.status(404).json("Finance Manager Not Found"); // Updated message
+      res.status(404).json("Finance Manager Not Found"); 
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json("Error in Updating Finance Manager"); // Updated message
+    res.status(500).json("Error in Updating Finance Manager"); 
   }
 });
 
@@ -105,16 +105,16 @@ router.route("/delete/:id").delete(async (req, res) => {
 
   await userRegistration.findByIdAndDelete(userRegistrationId)
     .then(() => {
-      res.status(200).send({ status: "Finance Manager Deleted" }); // Updated message
+      res.status(200).send({ status: "Finance Manager Deleted" });
     })
     .catch((err) => {
       console.log(err.message);
-      res.status(500).send({ status: "Error in deleting Finance Manager", error: err.message }); // Updated message
+      res.status(500).send({ status: "Error in deleting Finance Manager", error: err.message }); 
     });
 });
 
 //login
-router.route("/login/finance-manager").post(async (req, res) => {
+router.route("/login").post(async (req, res) => {
     const { userId, password } = req.body;
 
     try {
@@ -131,5 +131,6 @@ router.route("/login/finance-manager").post(async (req, res) => {
       res.status(500).json({ message: "Server error" });
     }
   });
+
 
 module.exports = router;

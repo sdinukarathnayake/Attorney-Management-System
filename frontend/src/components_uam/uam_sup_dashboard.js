@@ -14,6 +14,7 @@ function Dashboard() {
   const [replyTickets, setReplyTickets] = useState([]); 
   const [supportAgent, setSupportAgent] = useState({}); 
   const [clientDetails, setClientDetails] = useState({});
+  const [ticketDetails, setTicketDetails] = useState({});
 
   // Get support ticket details
   useEffect(() => {
@@ -54,26 +55,26 @@ function Dashboard() {
         setReplyTickets(res.data);
 
         res.data.forEach(replyTickets => {
-        const userId = replyTickets.supAgentId;
-                    if (!supportAgent[userId]) {
-                        axios.get(`http://localhost:8070/supportagent/${userId}`)
-                            .then(response => {
-                              setSupportAgent(prevDetails => ({
-                                    ...prevDetails,
-                                    [userId]: response.data
-                                  }));
-                                })
-                                .catch(error => {
-                                  console.error("Error fetching client details:", error);
-                                });
-                }
+                const supportTicketId = replyTickets.supportTicketId;
+                if (!ticketDetails[supportTicketId]) {
+                    axios.get(`http://localhost:8070/supportticket/${supportTicketId}`)
+                        .then(response => {
+                          setTicketDetails(prevDetails => ({
+                                ...prevDetails,
+                                [supportTicketId]: response.data
+                              }));
+                            })
+                            .catch(error => {
+                              console.error("Error fetching ticket details:", error);
+                            });
+            }
           });
                         }).catch((err) => {
                           alert(err.message);
                         });
                       }
                       getReplyTickets();
-    }, [supportAgent, id]);
+    }, [ticketDetails, id]);
 
 
   //get details related to support agent 
@@ -86,7 +87,7 @@ function Dashboard() {
         alert(err.message);
       })
     }
-    getSupportAgent();
+    getSupportAgent(); 
   }, [id])
  
   return (
@@ -142,8 +143,8 @@ function Dashboard() {
                     <th className="uam-summary-table-header">Reply Date</th>
                     <th className="uam-summary-table-header">Ticket Type</th> 
                     <th className="uam-summary-table-header">Subject</th>
-                    <th className="uam-summary-table-header">Agent Name</th>
-                    <th className="uam-summary-table-header">Agent Mobile</th>
+                    <th className="uam-summary-table-header">Client Name</th>
+                    <th className="uam-summary-table-header">Client Mobile</th>
                     <th className="uam-summary-table-header">Status</th>
                     <th className="uam-summary-table-header">Action</th>
                 </tr>
@@ -157,27 +158,27 @@ function Dashboard() {
                           new Date(replyTicket.replyTicketDate).toISOString().split('T')[0]
                         }</td>
                         <td className="uam-summary-table-data">
-                        {supportTickets[replyTicket.clientId]
-                            ? supportTickets[replyTicket.clientId].supTicketType
+                        {ticketDetails[replyTicket.supportTicketId]
+                            ? ticketDetails[replyTicket.supportTicketId].supTicketType
                             : 'Loading...'}
                         </td>
                         <td className="uam-summary-table-data">
-                        {supportTickets[replyTicket.clientId]
-                            ? supportTickets[replyTicket.clientId].supTicketSubject
+                        {ticketDetails[replyTicket.supportTicketId]
+                            ? ticketDetails[replyTicket.supportTicketId].supTicketSubject
                             : 'Loading...'}
                         </td>
                         <td className="uam-summary-table-data">
-                        {supportAgent[replyTicket.supAgentId]
-                            ? `${supportAgent[replyTicket.supAgentId].fName} ${supportAgent[replyTicket.supAgentId].lName}`
+                        {clientDetails[replyTicket.clientId]
+                            ? `${clientDetails[replyTicket.clientId].fname} ${clientDetails[replyTicket.clientId].lname}`
                             : 'Loading...'}
                         </td>
                         <td className="uam-summary-table-data">
-                        {supportAgent[replyTicket.supAgentId]
-                            ? supportAgent[replyTicket.supAgentId].phoneNumber
+                        {clientDetails[replyTicket.clientId]
+                            ? clientDetails[replyTicket.clientId].phone
                             : 'Loading...'}
                         </td>
                         <td className="uam-summary-table-data">{replyTicket.replyTicketstatus}</td>
-                        <td className="uam-summary-table-action"><a className="uam-summary-table-button" href={`/appointment-manager-dashboard/view-reply-ticket/${replyTicket._id}/${id}`}>View Reply</a></td>
+                        <td className="uam-summary-table-action"><a className="uam-summary-table-button" href={`/support-agent-dashboard/view-ticket-reply/${replyTicket._id}/${id}`}>View Reply</a></td>
                     </tr>
                     )
                 })
@@ -185,7 +186,7 @@ function Dashboard() {
             </tbody>
             </table>
 
-            <a className="apm-view-button" href={`/appointment-manager-dashboard/view-all-appointments/${id}`}>View Previous Appointments</a>
+            <a className="apm-view-button" href={`/support-agent-dashboard/view-all-ticket-replies${id}`}>View Previous Appointments</a>
 
         </div>
         <Footer />
