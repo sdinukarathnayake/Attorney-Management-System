@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const Case = require("../models/model_lcm_newcase");
-/*
-http://localhost:8070/case/add   <- URL to add a new case 
-*/
+
 router.route("/add_new_case").post((req, res) => {
-    const { caseNumber, procedure, courtType, courtArea, monetaryValue, caseCreatedDate,initialCaseDate, neededDocuments, nature,caseStatus,lawyerId,clientId } = req.body;
+    const { caseNumber, procedure, courtType, courtArea, caseCreatedDate,initialCaseDate, neededDocuments, nature,status,lawyerId,clientId,stepsToBeTaken,previousDate,stepsTaken,nextCourtDate } = req.body;
+
+    //const caseNumber = Number(req.body.caseNumber);
+    const monetaryValue = Number(req.body.monetaryValue);
 
     const newcase = new Case({
         caseNumber,
@@ -18,9 +19,13 @@ router.route("/add_new_case").post((req, res) => {
         initialCaseDate,
         neededDocuments, 
         nature,
-        caseStatus,
+        status,
         lawyerId,
         clientId,
+        stepsToBeTaken,
+        previousDate,
+        stepsTaken,
+        nextCourtDate
     
     });
 
@@ -34,9 +39,7 @@ router.route("/add_new_case").post((req, res) => {
         });
 });
 
-/*
-http://localhost:8070/case   <- URL to get all cases
-*/
+
 router.route("/getallcase").get((req, res) => {
     Case.find()
         .then((cases) => {
@@ -48,12 +51,24 @@ router.route("/getallcase").get((req, res) => {
         });
 });
 
-/*
-http://localhost:8070/case/update/:id   <- URL to update a case by ID
-*/
+// Get the last case
+router.route("/get_last_case_id").get(async (req, res) => {
+    try {
+        const lastcase = await Case.findOne().sort({ createdAt: -1 }); // Descending order
+        if (lastcase) {
+            res.status(200).json(lastcase);
+        } else {
+            res.status(404).json({ message: "No case found." });
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ error: "Failed to fetch the last case." });
+    }
+});
+
 router.route("/update/:id").put(async (req, res) => {
     let caseId = req.params.id;
-    const { caseNumber, procedure, courtType, courtArea, monetaryValue, caseCreatedDate,initialCaseDate, neededDocuments, nature,caseStatus,lawyerId,clientId } = req.body;
+    const { caseNumber, procedure, courtType, courtArea, monetaryValue, caseCreatedDate,initialCaseDate, neededDocuments, nature,status,lawyerId,clientId,stepsToBeTaken,previousDate,stepsTaken,nextCourtDate } = req.body;
 
     const updatedCase = {
         caseNumber,
@@ -65,9 +80,13 @@ router.route("/update/:id").put(async (req, res) => {
         initialCaseDate,
         neededDocuments, 
         nature,
-        caseStatus,
+        status,
         lawyerId,
         clientId,
+        stepsToBeTaken,
+        previousDate,
+        stepsTaken,
+        nextCourtDate
     };
 
     try {
@@ -79,9 +98,7 @@ router.route("/update/:id").put(async (req, res) => {
     }
 });
 
-/*
-http://localhost:8070/case/delete/:id   <- URL to delete a case by ID
-*/
+
 router.route("/delete/:id").delete(async (req, res) => {
     let caseId = req.params.id;
 
@@ -94,9 +111,7 @@ router.route("/delete/:id").delete(async (req, res) => {
     }
 });
 
-/*
-http://localhost:8070/case/get/:id   <- URL to get a specific case by ID
-*/
+
 router.route("/get/:id").get(async (req, res) => {
     let caseId = req.params.id;
 

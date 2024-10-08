@@ -14,7 +14,7 @@ function Dom_Request_View () {
 
   const [showdocumentRequest, getdocumentRequest] = useState({});
   const [showdclient, setshowdclient] = useState([]);
-  const searchId = Number(showdocumentRequest.clientID);
+  const searchId = showdocumentRequest.clientID;
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ function Dom_Request_View () {
   useEffect(() => {
     function get_client_details() {
         axios
-            .get(`http://localhost:8070/client/getByNic/${searchId}`)
+            .get(`http://localhost:8070/client/search/nic/${showdocumentRequest.clientID}`)
             .then((res) => {
                 setshowdclient(res.data.client);
             })

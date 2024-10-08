@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import List from '@mui/material/List';
 import { Box, Drawer, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
-
 import HomeIcon from "@mui/icons-material/Home"
 import InfoIcon from "@mui/icons-material/Info"
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded"
@@ -34,18 +33,18 @@ function LcmNavbar(){
     ] 
 
     return(
-        <nav className="lcm-navBar">
+        <nav className="home-navBar">
             <div className="logo-container">
                 <p>AMS</p>
             </div>
 
-            <div className="lmc-navbar-links-container">
-                <a className="navbar-links-container-link" href="/Lcm_Dashboard">Dashboard</a>
-                <a className="navbar-links-container-link" href="/home">Document Call</a>
-                <a className="navbar-links-container-link" href="/home">Support Ticket</a>   
-                <a className="navbar-links-container-link" href="/home">Payments</a>  
-                <a className="navbar-links-container-link" href="/Lcm_ClientSummary">Client Registration</a> 
-                <a className="navbar-links-container-link" href="/lawyer-dashboard/appointments/LCM004">Appointment</a>   
+            <div className="navbar-links-container">
+                <a className="navbar-links-container-links" href="/Lcm_Dashboard">Dashboard</a>
+                <a className="navbar-links-container-links" href="/home">Document Call</a>
+                <a className="navbar-links-container-links" href="/home">Support Ticket</a>   
+                <a className="navbar-links-container-links" href="/home">Payments</a>  
+                <a className="navbar-links-container-links" href="/Lcm_ClientSummary">Client Registration</a> 
+                <a className="navbar-links-container-links" href="/home">Appointment</a>   
                 <a className="navbar-primary-button" href="/">Logout</a>
             </div>
 

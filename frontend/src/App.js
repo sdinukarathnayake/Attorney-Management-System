@@ -66,6 +66,15 @@ import Dom_Call_View_Requested from './components_dom/Dom_Call_View_Requested';
 
 // Legal Case Management
 import LegalCaseManagerDashboard from './components_lcm/Lcm_Dashboard';
+import AddCase from './components_lcm/Lcm_AddCase';
+import CaseUpdate from './components_lcm/Lcm_UpdateCase';
+import CaseDetails from './components_lcm/Lcm_CaseDetails';
+import PreviousCases from './components_lcm/Lcm_PreviousCases';
+import ClientSummary from './components_lcm/Lcm_ClientSummary';
+import AddClient from './components_lcm/Lcm_AddClient';
+import PreviousCaseDetails from './components_lcm/Lcm_PreviousCaseDetails';
+import CaseReport from './components_lcm/Lcm_CaseReport';
+import ClientCDashboard from './components_lcm/Lcm_ClientCDashboard';
 
 
 // Deed Management
@@ -164,6 +173,15 @@ function App() {
 
           {/* Legal Case Management */}
           <Route path="/Lcm_Dashboard/:id" exact element={<LegalCaseManagerDashboard />} />
+          <Route path="/AddCase/:lawyerid" exact element={<AddCase/>} />
+          <Route path="/Lcm_CaseUpdate/:id" exact element={<CaseUpdate/>} />
+          <Route path="/Lcm_CaseDetails" element={<CaseDetails />} />
+          <Route path="/Lcm_ClientSummary" element={<ClientSummary />} />
+          <Route path="/Lcm_PreviousCaseDetails" element={<PreviousCaseDetails />} />
+          <Route path="/Lcm_AddClient" element={<AddClient />} />
+          <Route path="/Lcm_PreviousCases" element={<PreviousCases />} />
+          <Route path="/Lcm_CaseReport" element={<CaseReport />} />
+          <Route path="/Lcm_ClientCDashboard" element={<ClientCDashboard />} />
 
 
           {/* Client Portal */}

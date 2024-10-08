@@ -44,6 +44,8 @@ function Apm_View_AppointmentRequest() {
         }));
     };
 
+    
+
     if (!appointmentrequest) {
         return <div>Loading...</div>;
     }

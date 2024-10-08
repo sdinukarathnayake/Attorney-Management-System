@@ -46,10 +46,26 @@ const CaseSchema = new Schema({
         type: String,
         required: true
     },
-    caseStatus: {
+    status: {
         type: String,
         required: true    
-    }
+    },
+    nextCourtDate: {
+        type:String
+    },
+    stepsTaken :{
+        type:String
+    },
+    previousDate :{
+        type:String
+    },
+    stepsToBeTaken :{
+        type:String
+    },
+    createAt :{
+        type:Date,
+        default:Date.now,
+    },
 });
 
 const Case = mongoose.model("case", CaseSchema);

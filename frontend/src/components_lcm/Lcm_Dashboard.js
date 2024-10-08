@@ -7,10 +7,10 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import CasesIcon from '@mui/icons-material/Folder';
 import DocumentIcon from '@mui/icons-material/Description';
 import AppointmentIcon from '@mui/icons-material/Event';
-import PaymentIcon from '@mui/icons-material/MonetizationOn'; 
+import PaymentIcon from '@mui/icons-material/MonetizationOn';
 import { Bar, Pie } from 'react-chartjs-2';
 import { useParams } from 'react-router-dom';
-
+import './legal_case_management.css';
 
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 
@@ -26,7 +26,8 @@ function AllCases() {
   const [filteredMoneymatter, setFilteredsMoneymatter] = useState([]);
   const [filteredNamechange, setFilteredsNamechange] = useState([]);
   const [filteredDivorce, setFilteredsDivorce] = useState([]);
-  const { id } = useParams();
+
+const { id } = useParams();
 
   const lawyerid = {id};
 
@@ -96,7 +97,7 @@ const data = {
     {
       label: 'Case Nature',
       data: [filteredLand.length, filteredMoneymatter.length, filteredNamechange.length, filteredDivorce.length],
-      backgroundColor: ['rgba(69, 48, 10, 0.8)','rgba(30, 144, 255)','rgba(100, 149, 237 )','rgba(173, 216, 230)'],
+      backgroundColor: ['rgba(125, 61, 44)','rgba(153, 82, 64)','rgba(168, 93, 74 )','rgba(188, 105, 87)'],
       barThickness: 80,
     },
   ],
@@ -116,8 +117,8 @@ const options = {
   scales: {
     x: {
       stacked: false,
-      barPercentage: 0.8, // Adjusted for tighter spacing
-      categoryPercentage: 0.8, // Adjusted for tighter spacing
+      barPercentage: 0.8, 
+      categoryPercentage: 0.8, 
     },
     y: {
       beginAtZero: true,
@@ -130,7 +131,7 @@ const options = {
     labels: ['Pending Cases', 'Complete Cases'],
     datasets: [{
         data: [filteredPendingCases.length, completeCases.length],
-        backgroundColor: ['rgba(255, 99, 132 )', 'rgba(54, 162, 235)']
+        backgroundColor: ['rgba(171, 24, 5 )', 'rgba(3, 82, 10)']
     }]
 };
 
@@ -138,7 +139,6 @@ const options = {
   // Function to handle search and filter cases
 
     const filteredCases = filteredPendingCases.filter(caseItem =>
-      caseItem.caseNumber && caseItem.caseNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
       caseItem.nature && caseItem.nature.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -198,7 +198,7 @@ const options = {
         </div>
 
         
-        <div className="case-table-container">
+        <div className="case-piechart-container">
         {/* New table for case types - moved below the bar chart */}
         <h3 className="lcm-dashboard-subhead">Case Types Overview</h3>
         <div style={{ width: '50%', margin: 'auto' }}>
@@ -224,7 +224,7 @@ const options = {
           </div>
 
   
-
+          <div className="add-viewprevious-case-container">
           <button
             type="button"
             className="btn-btn-add-new-case"
@@ -239,6 +239,7 @@ const options = {
           >
             View Previous Cases
           </button>
+          </div>
         </div>
         <br />
 

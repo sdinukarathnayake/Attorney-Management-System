@@ -80,7 +80,7 @@ function Dom_Request() {
 
     // Search client details
     function searchClient() {
-        axios.get(`http://localhost:8070/client/getByNic/${searchId}`)
+        axios.get(`http://localhost:8070/client/search/nic/${searchId}`)
             .then((res) => {
                 setClient(res.data.client);
                 setError(false); // Reset error state

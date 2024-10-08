@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const app = express();
 require("dotenv").config();
 const bodyParser = require("body-parser");
+const path = require('path');
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // port number
