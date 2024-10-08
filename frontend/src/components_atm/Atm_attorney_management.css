@@ -1,5 +1,5 @@
 /* General Styles */
- .dashboard_css *{
+.ATM_dashboard_css * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -16,12 +16,13 @@
 }
 
 /* Body Styles */
-.dashboard_css body {
+.ATM_dashboard_css body {
   max-width: 100%;
   overflow-x: hidden;
   background-color: var(--background-color);
 }
-.top-navbar {
+
+.ATM_top-navbar {
   width: 100%;
   background-color: var(--primary-color);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -35,7 +36,7 @@
   padding: 10px 0;
 }
 
-.nav-list {
+.ATM_nav-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -45,16 +46,16 @@
   max-width: 900px;
 }
 
-.left-nav, .right-nav {
+.ATM_left-nav, .ATM_right-nav {
   display: flex;
 }
 
-.nav-item {
+.ATM_nav-item {
   text-align: center;
   flex-grow: 1;
 }
 
-.nav-link {
+.ATM_nav-link {
   text-decoration: none;
   color: var(--dark-color);
   display: flex;
@@ -63,11 +64,11 @@
   padding: 10px 15px;
 }
 
-.nav-item.active .nav-link {
+.ATM_nav-item.active .ATM_nav-link {
   color: var(--accent-color);
 }
 
-.nav-item.active::after {
+.ATM_nav-item.active::after {
   content: "";
   display: block;
   width: 100%;
@@ -77,7 +78,7 @@
 }
 
 /* Dashboard container */
-.dashboard-container {
+.ATM_dashboard-container {
   padding: 20px;
   background-color: var(--white);
   margin: 20px;
@@ -85,20 +86,20 @@
 }
 
 /* Table Section Styling */
-.table-section {
-  background-color:#f7f5f0;
+.ATM_table-section {
+  background-color: #f7f5f0;
   padding: 20px;
   margin: 20px 0;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.table-header-container {
+.ATM_table-header-container {
   margin-bottom: 15px;
 }
 
 /* Table header styling */
-.table-header {
+.ATM_table-header {
   text-align: left;
   font-size: 1.5em;
   font-weight: bold;
@@ -106,12 +107,12 @@
   margin: 0;
 }
 
-.add-button-container {
+.ATM_add-button-container {
   text-align: right;
   margin-top: 10px;
 }
 
-.add-new-btn {
+.ATM_add-new-btn {
   padding: 8px 16px;
   background-color: var(--accent-color);
   color: var(--white);
@@ -122,12 +123,12 @@
   font-weight: bold;
 }
 
-.add-new-btn:hover {
+.ATM_add-new-btn:hover {
   background-color: #5a3e21;
 }
 
 /* User Summary container alignment */
-.user-summary {
+.ATM_user-summary {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -136,10 +137,10 @@
 }
 
 /* Equal size boxes with blur effect */
-.user-summary-box {
+.ATM_user-summary-box {
   height: 150px;
   width: 155px;
-  background-color:  #ede8dd;
+  background-color: #ede8dd;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -153,70 +154,67 @@
   transition: transform 2s ease, box-shadow 1s ease;
 }
 
-.user-summary-box:hover {
+.ATM_user-summary-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.custom-table thead {
+.ATM_custom-table thead {
   background-color: #f9efd4;
 }
 
-.custom-table th {
+.ATM_custom-table th {
   color: #544010;
   background-color: var(--primary-color);
   font-weight: bold;
 }
 
-.custom-table th, .custom-table td {
+.ATM_custom-table th, .ATM_custom-table td {
   padding: 10px;
   text-align: left;
   border: 1px solid var(--secondary-color);
   color: var(--dark-color);
 }
 
-.custom-table td {
+.ATM_custom-table td {
   background-color: var(--white);
 }
 
-.custom-table tr:nth-child(even) td {
+.ATM_custom-table tr:nth-child(even) td {
   background-color: var(--background-color);
 }
 
 /* Firm Summary Styles */
-.firm-summary {
+.ATM_firm-summary {
   margin: 20px 0;
 }
 
-.firm-summary h2 {
+.ATM_firm-summary h2 {
   margin: 20px 0;
-  text-align: left; 
-  color: #74512D; 
+  text-align: left;
+  color: #74512D;
 }
 
-.summary-boxes {
+.ATM_summary-boxes {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  
-  
-  
 }
 
-.box {
+.ATM_box {
   flex-basis: 48%;
-  background-color:  #ede8dd;
+  background-color: #ede8dd;
   padding: 15px;
   margin-bottom: 10px;
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  color: var(--dark-color); /* Keep the original text color */
+  color: var(--dark-color);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.user-status-chart {
+.ATM_user-status-chart {
   margin: 20px 0;
   text-align: center;
   max-width: 400px;
@@ -269,7 +267,7 @@
 }
 
 /* Charts container styling */
-.charts-container {
+.ATM_charts-container {
   display: flex;
   justify-content: space-around;
   margin: 20px 0;
@@ -277,8 +275,8 @@
 }
 
 /* Bar Chart container */
-.bar-chart-container,
-.pie-chart-container {
+.ATM_bar-chart-container,
+.ATM_pie-chart-container {
   flex: 1;
   max-width: 700px;
   max-height: 600px;
@@ -288,20 +286,20 @@
   box-shadow: 0 5px 11px rgba(0, 0, 0, 0.1);
 }
 
-.bar-chart-container {
+.ATM_bar-chart-container {
   height: 450px;
 }
 
-.pie-chart-container {
+.ATM_pie-chart-container {
   height: 450px;
   display: flex;
-  flex-direction: column; /* Ensure items stack vertically */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 /* Styles for the background box */
-.background-box {
+.ATM_background-box {
   background-color: #f7f5f0;
   padding: 30px;
   border-radius: 12px;
@@ -313,7 +311,7 @@
 }
 
 /* Styling for the table container */
-.table-container {
+.ATM_table-container {
   margin-bottom: 30px;
 }
 
@@ -329,25 +327,24 @@
 }
 
 /* Styling for the charts area */
-.chart {
+.ATM_chart {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.bar-chart, 
-.pie-chart {
+.ATM_bar-chart,
+.ATM_pie-chart {
   width: 30%;
-  height: 400px; /* Keep height consistent if needed */
+  height: 400px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
 
-
 /* Styling for the 'Generate Report' button */
-.Atm-generate-report-button {
+.ATM_generate-report-button {
   background-color: #74512D;
   color: white;
   padding: 12px 30px;

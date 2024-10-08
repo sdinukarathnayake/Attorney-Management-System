@@ -1,3 +1,6 @@
+import NavBar from "./apm_page_navbar";
+import Footer from "./apm_page_footer";
+
 import React, { useState, useEffect } from 'react';
 import './appointment_management.css';
 import axios from "axios";
@@ -6,7 +9,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 function Apm_View_AppointmentRequest() {
     const { id, appointmentManagerId } = useParams(); 
     const navigate = useNavigate();
-    const [appointmentrequest, setAppointmentRequests] = useState(null);
+    const [appointmentrequest, setAppointmentRequests] = useState({});
     const [clientDetails, setClientDetails] = useState({});
 
     useEffect(() => {
@@ -36,26 +39,53 @@ function Apm_View_AppointmentRequest() {
         getAppointmentRequests();
     }, [clientDetails, id]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setAppointmentRequests(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
 
-    
+    // appointmen create 
+    const HandleSubmit = () => {
+        const [appointmentData, setAppointmentData] = useState({
+          appointmentRequestId: '',
+          appointmentManagerId: '',
+          lawyerId: '',
+          clientId: '',
+          appointmentCreationDate: new Date().toISOString(), 
+          appointmentTitle: '',
+          appointmentDescription: '',
+
+        });
+      
+        const handleChange = (event) => {
+          setAppointmentData({
+            ...appointmentData,
+            [event.target.name]: event.target.value,
+          });
+        };
+      
+        const handleSubmit = async (event) => {
+          event.preventDefault(); 
+      
+      
+            try {
+                const response = await axios.post('http://localhost:8070/appointment/add-appointment', appointmentData);
+                console.log(response.data); 
+            } catch (error) {
+                console.error(error);
+                // Handle error message (optional)
+            } 
+        }
 
     if (!appointmentrequest) {
         return <div>Loading...</div>;
     }
+}
 
     return (
         <div className="apm-form-container">
+            <NavBar/>
+
             <hr />
             <h2 className='apm-header'>Lawyer Appointment Request Details</h2>
-
-            <form className="apm-form">            
+     
+            <form className="apm-form" onSubmit={HandleSubmit}>
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="appointmentRequestName">
                     Request Name
@@ -66,7 +96,6 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentRequestName"
                     name="appointmentRequestName"
                     value={appointmentrequest.appointmentRequestName || ''}
-                    onChange={handleChange}
                     required
                 />
                 </div>
@@ -81,7 +110,6 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentRequestDate"
                     name="appointmentRequestDate"
                     value={new Date(appointmentrequest.appointmentRequestDate).toISOString().split('T')[0]}
-                    onChange={handleChange}
                     required
                 />
                 </div>
@@ -97,7 +125,6 @@ function Apm_View_AppointmentRequest() {
                     id="lawyerId"
                     name="lawyerId"
                     value={appointmentrequest.lawyerId || ''}
-                    onChange={handleChange}
                     readOnly
                 />
                 </div>
@@ -112,7 +139,6 @@ function Apm_View_AppointmentRequest() {
                     id="clientId"
                     name="clientId"
                     value={appointmentrequest.clientId || ''}
-                    onChange={handleChange}
                     required
                 />
                 </div>
@@ -158,7 +184,6 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentType"
                     name="appointmentType"
                     value={appointmentrequest.appointmentType}
-                    onChange={handleChange}
                     required
                 >
                     <option value={appointmentrequest.appointmentType}>{appointmentrequest.appointmentType}</option>
@@ -178,7 +203,6 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentDate"
                     name="appointmentDate"
                     value={new Date(appointmentrequest.appointmentDate).toISOString().split('T')[0]}
-                    onChange={handleChange}
                     required
                 />
                 </div>
@@ -193,7 +217,6 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentTime"
                     name="appointmentTime"
                     value={appointmentrequest.appointmentTime}
-                    onChange={handleChange}
                     required
                 />
                 </div>
@@ -208,7 +231,6 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentLocation"
                     name="appointmentLocation"
                     value={appointmentrequest.appointmentLocation || ''}
-                    onChange={handleChange}
                     required
                 />
                 </div>         
@@ -224,25 +246,53 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentRequestStatus"
                     name="appointmentRequestStatus"
                     value={appointmentrequest.appointmentRequestStatus}
-                    onChange={handleChange}
                     readOnly/>
                 </div>       
             </form>
 
+
             <hr className="form-divider" />
 
-            <form className="apm-form" onSubmit="">
+         
+            <form className="apm-form" onSubmit="handleSubmit">
+
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="appointmentrequest">Appointment Request Id</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="appointmentrequest"
+                    name="appointmentrequest"                    
+                />
+            </div>
     
             <div className="apm-form-group">
                 <label className='apm-form-label' htmlFor="appointmentCreationDate">Appointment Creation Date</label>
                 <input className='apm-form-input'
-                    type="date"
+                    type="Date"
                     style={{ backgroundColor: '#EEEEEE' }}
                     id="appointmentCreationDate"
-                    name="appointmentCreationDate"
-                    value={new Date().toISOString().split('T')[0]}
-                    onChange={handleChange}
-                    readOnly
+                    name="appointmentCreationDate"                   
+                />
+            </div>
+
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="lawyerId">Lawyer Id</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="lawyerId"
+                    name="lawyerId"                   
+                />
+            </div>
+
+            <div className="apm-form-group">
+                <label className='apm-form-label' htmlFor="clientId">Client Id</label>
+                <input className='apm-form-input'
+                    type="text"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    id="clientId"
+                    name="clientId"                    
                 />
             </div>
 
@@ -252,7 +302,7 @@ function Apm_View_AppointmentRequest() {
                     type="text"
                     id="appointmentTitle"
                     name="appointmentTitle"
-                    onChange={handleChange}
+                    
                 />
             </div>
     
@@ -261,7 +311,7 @@ function Apm_View_AppointmentRequest() {
                 <textarea className='apm-form-input-textarea'
                     id="appointmentDescription"
                     name="appointmentDescription"
-                    onChange={handleChange}
+                    
                 ></textarea>
             </div>
     
@@ -272,7 +322,7 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentManagerId"
                     name="appointmentManagerId"
                     value={appointmentManagerId}
-                    onChange={handleChange}
+                   
                 />
             </div>    
             
@@ -284,17 +334,17 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentStatus"
                     name="appointmentStatus"
                     value="Pending"
-                    onChange={handleChange}
-                    readOnly
+                    
                 />
             </div>
     
             <div className="apm-button-box">                
-                <button type="submit" className="apm-table-link-button">Mark As Complete</button>
+            <button type="submit" className="apm-table-link-button"> Mark As Complete</button>
             </div>    
-        </form>
+            </form>
+            <Footer/>
         </div>
-    );
+    )
 }
 
 export default Apm_View_AppointmentRequest;

@@ -34,6 +34,23 @@ router.route("/add-support-ticket").post((req, res) => {
             });
 })
 
+// Get all support ticket
+router.route("/all").get((req, res) => {
+        supportTicket.find()
+        .then((supportTicket) => {
+            if (supportTicket) {
+                res.json(supportTicket);
+            } else {
+                res.status(404).json("Support ticket Not Found"); 
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json("Error in Retrieving Support ticket");
+        });
+});
+
+
 
 // Get a specific support ticket  by ID
 router.route("/:id").get((req, res) => {
@@ -84,6 +101,29 @@ router.route("/update/:id").put(async (req, res) => {
         res.status(500).json("Error in Updating Support Ticket");
     }
 });
+
+router.route("/update/status/:id").put(async (req, res) => {
+    const supportTicketId = req.params.id;
+
+    // Object to hold updated fields
+    const updatedSupportTicket = {
+        supTicketStatus: "Replied"
+    };
+
+    try {
+        const result = await supportTicket.findByIdAndUpdate(supportTicketId, updatedSupportTicket, { new: true });
+
+        if (result) {
+            res.json("Support Ticket Updated Successfully");
+        } else {
+            res.status(404).json("Support Ticket Not Found");
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json("Error in Updating Support Ticket");
+    }
+});
+
 
 
 
@@ -179,4 +219,62 @@ router.route("/client/:id").get((req, res) => {
     });
 });
 
+
+// Support ticket count route
+router.get("/count", async (req, res) => {
+    try {
+        // Count total tickets
+        const totalCount = await SupportTicket.countDocuments();
+        
+        // Count replied tickets
+        const repliedCount = await SupportTicket.countDocuments({ supTicketStatus: 'Replied' });
+
+        // Respond with both counts
+        res.status(200).json({ total: totalCount, replied: repliedCount });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
+//for count (pie chart)
+router.route("/pending/count").get((req, res) => {
+    supportTicket.countDocuments({ supTicketStatus: "Pending" })
+    .then((count) => {
+        res.json({ count });
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err.message });
+    });
+});
+
+router.route("/replied/count").get((req, res) => {
+    supportTicket.countDocuments({ supTicketStatus: "Replied" })
+    .then((count) => {
+        res.json({ count });
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err.message });
+    });
+});
+
+
+
+router.post('/supportticket', async (req, res) => {
+    try {
+        const ticket = new SupportTicket(req.body);
+        await ticket.save();
+        res.status(201).json({ message: 'Support ticket created successfully', ticket });
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ errors: error.errors });
+        }
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
 module.exports = router;
+

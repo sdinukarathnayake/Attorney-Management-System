@@ -171,4 +171,36 @@ router.route("/support-agent/:id").get((req, res) => {
         });
 });
 
+router.post('/reply-tickets', async (req, res) => {
+    try {
+        const replyTicket = new replyTicket(req.body);
+        await replyTicket.save();
+        res.status(201).json({ message: 'Reply ticket created successfully', replyTicket });
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ errors: error.errors });
+        }
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
+// Get all ticket reply
+router.route("/reply/all").get((req, res) => {
+    replyTicket.find()
+    .then((replyTicket) => {
+        if (replyTicket) {
+            res.json(replyTicket);
+        } else {
+            res.status(404).json("Support ticket reply Not Found"); 
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json("Error in Retrieving Support ticket reply");
+    });
+});
+
+
+
 module.exports = router;

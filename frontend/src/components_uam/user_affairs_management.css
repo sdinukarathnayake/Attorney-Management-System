@@ -235,12 +235,29 @@
   border: 1px solid var(--dark-color);
 }
 
+.uam-sub-topic {
+  margin: auto;
+  width: 50%;
+  font-size: 1.5rem;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  color: #543310;
+}
+
 .uam-form-group {
   margin-bottom: 15px;
 }
 
 .uam-form-label {
   display: inline-block;
+  margin-bottom: 5px;
+  width: 30%;
+  font-size: 1.1rem;
+  color: #543310;
+}
+
+.uam-form-label-2 {
+  display: flex;
   margin-bottom: 5px;
   width: 30%;
   font-size: 1.1rem;
@@ -280,6 +297,16 @@
   background-color: var(--white);
 }
 
+.uam-form-input-textarea-2 {
+  width: 99%;
+  padding: 10px;
+  border: 1px solid var(--dark-color);
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  background-color: var(--white);
+}
+
 .uam-form-input-select {
   width: 69%;
   padding: 10px;
@@ -291,9 +318,9 @@
 }
 
 .uam-form-button {
-  display: block;
+ 
   width: 170px;
-  margin: 20px 0 20px auto;
+  margin: 20px 0 20px 10px; 
   padding: 8px;
   background-color: #543310;
   color: #fff;
@@ -303,6 +330,18 @@
   cursor: pointer;
 }
 
+.uam-form-button-danger {
+  display: inline-block; 
+  width: 170px;
+  margin: 20px 0 20px 10px; 
+  padding: 8px;
+  background-color: #543310;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
 .uam-form-button:hover {
   background-color: #74512D;
 }
@@ -400,4 +439,144 @@
   font-size: 24px;
   color: var(--accent-color);
   margin-bottom: 2rem;
+}
+
+
+/* Ticket count css */
+
+.uam-ticket-counts {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.uam-ticket-count-box {
+  border: 1px solid #ccc;
+  border-radius: 3cap;
+  padding: 10px;
+  background-color: var(--primary-color);
+  text-align: center;
+  width: 30%; /* Adjust the width as needed */
+}
+
+.form-divider{
+  width: 52%;
+  border: 0.05rem solid var(--accent-color);
+  margin: 2rem auto 2rem auto;
+}
+
+.form-divider-text {
+  font-size: 24px;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+}
+
+.uam-chart-container {
+  width: 35%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.uam-search-container {
+  display: flex;
+  align-items: center; /* Aligns label and input vertically */
+  justify-content: flex-end; /* Aligns the contents to the right */
+  margin: 10px 0 10px auto; /* Adjusted top and bottom margin */
+  padding: 5px; /* Reduced padding around the box */
+  border: 1px solid #ced4da; /* Border for the container */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #f8f9fa; /* Light background color */
+  width: 250px; /* Set a specific width for the container */
+}
+
+.uam-search-label {
+  margin-right: 2px; /* Reduced space between label and input */
+  font-size: 14px; /* Reduced font size for the label */
+  color: #495057; /* Label color */
+}
+
+.uam-search-input {
+  padding: 5px; /* Reduced padding inside the input */
+  border: 1px solid #ced4da; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 14px; /* Reduced font size */
+  width: 100px; /* Adjust the width of the input as needed */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.uam-search-input:focus {
+  border-color: #80bdff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+
+.generate-pdf-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Adjusts the space between the button and the footer */
+}
+
+.generate-pdf-button {
+  background-color: #AF8F6F;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.generate-pdf-button:hover {
+  background-color: #543310;
+}
+
+
+.uam-button-box {
+  width: 65%;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 20px;
+}
+
+.uam-button-box2 {
+  width: 80vw;
+  margin: 2rem auto;
+  padding-left: 50%;
+  justify-content: center;
+}
+
+.uam-button-box2 button {
+  width: 45%;
+  margin: 0 5% 0 0;
+}
+
+.uam-form-divider {
+  width: 55%;
+  border: 0.05rem solid var(--accent-color);
+  margin: 2rem auto 2rem auto;
+}
+
+.uam-form-divider-text {
+  font-size: 24px;
+  color: var(--accent-color);
+  margin-bottom: 2rem;
+}
+
+.uam-button-box {  
+  width: 65%;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 20px;
+}
+
+.uam-button-box2 {
+  width: 80vw;
+  margin: 2rem auto;
+  padding-left: 50%;
+  justify-content: center;
+}
+
+.uam-button-box2 button {
+  width: 45%;
+  margin: 0 5% 0 0; 
 }

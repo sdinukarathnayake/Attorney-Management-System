@@ -59,31 +59,34 @@ function Atm_LawFirm_Update() {
   }
 
   return (
-    <div className="form-container">
-      <h1>Update Law Firm</h1>
-      {successMessage && <div className="success-message">Successfully updated!</div>}
+    <div className="ATM_form-container">
+
+    
+      <h1 style={{ textAlign: 'center', color: '#74512D' }}>Update Law Firm</h1>
+<br></br>
+      {successMessage && <div className="ATM_success-message">Successfully updated!</div>}
       <form onSubmit={handleSubmit}>
-      <div className="form-group">
+        <div className="ATM_form-group">
           <label>Law Firm ID</label>
           <input type="text" name="lawFirmId" value={inputs.lawFirmId || ''} onChange={handleChange} />
         </div>
-        <div className="form-group">
+        <div className="ATM_form-group">
           <label>Firm Name</label>
           <input type="text" name="name" value={inputs.name || ''} onChange={handleChange} />
         </div>
-        <div className="form-group">
+        <div className="ATM_form-group">
           <label>Address</label>
           <input type="text" name="address" value={inputs.address || ''} onChange={handleChange} />
         </div>
-        <div className="form-group">
+        <div className="ATM_form-group">
           <label>Contact Number</label>
           <input type="text" name="contactNumber" value={inputs.contactNumber || ''} onChange={handleChange} />
         </div>
-        <div className="form-group">
+        <div className="ATM_form-group">
           <label>Registration Number</label>
           <input type="text" name="registrationNo" value={inputs.registrationNo || ''} onChange={handleChange} />
         </div>
-        <div className="form-group">
+        <div className="ATM_form-group">
           <label>Lawyer Id</label>
           <input type="text" name="lawyerId" value={inputs.lawyerId || ''} onChange={handleChange} />
         </div>

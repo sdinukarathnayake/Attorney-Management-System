@@ -96,7 +96,8 @@ function Dashboard() {
 
             <div className="apm-container">
                 <h1 className="apm-header">Legal Case Manager</h1>
-                <h1 className="apm-header">Appointment Management Dashboard</h1>
+                <h3 className="apm-header">Appointment Management Dashboard</h3>
+
                 <p className="apm-user-welcome">Welcome {lawyerDetails.fName} {lawyerDetails.lName}</p>
                 <p className="apm-user-welcome">User ID : {lawyerDetails.userId}</p>
 

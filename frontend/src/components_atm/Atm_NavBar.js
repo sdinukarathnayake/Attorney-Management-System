@@ -10,32 +10,32 @@ import { Link } from 'react-router-dom';
 function Apm_NavBar() {
   return (
     <div>
-      <nav className="top-navbar">
-        <ul className="nav-list">
-          <div className="left-nav">
-            <li className="nav-item">
-              <Link to="/add-lawfrim" className="nav-link">
+      <nav className="ATM_top-navbar">
+        <ul className="ATM_nav-list">
+          <div className="ATM_left-nav">
+            <li className="ATM_nav-item">
+              <Link to="/add-lawfrim" className="ATM_nav-link">
                 <BusinessIcon />
                 <span>Firm</span>
               </Link>
             </li>
 
-            <li className="nav-item">
-              <Link to="/Atm_LawFirm_Details_Dipsply" className="nav-link">
+            <li className="ATM_nav-item">
+              <Link to="/Atm_LawFirm_Details_Dipsply" className="ATM_nav-link">
                 <DescriptionIcon />
                 <span>Frim Details</span>
               </Link>
             </li>
           </div>
 
-          <div className="right-nav">
-            <li className="nav-item">
-              <Link to="/profile" className="nav-link">
+          <div className="ATM_right-nav">
+            <li className="ATM_nav-item">
+              <Link to="/profile" className="ATM_nav-link">
                 <AccountCircleIcon />
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/logout" className="nav-link">
+            <li className="ATM_nav-item">
+              <Link to="/logout" className="ATM_nav-link">
                 <ExitToAppIcon />
                 <span>Logout</span>
               </Link>

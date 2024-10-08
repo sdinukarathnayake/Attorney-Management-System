@@ -20,7 +20,7 @@ body {
     background-color: var(--background-color);
 }
 
-.top-navbar {
+.ATM_top-navbar {
     width: 100%; /* Full-width navbar */
     background-color: var(--primary-color); /* Use the primary color for the navbar background */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -34,7 +34,7 @@ body {
     padding: 10px 0;
 }
 
-.nav-list {
+.ATM_nav-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -44,12 +44,12 @@ body {
     max-width: 600px; /* Limit the width for better design */
 }
 
-.nav-item {
+.ATM_nav-item {
     text-align: center;
     flex-grow: 1;
 }
 
-.nav-link {
+.ATM_nav-link {
     text-decoration: none;
     color: var(--dark-color); /* Use the dark color for the text */
     display: flex;
@@ -58,17 +58,17 @@ body {
     padding: 10px 15px;
 }
 
-.nav-link .nav-icon {
+.ATM_nav-link .nav-icon {
     width: 24px;
     height: 24px;
     margin-bottom: 5px;
 }
 
-.nav-item.active .nav-link {
+.ATM_nav-item.active .ATM_nav-link {
     color: var(--accent-color); /* Accent color for active nav items */
 }
 
-.nav-item.active::after {
+.ATM_nav-item.active::after {
     content: "";
     display: block;
     width: 100%;

@@ -13,6 +13,7 @@ function Atm_Lawyer_Update() {
         nic: '',
         email: '',
         phoneNumber: '',
+        phoneNumber: '',
         address: '',
         userType: '',
         education: '',
@@ -67,43 +68,43 @@ function Atm_Lawyer_Update() {
     }
 
     return (
-        <div className="form-container">
+        <div className="ATM_form-container">
             <h1>Update Lawyer</h1>
-            {successMessage && <div className="success-message">Successfully updated!</div>}
+            {successMessage && <div className="ATM_success-message">Successfully updated!</div>}
             <form onSubmit={handleSubmit}>
-            <div className="form-group">
+                <div className="ATM_form-group">
                     <label>User ID</label>
                     <input type="text" name="userId" value={inputs.userId || ''} onChange={handleChange} />
                 </div>
-                <div className="form-group">
+                <div className="ATM_form-group">
                     <label>First Name</label>
                     <input type="text" name="fName" value={inputs.fName || ''} onChange={handleChange} />
                 </div>
-                <div className="form-group">
+                <div className="ATM_form-group">
                     <label>Last Name</label>
                     <input type="text" name="lName" value={inputs.lName || ''} onChange={handleChange} />
                 </div>
-                <div className="form-group">
+                <div className="ATM_form-group">
                     <label>NIC</label>
                     <input type="text" name="nic" value={inputs.nic || ''} onChange={handleChange} />
                 </div>
-                <div className="form-group">
+                <div className="ATM_form-group">
                     <label>Email</label>
                     <input type="email" name="email" value={inputs.email || ''} onChange={handleChange} />
                 </div>
-                <div className="form-group">
+                <div className="ATM_form-group">
                     <label>Phone Number</label>
                     <input type="text" name="phoneNumber" value={inputs.phoneNumber || ''} onChange={handleChange} />
                 </div>
-                <div className="form-group">
+                <div className="ATM_form-group">
                     <label>Address</label>
                     <input type="text" name="address" value={inputs.address || ''} onChange={handleChange} />
                 </div>
-                <div className="form-group">
+                <div className="ATM_form-group">
                     <label>User Type</label>
                     <input type="text" name="userType" value={inputs.userType || ''} onChange={handleChange} />
                 </div>
-                <div className="form-group">
+                <div className="ATM_form-group">
                     <label>Education</label>
                     <input type="text" name="education" value={inputs.education || ''} onChange={handleChange} />
                 </div>

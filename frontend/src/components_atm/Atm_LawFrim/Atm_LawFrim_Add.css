@@ -1,4 +1,4 @@
-* {
+*.ATM_ {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -14,13 +14,13 @@
   --dark-color: #544010;
 }
 
-body {
+.ATM_body {
   max-width: 100%;
   overflow-x: hidden;
   background-color: var(--background-color);
 }
 
-.form-container {
+.ATM_form-container {
   background-color: var(--primary-color);
   width: 50%;
   margin: 150px auto; /* Adds space for the navbar and centers the form */
@@ -29,30 +29,30 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+.ATM_h2 {
   text-align: center;
   color: var(--accent-color);
   margin-bottom: 20px;
 }
 
-.form-group {
+.ATM_form-group {
   margin-bottom: 15px;
 }
 
-label {
+.ATM_label {
   display: block;
   margin-bottom: 5px;
   color: var(--dark-color);
 }
 
-input[type="text"], input[type="tel"] {
+.ATM_input[type="text"], .ATM_input[type="tel"] {
   width: 100%;
   padding: 10px;
   border: 1px solid var(--secondary-color);
   border-radius: 5px;
 }
 
-button {
+.ATM_button {
   background-color: var(--accent-color);
   color: var(--white);
   padding: 10px 20px;
@@ -64,11 +64,11 @@ button {
   font-size: 16px;
 }
 
-button:hover {
+.ATM_button:hover {
   background-color: var(--dark-color);
 }
 
-.form-group input:focus {
+.ATM_form-group input:focus {
   outline: none;
   border-color: var(--accent-color);
 }

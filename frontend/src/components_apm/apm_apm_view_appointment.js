@@ -361,10 +361,7 @@ function Apm_View_Appointment() {
             </div>
     
             <div className="apm-button-box">                
-                <button type="submit" className="apm-table-link-button">Update Request</button>
-                <button type="submit" className="apm-table-link-button">Mark As Complete</button>
-            </div>
-            <div className="apm-button-box">               
+                <button type="submit" className="apm-table-link-button">Update Request</button>          
                 <button
                     type="button"
                     className="apm-table-negative-button"
@@ -372,7 +369,6 @@ function Apm_View_Appointment() {
                     Delete Request
                 </button>
             </div>
-    
         </form>
     </div>
     

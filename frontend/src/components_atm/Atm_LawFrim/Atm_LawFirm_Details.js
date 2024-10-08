@@ -5,7 +5,6 @@ import './Atm_LawFirm_Details.css';
 
 const URL = "http://localhost:8070/lawfirm/lawfirms";
 
-
 function Atm_LawFirm_Details() {
   const [lawFirms, setLawFirms] = useState([]);
   const [error, setError] = useState(null);
@@ -38,15 +37,16 @@ function Atm_LawFirm_Details() {
 
   return (
     <div>
-      <div className="table-container">
-        <button className="back-button" onClick={goBack}>
+      <div className="ATM_table-container">
+        <button className="ATM_back-button" onClick={goBack}>
           ←
         </button>
-        <div className="spacer"></div> {/* Blank line between arrow and title */}
+        <div className="ATM_spacer"></div> {/* Blank line between arrow and title */}
         
-        <h1>Law Firm Details</h1>
-        {error && <p className="error-message">{error}</p>}
-        <table className="lawfirm-table">
+        <h1 style={{ textAlign: 'center', color: '#74512D' }}>Law Firm Details</h1>
+
+        {error && <p className="ATM_error-message">{error}</p>}
+        <table className="ATM_lawfirm-table">
           <thead>
             <tr>
               <th>Law Firm Id</th>
@@ -69,7 +69,7 @@ function Atm_LawFirm_Details() {
                   <td>{firm.registrationNo}</td>
                   <td>{firm.lawyerId}</td>
                   <td>
-                    <button className="update-button" onClick={() => handleUpdateClick(firm._id)}>
+                    <button className="ATM_update-button" onClick={() => handleUpdateClick(firm._id)}>
                       Update
                     </button>
                   </td>
@@ -77,7 +77,7 @@ function Atm_LawFirm_Details() {
               ))
             ) : (
               <tr>
-                <td colSpan="5">No law firms found</td>
+                <td colSpan="7">No law firms found</td>
               </tr>
             )}
           </tbody>

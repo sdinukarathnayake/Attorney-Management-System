@@ -46,81 +46,87 @@ function Atm_LawFrim_Add() {
 
   return (
     <div>
-      <Nav/>
-      <br></br><br></br><br></br><br></br>
-      <div className="form-container">
-        <h2>Add Law Firm</h2>
+      <Nav />
+      <br /><br /><br /><br />
+      <div className="ATM_form-container">
+        <h2 className="ATM_h2">Add Law Firm</h2>
         <form onSubmit={handleSubmit}>
-        <div className="form-group">
-            <label htmlFor="lawFirmId">Law Firm ID</label>
-            <input 
-              type="text" 
-              id="lawFirmId" 
-              name="lawFirmId" 
+          <div className="ATM_form-group">
+            <label className="ATM_label" htmlFor="lawFirmId">Law Firm ID</label>
+            <input
+              className="ATM_input"
+              type="text"
+              id="lawFirmId"
+              name="lawFirmId"
               value={formData.lawFirmId}
-              onChange={handleChange} 
-              required 
+              onChange={handleChange}
+              required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="name">Law Firm Name</label>
-            <input 
-              type="text" 
-              id="name" 
-              name="name" 
+          <div className="ATM_form-group">
+            <label className="ATM_label" htmlFor="name">Law Firm Name</label>
+            <input
+              className="ATM_input"
+              type="text"
+              id="name"
+              name="name"
               value={formData.name}
-              onChange={handleChange} 
-              required 
+              onChange={handleChange}
+              required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="address">Address</label>
-            <input 
-              type="text" 
-              id="address" 
-              name="address" 
+          <div className="ATM_form-group">
+            <label className="ATM_label" htmlFor="address">Address</label>
+            <input
+              className="ATM_input"
+              type="text"
+              id="address"
+              name="address"
               value={formData.address}
-              onChange={handleChange} 
-              required 
+              onChange={handleChange}
+              required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="contactNumber">Contact Number</label>
-            <input 
-              type="tel" 
-              id="contactNumber" 
-              name="contactNumber" 
+          <div className="ATM_form-group">
+            <label className="ATM_label" htmlFor="contactNumber">Contact Number</label>
+            <input
+              className="ATM_input"
+              type="tel"
+              id="contactNumber"
+              name="contactNumber"
               value={formData.contactNumber}
-              onChange={handleChange} 
-              required 
+              onChange={handleChange}
+              required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="registrationNo">Registration Number</label>
-            <input 
-              type="text" 
-              id="registrationNo" 
-              name="registrationNo" 
+          <div className="ATM_form-group">
+            <label className="ATM_label" htmlFor="registrationNo">Registration Number</label>
+            <input
+              className="ATM_input"
+              type="text"
+              id="registrationNo"
+              name="registrationNo"
               value={formData.registrationNo}
-              onChange={handleChange} 
-              required 
+              onChange={handleChange}
+              required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="lawyerId">Lawyer Id</label>
-            <input 
-              type="text" 
-              id="lawyerId" 
-              name="lawyerId" 
+          <div className="ATM_form-group">
+            <label className="ATM_label" htmlFor="lawyerId">Lawyer Id</label>
+            <input
+              className="ATM_input"
+              type="text"
+              id="lawyerId"
+              name="lawyerId"
               value={formData.lawyerId}
-              onChange={handleChange} 
-              required 
+              onChange={handleChange}
+              required
             />
           </div>
-          <button type="submit">Submit</button>
+          <button className="ATM_button" type="submit">Submit</button>
         </form>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

@@ -223,6 +223,18 @@ router.route("/client/:id").get((req, res) => {
     });
 });
 
+router.post('/appointments', async (req, res) => {
+    try {
+        const appointment = new Appointment(req.body);
+        await appointment.save();
+        res.status(201).json({ message: 'Appointment created successfully', appointment });
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ errors: error.errors });
+        }
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
 
 
 

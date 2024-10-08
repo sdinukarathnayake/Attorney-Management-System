@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import './Atm_lawyer_Update.css';
+
 
 function ViewUserDetails() {
     const { id } = useParams(); 
@@ -108,7 +108,8 @@ function ViewUserDetails() {
 
     return (
         <div className="user-details-container">
-            <h1>User Details</h1>
+
+        <h1 style={{ textAlign: 'center', color: '#74512D' }}>User Details</h1>
             <table className="table">
                 <tbody>
                 <tr>

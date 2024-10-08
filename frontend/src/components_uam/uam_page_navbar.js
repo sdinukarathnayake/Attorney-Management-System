@@ -28,7 +28,7 @@ function UamNavbar(){
             </div>
 
             <div className="apm-navbar-links-container">
-                <a className="apm-navbar-links-container-links" href="/appointment-manager-dashboard">Dashboard</a>
+                <a className="apm-navbar-links-container-links" href="/support-agent-dashboard/SUP001">Dashboard</a>
                 <a className="apm-navbar-primary-button" href="/login">Logout</a>
             </div>
 

@@ -9,29 +9,27 @@ import { Link } from 'react-router-dom';
 
 function Atm_LawFrim_Nav() {
   return (
-    <div>
-      <nav className="top-navbar">
-        <ul className="nav-list">
-          <li className="nav-item">
-            <Link to="mainHome" className="nav-link">
+    <div className=".ATM_body">
+      <nav className="ATM_top-navbar">
+        <ul className="ATM_nav-list">
+          <li className="ATM_nav-item">
+            <Link to="mainHome" className="ATM_nav-link">
               <HomeIcon />
               <span>Home</span>
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to="/Atm_LawyerRegistration" className="nav-link">
+          <li className="ATM_nav-item">
+            <Link to="/Atm_LawyerRegistration" className="ATM_nav-link">
               <PersonAddIcon />
               <span>Add Attorney</span>
             </Link>
           </li>
-          <li className="nav-item active">
-            <Link to="/Atm_LawFirm_Details_Dipsply" className="nav-link">
+          <li className="ATM_nav-item ATM_active">
+            <Link to="/Atm_LawFirm_Details_Dipsply" className="ATM_nav-link">
               <BusinessIcon />
               <span>Law Firm Details</span>
             </Link>
           </li>
-          
-          
         </ul>
       </nav>
     </div>

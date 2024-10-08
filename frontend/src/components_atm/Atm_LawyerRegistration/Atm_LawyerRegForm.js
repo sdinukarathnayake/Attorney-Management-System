@@ -103,17 +103,17 @@ function Atm_LawyerRegForm() {
   return (
     <div>
       <Nav />
-      <br></br><br></br><br></br><br></br>
+      <br /><br /><br /><br />
 
-      <div className="form-container">
+      <div className="ATM_form-container">
         <h2>Lawyer Registration Form</h2>
 
         {/* Success message display */}
-        {successMessage && <div className="success-message">{successMessage}</div>}
+        {successMessage && <div className="ATM_success-message">{successMessage}</div>}
 
         <form onSubmit={handleSubmit}>
           {/* Input fields for the form */}
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="userId">User ID:</label>
             <input
               type="text"
@@ -124,7 +124,7 @@ function Atm_LawyerRegForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="fName">First Name:</label>
             <input
               type="text"
@@ -135,7 +135,7 @@ function Atm_LawyerRegForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="lName">Last Name:</label>
             <input
               type="text"
@@ -146,7 +146,7 @@ function Atm_LawyerRegForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="nic">NIC:</label>
             <input
               type="text"
@@ -157,7 +157,7 @@ function Atm_LawyerRegForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="email">Email:</label>
             <input
               type="email"
@@ -168,9 +168,9 @@ function Atm_LawyerRegForm() {
               onBlur={validateEmail}
               required
             />
-            {emailError && <span className="error-message">{emailError}</span>}
+            {emailError && <span className="ATM_error-message">{emailError}</span>}
           </div>
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="phoneNumber">Mobile Number:</label>
             <input
               type="tel"
@@ -181,9 +181,9 @@ function Atm_LawyerRegForm() {
               onBlur={validatePhoneNumber}
               required
             />
-            {phoneError && <span className="error-message">{phoneError}</span>}
+            {phoneError && <span className="ATM_error-message">{phoneError}</span>}
           </div>
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="address">Address:</label>
             <input
               type="text"
@@ -194,10 +194,10 @@ function Atm_LawyerRegForm() {
               required
             />
           </div>
-          <div className="form-group">
-            <label className="atm-form-lable" htmlFor="userType">User Type:</label>
+          <div className="ATM_form-group">
+            <label className="ATM_form-label" htmlFor="userType">User Type:</label>
             <select
-              className="atm-form-input-select"
+              className="ATM_form-input-select"
               id="userType"
               name="userType"
               value={formData.userType}
@@ -205,15 +205,15 @@ function Atm_LawyerRegForm() {
               required
             >
               <option value="">Select User Type</option>
-              <option value="Deed  Manager">Deed  Manager</option>
-              <option value="Legal  Manager">Legal  Manager</option>
+              <option value="Deed Manager">Deed Manager</option>
+              <option value="Legal Manager">Legal Manager</option>
               <option value="Support Agent">Support Agent</option>
               <option value="Document Manager">Document Manager</option>
               <option value="Finance Manager">Finance Manager</option>
               <option value="Appointment Management">Appointment Management</option>
             </select>
           </div>
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="education">Education:</label>
             <input
               type="text"
@@ -224,7 +224,7 @@ function Atm_LawyerRegForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="password">Password:</label>
             <input
               type="password"
@@ -235,7 +235,7 @@ function Atm_LawyerRegForm() {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label htmlFor="createDate">Create Date:</label>
             <input
               type="date"
@@ -248,9 +248,9 @@ function Atm_LawyerRegForm() {
           </div>
 
           {/* User Status Radio Buttons */}
-          <div className="form-group">
+          <div className="ATM_form-group">
             <label>User Status:</label>
-            <div className="radio-group">
+            <div className="ATM_radio-group">
               <label>
                 <input
                   type="radio"
@@ -274,7 +274,7 @@ function Atm_LawyerRegForm() {
             </div>
           </div>
 
-          {formError && <span className="error-message">{formError}</span>}
+          {formError && <span className="ATM_error-message">{formError}</span>}
           <button type="submit">Register</button>
         </form>
       </div>

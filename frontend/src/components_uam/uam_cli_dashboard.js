@@ -122,7 +122,7 @@ function Dashboard() {
                     <td className="uam-summary-table-data">{supportTicket.supTicketSubject}</td>
                     <td className="uam-summary-table-data">{supportTicket.supTicketStatus}</td>
                     <td className="uam-summary-table-action">
-                        <a className="uam-summary-table-button" href={`/client-portal/view-support-ticket/${supportTicket._id}/${id}`}>View Request</a>
+                        <a className="uam-summary-table-button" href={`/client-portal/view-support-ticket/${supportTicket._id}`}>View Ticket</a>
                     </td>
                 </tr>
                 )

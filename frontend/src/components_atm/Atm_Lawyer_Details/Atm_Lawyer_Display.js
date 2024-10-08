@@ -44,14 +44,14 @@ function Atm_Lawyer_Display() {
 
   return (
     <div>
-      <div className="table-container">
-        <button className="back-button" onClick={goBack}>
+      <div className="ATM_table-container">
+        <button className="ATM_back-button" onClick={goBack}>
           ←
         </button>
-        <div className="spacer"></div>
+        <div className="ATM_spacer"></div>
         <h1>Lawyer Details</h1>
-        {error && <p className="error-message">{error}</p>}
-        <table className="lawyer-table">
+        {error && <p className="ATM_error-message">{error}</p>}
+        <table className="ATM_lawyer-table">
           <thead>
             <tr>
               <th>Full Name</th>
@@ -77,13 +77,13 @@ function Atm_Lawyer_Display() {
                   <td>{lawyer.education}</td>
                   <td>
                     <button 
-                      className="update-button" 
+                      className="ATM_update-button" 
                       onClick={() => goToUpdate(lawyer._id)}
                     >
                       Update
                     </button>
                     <button 
-                      className="remove-button" 
+                      className="ATM_remove-button" 
                       onClick={() => deleteHandler(lawyer._id)}
                     >
                       Remove

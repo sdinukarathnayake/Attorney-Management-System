@@ -292,4 +292,18 @@ router.route("/graph/appointments-by-date").get((req, res) => {
 });
 
 
+router.post('/appointmentrequest', async (req, res) => {
+    try {
+        const appointmentRequest = new AppointmentRequest(req.body);
+        await appointmentRequest.save();
+        res.status(201).json({ message: 'Appointment request created successfully', appointmentRequest });
+    } catch (error) {
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ errors: error.errors });
+        }
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+
 module.exports = router;

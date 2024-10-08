@@ -1,5 +1,5 @@
 /* Styling for the law firm details table */
-.table-container {
+.ATM_table-container {
   width: 80%;
   margin: 150px auto 20px;
   font-size: 1.1em;
@@ -7,7 +7,7 @@
 }
 
 /* Styling for the back button */
-.back-button {
+.ATM_back-button {
   background-color: transparent;
   border: none;
   font-size: 24px;
@@ -19,39 +19,39 @@
   padding: 5px;
 }
 
-.back-button:hover {
+.ATM_back-button:hover {
   color: var(--accent-color);
 }
 
 /* Create space between the arrow and the title */
-.spacer {
+.ATM_spacer {
   height: 20px; /* Creates a blank line */
 }
 
 /* Table styling */
-.lawfirm-table {
+.ATM_lawfirm-table {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
 }
 
-.lawfirm-table th,
-.lawfirm-table td {
+.ATM_lawfirm-table th,
+.ATM_lawfirm-table td {
   padding: 12px 15px;
   border: 1px solid #ddd;
 }
 
-.lawfirm-table thead tr {
+.ATM_lawfirm-table thead tr {
   background-color: var(--primary-color);
   color: var(--dark-color);
 }
 
-.lawfirm-table tbody tr:nth-of-type(even) {
+.ATM_lawfirm-table tbody tr:nth-of-type(even) {
   background-color: #f9f9f9;
 }
 
 /* Button styling */
-.update-button {
+.ATM_update-button {
   background-color: #4CAF50;
   color: white;
   border: none;
@@ -63,12 +63,12 @@
   height: 40px;
 }
 
-.update-button:hover {
+.ATM_update-button:hover {
   background-color: #23272b;
 }
 
 /* Error message styling */
-.error-message {
+.ATM_error-message {
   color: red;
   font-size: 1.1em;
   margin: 20px 0;
@@ -76,11 +76,11 @@
 
 /* Responsive table for small screens */
 @media screen and (max-width: 768px) {
-  .lawfirm-table {
+  .ATM_lawfirm-table {
     font-size: 0.9em;
   }
 
-  button {
+  .ATM_button {
     padding: 6px 12px;
   }
 }

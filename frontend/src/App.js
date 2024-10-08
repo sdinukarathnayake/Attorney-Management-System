@@ -170,7 +170,7 @@ function App() {
           <Route path="/client-portal/view-all-ticket-replies/:id" exact element={<ClientViewAllTicketReplies />} />
 
           <Route path="/support-agent-dashboard/:id" exact element={<SupportAgentDashboard />} />
-          <Route path="/support-agent-dashboard/view-support-ticket/:id" exact element={<SupportAgentViewSupportTicket />} />
+          <Route path="/support-agent-dashboard/view-support-ticket/:id/:agentId" exact element={<SupportAgentViewSupportTicket />} />
           <Route path="/support-agent-dashboard/view-ticket-reply/:id" exact element={<SupportAgentViewTicketReply />} />
           <Route path="/support-agent-dashboard/view-all-support-tickets" exact element={<SupportAgentViewAllSupportTickets />} />
           <Route path="/support-agent-dashboard/view-all-ticket-replies/:id" exact element={<SupportAgentViewAllTicketReplies />} />
@@ -211,7 +211,7 @@ function App() {
 
 
           {/* Finance Management */}
-          <Route path="/finance-manager-dashboard" exact element={<Fin_payment_RQ/>}/>
+          <Route path="/finance-manager-dashboard/:id" exact element={<Fin_payment_RQ/>}/>
         <Route path="/mainHome" exact element={<Home/>}/>
         <Route path="/user_details" exact element={<Fin_Payment_RQ_details/>}/>
         <Route path="/Fin_nav_Rq_form" exact element={<Fin_Payment_RQ_Insert/>}/>

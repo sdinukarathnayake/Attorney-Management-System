@@ -69,7 +69,7 @@ function Apm_Create_AppointmentRequest(){
     const searchClient = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.get(`http://localhost:8070/client/search-client/nic/${nic}`);
+            const res = await axios.get(`http://localhost:8070/client/search/${nic}`);
             setClient(res.data); // Update the client state with the response data
         } catch (err) {
             console.error(err);
@@ -342,7 +342,7 @@ function Apm_Create_AppointmentRequest(){
                 id="appointmentTime"
                 name="appointmentTime"
                 value={appointmentTime}
-                onChange={(e) => setappointmentTime(e.target.value)}   
+                onChange={(e) => setappointmentTime(e.target.value)}
 
                 required
             />
