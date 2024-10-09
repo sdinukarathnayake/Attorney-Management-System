@@ -151,7 +151,7 @@ function App() {
           <Route path="/lawyer-dashboard/view-all-appointments/:id" exact element={<LawyerViewAllAppointments />} />
 
           <Route path="/appointment-manager-dashboard/:id/" exact element={<AppointmentManagerDashboard />} />
-          <Route path="/appointment-manager-dashboard/view-appointment-request/:id/:appointmentManagerId" exact element={<AppointmentManagerViewAppointmentRequest />} />
+          <Route path="/appointment-manager-dashboard/view-appointment-request/:id/:apManagerId" exact element={<AppointmentManagerViewAppointmentRequest />} />
           <Route path="/appointment-manager-dashboard/view-appointment/:id" exact element={<AppointmentManagerViewAppointment />} />
           <Route path="/appointment-manager-dashboard/view-all-appointment-requests" exact element={<AppointmentManagerViewAllAppointmentRequests />} />
           <Route path="/appointment-manager-dashboard/view-all-appointments/:id" exact element={<AppointmentManagerViewAllAppointments />} />

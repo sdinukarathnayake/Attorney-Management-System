@@ -44,7 +44,7 @@ function LcmNavbar(){
                 <a className="navbar-links-container-links" href="/home">Support Ticket</a>   
                 <a className="navbar-links-container-links" href="/home">Payments</a>  
                 <a className="navbar-links-container-links" href="/Lcm_ClientSummary">Client Registration</a> 
-                <a className="navbar-links-container-links" href="/home">Appointment</a>   
+                <a className="navbar-links-container-links" href="/lawyer-dashboard/appointments/LCM004">Appointment</a>   
                 <a className="navbar-primary-button" href="/">Logout</a>
             </div>
 

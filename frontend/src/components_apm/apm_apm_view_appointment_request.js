@@ -7,7 +7,7 @@ import axios from "axios";
 import { useParams, useNavigate } from 'react-router-dom';
 
 function Apm_View_AppointmentRequest() {
-    const { id, appointmentManagerId } = useParams(); 
+    const { id, apManagerId } = useParams(); 
     const navigate = useNavigate();
     const [appointmentrequest, setAppointmentRequests] = useState(null);
     const [clientDetails, setClientDetails] = useState({});
@@ -39,13 +39,10 @@ function Apm_View_AppointmentRequest() {
         getAppointmentRequests();
     }, [clientDetails, id]);
 
+    const [appointmentManagerId] =useState(apManagerId)
     const [appointmentCreationDate, setAppointmentCreationDate] = useState("");
     const [appointmentTitle, setAppointmentTitle] = useState("");
     const [appointmentDescription, setAppointmentDescription] = useState("");
-    const [discussedPoints] = useState("");
-    const [agreedPayment] = useState("");
-    const [requestedDocuments] = useState("");
-    const [nextAppointmentDate] = useState("");
     const [appointmentStatus] = useState("Pending");
 
     function sendDataAppointment(e) {
@@ -53,16 +50,12 @@ function Apm_View_AppointmentRequest() {
         
         const newAppointment = {
             appointmentRequestId: appointmentrequest.appointmentRequestId,
-            aptManagerId: appointmentManagerId,
+            appointmentManagerId: apManagerId,
             lawyerId: appointmentrequest.lawyerId,
             clientId: appointmentrequest.clientId,
             appointmentCreationDate,
             appointmentTitle, 
             appointmentDescription,
-            discussedPoints,
-            agreedPayment,
-            requestedDocuments,
-            nextAppointmentDate, 
             appointmentStatus,
           };
         
@@ -77,7 +70,7 @@ function Apm_View_AppointmentRequest() {
             axios.post(`http://localhost:8070/appointmentrequest/update/status/${id}`, newAppointment)
             .then(() => {
               alert("Appointment Added..");
-              navigate(`/appointment-manager-dashboard/${appointmentManagerId}`);
+              navigate(`/appointment-manager-dashboard/${apManagerId}`);
             })
             .catch((err) => {
               alert(err);
@@ -333,7 +326,7 @@ function Apm_View_AppointmentRequest() {
                     type="text"
                     id="appointmentManagerId"
                     name="appointmentManagerId"
-                    value={appointmentManagerId}
+                    value={apManagerId}
                 />
             </div>    
             
@@ -350,7 +343,7 @@ function Apm_View_AppointmentRequest() {
             </div>
     
             <div className="apm-button-box">                
-                <button type="submit" className="apm-table-link-button">Mark As Complete</button>
+                <button type="submit" className="apm-table-link-button">Create Appointment</button>
             </div>    
         </form>
         <Footer/>

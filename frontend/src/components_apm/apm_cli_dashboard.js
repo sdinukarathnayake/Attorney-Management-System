@@ -65,10 +65,7 @@ function Dashboard() {
             <hr />
 
             <div className="apm-container">
-                <h1 className="apm-header">Legal Case Manager</h1>
-                <h1 className="apm-header">Appointment Management Dashboard</h1>
-                <p className="apm-user-welcome">Welcome </p>
-                <p className="apm-user-welcome">User ID : {lawyerDetails.userId}</p>
+                <h1 className="apm-header">Client Appointment Management Dashboard</h1>
 
                         
                 <h2>My Upcoming Appointments..</h2>
@@ -116,7 +113,7 @@ function Dashboard() {
                                                 : 'Loading...'}
                                         </td>
                                         <td className="apm-summary-table-data">{appointment.appointmentStatus}</td>
-                                        <td className="apm-summary-table-action"><a className="apm-summary-table-button" href={`/lawyer-dashboard/view-appointment/${appointment._id}`}>View Request</a></td>
+                                        <td className="apm-summary-table-action"><a className="apm-summary-table-button" href={`/client-portal/view-appointment/${appointment._id}`}>View Request</a></td>
                                     </tr>
                                 )
                             })
@@ -124,7 +121,7 @@ function Dashboard() {
                     </tbody>
                 </table>
 
-                <a className="apm-view-button" href={`/lawyer-dashboard/view-all-appointments/${id}`}>View Previous Appointments</a>
+                <a className="apm-view-button" href={`/client-portal/view-all-appointments/${id}`}>View Previous Appointments</a>
 
             </div>
             {/* <Footer /> */}

@@ -7,13 +7,9 @@ router.route("/add-appointment").post((req, res) => {
     const appointmentManagerId = req.body.appointmentManagerId;
     const lawyerId = req.body.lawyerId;
     const clientId = req.body.clientId;
-    const appointmentCreationDate = new Date(); // Set the creation date automatically
+    const appointmentCreationDate = new Date(); 
     const appointmentTitle = req.body.appointmentTitle;
     const appointmentDescription = req.body.appointmentDescription;
-    const discussedPoints = req.body.discussedPoints;
-    const agreedPayment = req.body.agreedPayment;
-    const requestedDocuments = req.body.requestedDocuments;
-    const nextAppointmentDate = req.body.nextAppointmentDate;
     const appointmentStatus = req.body.appointmentStatus;
 
     // creating new object
@@ -25,10 +21,6 @@ router.route("/add-appointment").post((req, res) => {
         appointmentCreationDate,
         appointmentTitle,
         appointmentDescription,
-        discussedPoints,
-        agreedPayment,
-        requestedDocuments,
-        nextAppointmentDate,
         appointmentStatus
     })
 
@@ -43,7 +35,7 @@ router.route("/add-appointment").post((req, res) => {
 
 
 // view specific appointment by ID
-router.route("/:id").get((req, res) => {
+router.route("/view/:id").get((req, res) => {
     const appointmentId = req.params.id;
         
     appointment.findById(appointmentId)
@@ -74,10 +66,6 @@ router.route("/update/:id").put(async (req, res) => {
         appointmentCreationDate: new Date(),
         appointmentTitle: req.body.appointmentTitle,
         appointmentDescription: req.body.appointmentDescription,
-        discussedPoints: req.body.discussedPoints,
-        agreedPayment: req.body.agreedPayment,
-        requestedDocuments: req.body.requestedDocuments,
-        nextAppointmentDate: req.body.nextAppointmentDate,
         appointmentStatus: req.body.appointmentStatus
     };
 

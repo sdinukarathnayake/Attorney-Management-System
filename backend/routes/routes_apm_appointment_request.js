@@ -311,7 +311,7 @@ router.route("/update/status/:id").put(async (req, res) => {
 
     // Object to hold updated fields
     const updatedAppointmentRequest = {
-        appointmentRequestStatus: "Completed"
+        appointmentRequestStatus: "Replied"
     };
 
     try {

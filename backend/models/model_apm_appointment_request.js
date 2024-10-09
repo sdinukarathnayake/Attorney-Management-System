@@ -10,50 +10,39 @@ const appointmentRequestSchema = new Schema({
     },
     appointmentRequestDate: {
         type: Date,
-        required: [true, 'Appointment request date is required'],
-        validate: {
-            validator: function(value) {
-                return value instanceof Date && !isNaN(value);
-            },
-            message: 'Invalid date format for appointment request date'
-        }
+        required: true,
+
     },
     appointmentRequestStatus: {
         type: String,
-        enum: ['Pending', 'Replied'], // Example of enum validation
-        default: 'Pending' // Default status
+        enum: ['Pending', 'Replied'],
+        default: 'Pending' // 
     },
     lawyerId: {
         type: String,
-        required: [true, 'Lawyer ID is required'],
+        required: true,
     },
     clientId: {
         type: String,
-        required: [true, 'Client ID is required'],
+        required: true,
     },
     appointmentType: {
         type: String,
-        required: [true, 'Appointment type is required'],
-        enum: ['Consultation', 'Meeting', 'Other'] // Example of enum validation
+        required: true,
+        enum: ['Consultation', 'Meeting', 'Other']
     },
     appointmentDate: {
         type: Date,
-        required: [true, 'Appointment date is required'],
-        validate: {
-            validator: function(value) {
-                return value instanceof Date && !isNaN(value);
-            },
-            message: 'Invalid date format for appointment date'
-        }
+        required: true,
     },
+
     appointmentTime: {
         type: String,
-        required: [true, 'Appointment time is required'],
-        match: [/^\d{1,2}:\d{2} (AM|PM)$/, 'Appointment time must be in the format HH:MM AM/PM'] // Regex for time format
+       required: true,
     },
     appointmentLocation: {
         type: String,
-        required: [true, 'Appointment location is required'],
+        required: true,
         minlength: [5, 'Appointment location must be at least 5 characters long'],
         maxlength: [200, 'Appointment location must be less than 200 characters long']
     }

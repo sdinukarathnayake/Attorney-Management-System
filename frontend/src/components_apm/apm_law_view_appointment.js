@@ -17,7 +17,7 @@ function Apm_View_Appointment() {
 
     useEffect(() => {
         function getAppointment() {
-            axios.get(`http://localhost:8070/appointment/${id}`)
+            axios.get(`http://localhost:8070/appointment/view/${id}`)
                 .then((res) => {
                     setAppointment(res.data);
 
@@ -310,49 +310,7 @@ function Apm_View_Appointment() {
                     readOnly
                 />
             </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="discussedPoints">Discussed Points</label>
-                <textarea className='apm-form-input-textarea'
-                    id="discussedPoints"
-                    name="discussedPoints"
-                    value={appointment.discussedPoints}
-                    onChange={handleChange}
-                ></textarea>
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="agreedPayment">Agreed Payment</label>
-                <input className='apm-form-input'
-                    type="text"
-                    id="agreedPayment"
-                    name="agreedPayment"
-                    value={appointment.agreedPayment}
-                    onChange={handleChange}
-                />
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="requestedDocuments">Requested Documents</label>
-                <textarea className='apm-form-input-textarea'
-                    id="requestedDocuments"
-                    name="requestedDocuments"
-                    value={appointment.requestedDocuments}
-                    onChange={handleChange}
-                ></textarea>
-            </div>
-    
-            <div className="apm-form-group">
-                <label className='apm-form-label' htmlFor="nextAppointmentDate">Next Appointment Date</label>
-                <input className='apm-form-input'
-                    type="date"
-                    id="nextAppointmentDate"
-                    name="nextAppointmentDate"
-                    value={new Date(appointment.nextAppointmentDate).toISOString().split('T')[0]}
-                    onChange={handleChange}
-                />
-            </div>
-    
+       
             <div className="apm-form-group">
                 <label className='apm-form-label' htmlFor="appointmentStatus">Appointment Status</label>
                 <input className='apm-form-input'

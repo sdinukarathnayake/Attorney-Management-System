@@ -1,3 +1,7 @@
+import NavBar from "./apm_page_navbar";
+import Footer from "./apm_page_footer";
+
+
 import React, { useState, useEffect } from 'react';
 import './appointment_management.css';
 import axios from "axios";
@@ -13,7 +17,7 @@ function Apm_View_Appointment() {
 
     useEffect(() => {
         function getAppointment() {
-            axios.get(`http://localhost:8070/appointment/${id}`)
+            axios.get(`http://localhost:8070/appointment/view/${id}`)
                 .then((res) => {
                     setAppointment(res.data);
 
@@ -114,6 +118,8 @@ function Apm_View_Appointment() {
 
     return (
         <div className="apm-form-container">
+
+            <NavBar />
         <form className="apm-form" onSubmit={handleSubmit}>
     
             <div className="apm-form-group">
@@ -370,6 +376,8 @@ function Apm_View_Appointment() {
                 </button>
             </div>
         </form>
+
+        <Footer/>
     </div>
     
     );
