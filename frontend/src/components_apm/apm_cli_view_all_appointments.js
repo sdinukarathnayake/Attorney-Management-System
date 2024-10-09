@@ -57,7 +57,6 @@ function Dashboard() {
 
     return (
         <div>
-            <NavBar/>
             <hr />
 
             <div className="apm-container">
@@ -115,7 +114,6 @@ function Dashboard() {
                     </tbody>
                 </table>        
             </div>
-            <Footer/>
 
         </div>
     )

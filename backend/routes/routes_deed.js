@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Deed = require("../models/model_dem_deed");
-const Client = require("../models/model_cli_client");
+const Client = require("../models/model_cli_clients");
 const Lawyer = require("../models/model_atm_deed_manager"); 
 const AppointmentRequest = require("../models/model_apm_appointment_request");
 const PaymentRequest = require("../models/model_fin_Payment_form"); 
@@ -347,6 +347,101 @@ router.get("/deeds-per-lawyer", async (req, res) => {
         res.status(500).send("Server Error");
     }
 });
+
+
+
+
+/// Route to fetch deeds by grantorNic or granteeNic
+router.get("/get_deeds_by_nic/:nic", async (req, res) => {
+    const { nic } = req.params;
+    try {
+        const deeds = await Deed.find({
+            $or: [{ grantorNic: nic }, { granteeNic: nic }]
+        });
+        if (deeds.length === 0) {
+            return res.status(404).json({ message: "No deeds found for the provided NIC." });
+        }
+        res.json(deeds);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error fetching deeds. Please try again later." });
+    }
+});
+
+// Search deeds based on query parameters
+router.get("/search_deeds", async (req, res) => {
+    const { title, status } = req.query;
+
+    try {
+        // Create a filter object based on the provided query parameters
+        let filter = {};
+
+        if (title) {
+            filter.title = new RegExp(title, 'i'); // Case-insensitive search
+        }
+        if (status) {
+            filter.deedStatus = status; // Match exact status
+        }
+
+        // Find deeds matching the filter criteria
+        const deeds = await Deed.find(filter)
+            .populate("grantor", "fname lname") // Populate grantor with 'fname' and 'lname'
+            .populate("grantee", "fname lname"); // Populate grantee with 'fname' and 'lname'
+
+        if (deeds.length > 0) {
+            res.status(200).json(deeds);
+        } else {
+            res.status(404).json({ message: "No deeds found matching the criteria" });
+        }
+    } catch (error) {
+        console.error("Error searching deeds:", error);
+        res.status(500).json({ message: "Error searching deeds", error: error.message });
+    }
+});
+
+// Fetch deed count by NIC (grantorNic and granteeNic separately)
+router.get("/get_deed_count_by_nic/:nic", async (req, res) => {
+    const { nic } = req.params;
+
+    try {
+        // Count deeds where the user is the grantor
+        const grantorCount = await Deed.countDocuments({ grantorNic: nic });
+
+        // Count deeds where the user is the grantee
+        const granteeCount = await Deed.countDocuments({ granteeNic: nic });
+
+        res.status(200).json({
+            grantorCount,
+            granteeCount,
+            totalCount: grantorCount + granteeCount // Total count of deeds
+        });
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ error: "Error with fetching deed count by NIC" });
+    }
+});
+
+// Route to fetch deeds by grantor or grantee ID
+router.get("/get_deeds_by_client_id/:id", async (req, res) => {
+    const clientId = req.params.id;
+
+    try {
+        // Find deeds where the grantor or grantee matches the client ID
+        const deeds = await Deed.find({
+            $or: [{ grantor: clientId }, { grantee: clientId }]
+        });
+
+        if (deeds.length > 0) {
+            return res.status(200).json(deeds);
+        } else {
+            return res.status(404).json({ message: "No deeds found for this client." });
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Error fetching deeds by client ID." });
+    }
+});
+
 
 
 

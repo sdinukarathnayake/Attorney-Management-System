@@ -24,7 +24,7 @@ function Apm_View_Appointment() {
                     //appointment request details
                     const appointmentRequestId = res.data.appointmentRequestId;
                     if (!appointmentRequestDetails[appointmentRequestId]) {
-                        axios.get(`http://localhost:8070/appointmentrequest/${appointmentRequestId}`)
+                        axios.get(`http://localhost:8070/appointmentrequest/view/${appointmentRequestId}`)
                             .then(response => {
                                 setAppointmentRequestDetails(prevDetails => ({
                                     ...prevDetails,

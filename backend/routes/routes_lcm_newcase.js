@@ -124,4 +124,57 @@ router.route("/get/:id").get(async (req, res) => {
     }
 });
 
+
+
+
+
+
+// Fetch cases by NIC
+router.route("/get_cases_by_nic/:nic").get(async (req, res) => {
+    let nic = req.params.nic;
+
+    try {
+        const cases = await Case.find({ nic: nic });
+        if (cases.length > 0) {
+            res.status(200).json(cases);
+        } else {
+            res.status(404).json({ message: "No cases found for this NIC" });
+        }
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ error: "Error with fetching cases by NIC" });
+    }
+});
+
+// Fetch case count by NIC
+router.route("/get_case_count_by_nic/:nic").get(async (req, res) => {
+    let nic = req.params.nic;
+
+    try {
+        const caseCount = await Case.countDocuments({ nic: nic });
+        res.status(200).json({ count: caseCount });
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).json({ error: "Error with fetching case count by NIC" });
+    }
+});
+
+// Search cases by case number or other fields
+router.get("/search_case", async (req, res) => {
+    try {
+        const searchQuery = req.query.q;
+        const cases = await Case.find({
+            $or: [
+                { caseNumber: { $regex: searchQuery, $options: "i" } },
+                { nic: { $regex: searchQuery, $options: "i" } },
+                { status: { $regex: searchQuery, $options: "i" } }
+                // Add more fields as needed
+            ]
+        });
+        res.json(cases);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = router; 

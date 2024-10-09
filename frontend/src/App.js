@@ -77,6 +77,19 @@ import CaseReport from './components_lcm/Lcm_CaseReport';
 import ClientCDashboard from './components_lcm/Lcm_ClientCDashboard';
 
 
+// client
+import AddClientE from './components_cli/Clients/addClient';
+import ClientPortalHome from './components_cli/Clients/ClientPortalHome';
+import SuccessPage from './components_cli/ClientDetails/viewClientDetails';
+import UserClients from './components_cli/ClientDetails/UserClients';
+import ClientLogin from './components_cli/ClientDetails/ClientLogin';
+import ClientProfile from './components_cli/ClientDetails/ClientProfile';
+import UpdateClient from './components_cli/Clients/UpdateClient';
+import DeleteClient from './components_cli/Clients/DeleteClient';
+import ClientCase from './components_cli/Clients_Info/ClientCases';
+import ClientDeeds from './components_cli/Clients_Info/ClientDeeds';
+import SearchResults from './components_cli/Clients_Info/SearchResults';
+
 
 //finance management
 import Fin_payment_RQ from './components_fin/lawyer_payment_request/Fin_Payment_RQ'
@@ -206,7 +219,17 @@ function App() {
 
 
           {/* Client Portal */}
-
+          <Route path="/addClient" element={<AddClientE />} />
+          <Route path="/clientHome/:id" element={<ClientPortalHome />} />
+          <Route path="/successCli_Page" element={<SuccessPage />} />
+          <Route path="/viewClient" element={<UserClients />} />
+          <Route path="/loginClient/" element={<ClientLogin />} />
+          <Route path="/clientProfile/:id" element={<ClientProfile />} /> 
+          <Route path="/updateClient/:id" element={<UpdateClient />} />
+          <Route path="/deleteClient/:id" element={<DeleteClient />} />
+          <Route path="/viewCase/:nic" element={<ClientCase />} />
+          <Route path="/viewDeed/:nic" element={<ClientDeeds />} />
+          <Route path="/searchResults" element={<SearchResults />} />
 
 
 

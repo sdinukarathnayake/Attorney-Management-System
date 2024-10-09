@@ -67,6 +67,15 @@ app.use("/document_call", documentCallRouter);
 const clientRouter = require("./routes/routes_cli_clients.js");
 app.use("/client", clientRouter);
 
+//access to route for messages
+const messageRouter = require("./routes/routes_message.js");
+app.use("/message", messageRouter);
+
+//route to search case & deed in client_portal
+const searchRoutes = require("./routes/routes_cli_search.js");
+app.use("/api/search", searchRoutes);
+
+
 //finance management
 const paymentRQRouter = require("./routes/routes_fin_Payement_form.js");
 app.use("/paymentRQ", paymentRQRouter);

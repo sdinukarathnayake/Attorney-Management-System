@@ -41,7 +41,7 @@ function Login(){
         },
         {
             icon: <SensorOccupiedIcon/>,
-            title: <a href="/" style={{ textDecoration: 'none', color: 'inherit' }}>Client Portal</a> 
+            title: <a href="/loginClient" style={{ textDecoration: 'none', color: 'inherit' }}>Client Portal</a> 
         },
         {
           icon: <AccountBalanceIcon/>,    

@@ -63,6 +63,23 @@ router.route("/:id").get((req, res) => {
 });
 
 
+router.route("/view/:id").get((req, res) => {
+    const appointmentRequestId = req.params.id;
+
+    appointmentRequest.findById(appointmentRequestId)
+        .then((appointmentRequest) => {
+            if (appointmentRequest) {
+                res.json(appointmentRequest);
+            } else {
+                res.status(404).json("Appointment Request Not Found");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json("Error in Retrieving Appointment Request");
+        });
+});
+
 // Update appointment request
 router.route("/update/:id").put(async (req, res) => {
     const appointmentRequestId = req.params.id;

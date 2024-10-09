@@ -61,7 +61,6 @@ function Dashboard() {
 
     return (
         <div>
-            {/* <NavBar /> */}
             <hr />
 
             <div className="apm-container">
@@ -124,7 +123,7 @@ function Dashboard() {
                 <a className="apm-view-button" href={`/client-portal/view-all-appointments/${id}`}>View Previous Appointments</a>
 
             </div>
-            {/* <Footer /> */}
+           
 
         </div>
     )

@@ -182,13 +182,15 @@ function Apm_View_AppointmentRequest() {
                 <label className="apm-form-label" htmlFor="appointmentType">
                     Appointment Type
                 </label>
-                <select
-                    className="apm-form-input-select"
+                <input
+                    className="apm-form-input"
+                    style={{ backgroundColor: '#EEEEEE' }}
+                    type="text"
                     id="appointmentType"
                     name="appointmentType"
                     value={appointmentrequest.appointmentType}
-                    required>
-                </select>
+                    readOnly
+                />
                 </div>
 
                 <div className="apm-form-group">

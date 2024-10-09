@@ -24,7 +24,7 @@ const ClientLogin = () => {
                 localStorage.setItem('userNic', response.data.client.nic);
 
                 // Redirect to ClientPortalHome with the user's ID
-                navigate(`/client-dashboard/${response.data.client.userId}`);
+                navigate(`/clientHome/${response.data.client.userId}`);
             }
         } catch (err) {
             setError('Invalid email or password');
