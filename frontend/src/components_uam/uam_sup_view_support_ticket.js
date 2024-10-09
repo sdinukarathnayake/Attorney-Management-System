@@ -29,7 +29,6 @@ function SupportTicketView() {
   const [supportTicketId] = useState(id); // New state for support ticket ID
   const [replyTicketDate] = useState(new Date()); // New state for reply ticket date
   const [userType] = useState("Client");
-  const [clientId, setClientId] = useState("");
   const [supAgentId] = useState(agentId); // New state for support agent ID
   const [replyTicketMsg, setReplyTicketMsg] = useState(""); // New state for reply ticket message
   const [replyTicketStatus] = useState("Pending"); // Status set to "Pending"

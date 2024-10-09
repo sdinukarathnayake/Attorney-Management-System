@@ -9,7 +9,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 function Apm_View_AppointmentRequest() {
     const { id, appointmentManagerId } = useParams(); 
     const navigate = useNavigate();
-    const [appointmentrequest, setAppointmentRequests] = useState({});
+    const [appointmentrequest, setAppointmentRequests] = useState(null);
     const [clientDetails, setClientDetails] = useState({});
 
     useEffect(() => {
@@ -39,53 +39,63 @@ function Apm_View_AppointmentRequest() {
         getAppointmentRequests();
     }, [clientDetails, id]);
 
+    const [appointmentCreationDate, setAppointmentCreationDate] = useState("");
+    const [appointmentTitle, setAppointmentTitle] = useState("");
+    const [appointmentDescription, setAppointmentDescription] = useState("");
+    const [discussedPoints] = useState("");
+    const [agreedPayment] = useState("");
+    const [requestedDocuments] = useState("");
+    const [nextAppointmentDate] = useState("");
+    const [appointmentStatus] = useState("Pending");
 
-    // appointmen create 
-    const HandleSubmit = () => {
-        const [appointmentData, setAppointmentData] = useState({
-          appointmentRequestId: '',
-          appointmentManagerId: '',
-          lawyerId: '',
-          clientId: '',
-          appointmentCreationDate: new Date().toISOString(), 
-          appointmentTitle: '',
-          appointmentDescription: '',
+    function sendDataAppointment(e) {
+        e.preventDefault();
+        
+        const newAppointment = {
+            appointmentRequestId: appointmentrequest.appointmentRequestId,
+            aptManagerId: appointmentManagerId,
+            lawyerId: appointmentrequest.lawyerId,
+            clientId: appointmentrequest.clientId,
+            appointmentCreationDate,
+            appointmentTitle, 
+            appointmentDescription,
+            discussedPoints,
+            agreedPayment,
+            requestedDocuments,
+            nextAppointmentDate, 
+            appointmentStatus,
+          };
+        
+          axios.post("http://localhost:8070/appointment/add-appointment", newAppointment)
+            .then(() => {
+              alert("Appointment Added..");
+            })
+            .catch((err) => {
+              alert(err);
+            });
 
-        });
-      
-        const handleChange = (event) => {
-          setAppointmentData({
-            ...appointmentData,
-            [event.target.name]: event.target.value,
-          });
-        };
-      
-        const handleSubmit = async (event) => {
-          event.preventDefault(); 
-      
-      
-            try {
-                const response = await axios.post('http://localhost:8070/appointment/add-appointment', appointmentData);
-                console.log(response.data); 
-            } catch (error) {
-                console.error(error);
-                // Handle error message (optional)
-            } 
-        }
+            axios.post(`http://localhost:8070/appointmentrequest/update/status/${id}`, newAppointment)
+            .then(() => {
+              alert("Appointment Added..");
+              navigate(`/appointment-manager-dashboard/${appointmentManagerId}`);
+            })
+            .catch((err) => {
+              alert(err);
+            });
+    }
+
 
     if (!appointmentrequest) {
         return <div>Loading...</div>;
     }
-}
 
     return (
         <div className="apm-form-container">
             <NavBar/>
-
             <hr />
             <h2 className='apm-header'>Lawyer Appointment Request Details</h2>
-     
-            <form className="apm-form" onSubmit={HandleSubmit}>
+
+            <form className="apm-form">            
                 <div className="apm-form-group">
                 <label className="apm-form-label" htmlFor="appointmentRequestName">
                     Request Name
@@ -184,12 +194,7 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentType"
                     name="appointmentType"
                     value={appointmentrequest.appointmentType}
-                    required
-                >
-                    <option value={appointmentrequest.appointmentType}>{appointmentrequest.appointmentType}</option>
-                    <option value="consultation">Consultation</option>
-                    <option value="meeting">Meeting</option>
-                    <option value="other">Other</option>
+                    required>
                 </select>
                 </div>
 
@@ -250,11 +255,9 @@ function Apm_View_AppointmentRequest() {
                 </div>       
             </form>
 
-
             <hr className="form-divider" />
-
-         
-            <form className="apm-form" onSubmit="handleSubmit">
+          
+            <form className="apm-form" onSubmit={sendDataAppointment}>
 
             <div className="apm-form-group">
                 <label className='apm-form-label' htmlFor="appointmentrequest">Appointment Request Id</label>
@@ -262,7 +265,9 @@ function Apm_View_AppointmentRequest() {
                     type="text"
                     style={{ backgroundColor: '#EEEEEE' }}
                     id="appointmentrequest"
-                    name="appointmentrequest"                    
+                    name="appointmentrequest"
+                    value={appointmentrequest._id}
+                    readOnly
                 />
             </div>
     
@@ -272,7 +277,10 @@ function Apm_View_AppointmentRequest() {
                     type="Date"
                     style={{ backgroundColor: '#EEEEEE' }}
                     id="appointmentCreationDate"
-                    name="appointmentCreationDate"                   
+                    name="appointmentCreationDate"
+                    value={new Date().toISOString().split('T')[0]}
+                    onChange={(e) => setAppointmentCreationDate(e.target.value)}
+                    readOnly
                 />
             </div>
 
@@ -282,7 +290,9 @@ function Apm_View_AppointmentRequest() {
                     type="text"
                     style={{ backgroundColor: '#EEEEEE' }}
                     id="lawyerId"
-                    name="lawyerId"                   
+                    name="lawyerId"
+                    value={appointmentrequest.lawyerId}
+                    readOnly
                 />
             </div>
 
@@ -292,7 +302,9 @@ function Apm_View_AppointmentRequest() {
                     type="text"
                     style={{ backgroundColor: '#EEEEEE' }}
                     id="clientId"
-                    name="clientId"                    
+                    name="clientId"
+                    value={appointmentrequest.clientId}
+                    readOnly
                 />
             </div>
 
@@ -302,7 +314,7 @@ function Apm_View_AppointmentRequest() {
                     type="text"
                     id="appointmentTitle"
                     name="appointmentTitle"
-                    
+                    onChange={(e) => setAppointmentTitle(e.target.value)}
                 />
             </div>
     
@@ -311,7 +323,7 @@ function Apm_View_AppointmentRequest() {
                 <textarea className='apm-form-input-textarea'
                     id="appointmentDescription"
                     name="appointmentDescription"
-                    
+                    onChange={(e) => setAppointmentDescription(e.target.value)}
                 ></textarea>
             </div>
     
@@ -322,7 +334,6 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentManagerId"
                     name="appointmentManagerId"
                     value={appointmentManagerId}
-                   
                 />
             </div>    
             
@@ -334,17 +345,17 @@ function Apm_View_AppointmentRequest() {
                     id="appointmentStatus"
                     name="appointmentStatus"
                     value="Pending"
-                    
+                    readOnly
                 />
             </div>
     
             <div className="apm-button-box">                
-            <button type="submit" className="apm-table-link-button"> Mark As Complete</button>
+                <button type="submit" className="apm-table-link-button">Mark As Complete</button>
             </div>    
-            </form>
-            <Footer/>
+        </form>
+        <Footer/>
         </div>
-    )
+    );
 }
 
 export default Apm_View_AppointmentRequest;

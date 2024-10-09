@@ -306,4 +306,27 @@ router.post('/appointmentrequest', async (req, res) => {
 });
 
 
+router.route("/update/status/:id").put(async (req, res) => {
+    const appointmentRequest = req.params.id;
+
+    // Object to hold updated fields
+    const updatedAppointmentRequest = {
+        appointmentRequestStatus: "Completed"
+    };
+
+    try {
+        const result = await appointmentRequest.findByIdAndUpdate(appointmentRequest, updatedAppointmentRequest, { new: true });
+
+        if (result) {
+            res.json("Appointment Updated Successfully");
+        } else {
+            res.status(404).json("Appointment Not Found");
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json("Error in Updating Appointment");
+    }
+});
+
+
 module.exports = router;

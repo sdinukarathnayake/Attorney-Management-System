@@ -37,32 +37,24 @@ const appointmentSchema = new Schema({
     appointmentDescription: {
         type: String,
         required: [true, 'Appointment description is required'],
-        minlength: [10, 'Appointment description must be at least 10 characters long'],
+        minlength: [3, 'Appointment description must be at least 10 characters long'],
         maxlength: [500, 'Appointment description must be less than 500 characters long']
     },
     discussedPoints: {
-        type: String,
-        required: [true, 'Discussed points are required'], // Make it required
+        type: String
     },
     agreedPayment: {
-        type: String,
-        required: [true, 'Agreed payment information is required'], // Make it required
+        type: String
     },
     requestedDocuments: {
         type: String,
     },
     nextAppointmentDate: {
-        type: Date,
-        validate: {
-            validator: function(value) {
-                return value instanceof Date && !isNaN(value);
-            },
-            message: 'Invalid date format for next appointment date'
-        }
+        type: Date,        
     },
     appointmentStatus: {
         type: String,
-        enum: ['Pending', 'Confirmed', 'Cancelled'], // Example of enum validation
+        enum: ['Pending', 'Completed'], // Example of enum validation
         default: 'Pending' // Default status
     }
 });

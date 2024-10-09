@@ -20,7 +20,7 @@ const appointmentRequestSchema = new Schema({
     },
     appointmentRequestStatus: {
         type: String,
-        enum: ['Pending', 'Confirmed', 'Cancelled'], // Example of enum validation
+        enum: ['Pending', 'Replied'], // Example of enum validation
         default: 'Pending' // Default status
     },
     lawyerId: {
@@ -34,7 +34,7 @@ const appointmentRequestSchema = new Schema({
     appointmentType: {
         type: String,
         required: [true, 'Appointment type is required'],
-        enum: ['Consultation', 'Follow-up', 'Other'] // Example of enum validation
+        enum: ['Consultation', 'Meeting', 'Other'] // Example of enum validation
     },
     appointmentDate: {
         type: Date,
