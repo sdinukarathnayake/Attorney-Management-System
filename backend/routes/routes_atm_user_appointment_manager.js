@@ -51,7 +51,7 @@ router.route("/view-all-appointment-managers").get((req, res)=> {
     })
 })
 
-
+ 
 // Get a specific userRegistration by ID
 router.route("/:id").get((req, res) => {
     const userId = req.params.id;

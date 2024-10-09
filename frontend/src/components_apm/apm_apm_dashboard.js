@@ -1,6 +1,8 @@
 import NavBar from "./apm_page_navbar";
 import Footer from "./apm_page_footer";
 import './appointment_management.css';
+import jsPDF from "jspdf";
+import "jspdf-autotable"; 
 
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
@@ -14,6 +16,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Dashboard() {
+
+    
 
     const { id } = useParams();
     const [appointmentrequest, setAppointmentRequests] = useState([]);
@@ -51,7 +55,7 @@ function Dashboard() {
 
                     const clientId = appointmentRequest.clientId;
                     if (!clientDetails[clientId]) {
-                        axios.get(`http://localhost:8070/client/${clientId}`)
+                        axios.get(`http://localhost:8070/client/v/${clientId}`)
                             .then(response => {
                                 setClientDetails(prevDetails => ({
                                     ...prevDetails,
@@ -159,6 +163,42 @@ function Dashboard() {
             }
         }
     };
+
+    // Updated generatePDF function for grid view report
+    const generatePDF = () => {
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        
+        pdf.text("Appointment Report", 10, 10);
+
+        const columns = ["Request Date", "Request Name", "Lawyer Name", "Client Name"];
+        const rows = [];
+
+        const search = appointment.filter(request => request.appointmentTitle == "Appointmnet Title 1113ZZZ33");
+
+        search.forEach(request => {
+            rows.push([
+                Date(request.appointmentRequestDate).toString().split('T')[0],
+                request.appointmentTitle,
+                lawyerDetails[request.lawyerId]
+                    ? `${lawyerDetails[request.lawyerId].fName} ${lawyerDetails[request.lawyerId].lName}`
+                    : 'N/A',
+                clientDetails[request.clientId]
+                    ? `${clientDetails[request.clientId].fname} ${clientDetails[request.clientId].lname}`
+                    : 'N/A'
+            ]);
+        });
+
+
+        pdf.autoTable({
+            head: [columns],
+            body: rows,
+            startY: 20,
+            styles: { fontSize: 8, cellPadding: 2 }
+        });
+
+        pdf.save("appointment_requests_report.pdf");
+    };
+
 
 
     return (
@@ -292,9 +332,18 @@ function Dashboard() {
                 <a className="apm-view-button" href={`/appointment-manager-dashboard/view-all-appointments/${id}`}>View Previous Appointments</a>
 
             </div>
+            <button className="apm-view-button"  onClick={generatePDF}>
+    Generate Report
+</button>
+
             <Footer />
         </div>
     )
+
+    
+
+
+
 }
 
 export default Dashboard;

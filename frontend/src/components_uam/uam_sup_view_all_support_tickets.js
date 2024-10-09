@@ -22,7 +22,7 @@ function ClientViewAllTickets () {
                 res.data.forEach(supportTicket => {
                     const clientId = supportTicket.clientId;
                     if (!clientDetails[clientId]) {
-                        axios.get(`http://localhost:8070/client/${clientId}`)
+                        axios.get(`http://localhost:8070/client/v/${clientId}`)
                             .then(response => {
                                 setClientDetails(prevDetails => ({
                                     ...prevDetails,
@@ -47,7 +47,6 @@ function ClientViewAllTickets () {
             <hr />
 
             <div className="uam-container">
-                <h2 className="uam-header">Client</h2>
                 <h1 className="uam-header">All Support Tickets</h1>
         
                 <h2>Support Tickets</h2>
@@ -84,7 +83,7 @@ function ClientViewAllTickets () {
                                         
                                         <td className="uam-summary-table-data">{supportTicket.supTicketSubject}</td>
                                         <td className="uam-summary-table-data">{supportTicket.supTicketStatus}</td>                                         
-                                        <td className="uam-summary-table-action"><a className="uam-summary-table-button" href={`/support-agent-dashboard//${supportTicket._id}`}>View Ticket</a></td>
+                                        <td className="uam-summary-table-action"><a className="uam-summary-table-button" href={`/support-agent-dashboard/view-support-ticket/${supportTicket._id}/${id}`}>View Ticket</a></td>
                                     </tr>
                                 )
                             })

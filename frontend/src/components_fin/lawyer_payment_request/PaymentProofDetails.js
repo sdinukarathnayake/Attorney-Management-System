@@ -40,6 +40,13 @@ function PaymentProofDetails() {
         });
     };
 
+    // Function to open WhatsApp with the provided phone number
+    const sendWhatsAppMessage = () => {
+        const phoneNumber = "+94" + paymentProof.PhoneNumber; // Add the prefix +94
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=Hello, I am contacting you regarding your payment proof.`;
+        window.open(whatsappURL, '_blank');
+    };
+
     if (loading) {
         return <p>Loading payment proof details...</p>;
     }
@@ -82,7 +89,6 @@ function PaymentProofDetails() {
                             <td><strong>Payment Type:</strong></td>
                             <td>{paymentProof.PaymentType}</td>
                         </tr>
-                        {/* Added Amount field */}
                         <tr>
                             <td><strong>Amount:</strong></td>
                             <td>{paymentProof.Amount}</td>
@@ -107,6 +113,22 @@ function PaymentProofDetails() {
                     Back to Dashboard
                 </Button>
             </Link>
+
+            {/* Send WhatsApp Message Button */}
+            <Button
+                variant="outlined"
+                color="secondary"
+                onClick={sendWhatsAppMessage}
+                style={{
+                    marginTop: '20px',
+                    marginLeft: '20px',
+                    color: '#e74c3c',
+                    borderColor: '#e74c3c',
+                    fontWeight: 'bold'
+                }}
+            >
+                Send WhatsApp Message
+            </Button>
         </div>
     );
 }

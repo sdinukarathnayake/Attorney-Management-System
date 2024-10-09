@@ -15,14 +15,38 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 function Dashboard() {
 
+  
   const generatePDF = async () => {
-    const element = document.querySelector('.uam-container');
-    const canvas = await html2canvas(element,  { scale: 0.6 });
-    const imgData = canvas.toDataURL('image/png');
     const pdf = new jsPDF('p', 'mm', 'a4');
-    pdf.addImage(imgData, 'PNG', 0, 0);
+    
+    // Create title for the report
+    pdf.text("Support Ticket Report", 10, 10);
+
+    // Set column titles for the grid
+    const columns = ["Ticket Date", "Ticket Type", "Subject", "Status"];
+    const rows = [];
+
+    // Fill rows with the support tickets data
+    supportTickets.forEach(ticket => {
+      rows.push([
+        new Date(ticket.supTicketDate).toISOString().split('T')[0],
+        ticket.supTicketType,
+        ticket.supTicketSubject,
+        ticket.supTicketStatus
+      ]);
+    });
+
+    // Add table with ticket data to the PDF
+    pdf.autoTable({
+      head: [columns],
+      body: rows,
+      startY: 20,
+      styles: { fontSize: 8, cellPadding: 2 }
+    });
+
     pdf.save("support_tickets_report.pdf");
-};
+  };
+
 
 
   const { id } = useParams();
@@ -64,7 +88,7 @@ function Dashboard() {
           const clientId = supportTicket.clientId;
 
           if (!clientDetails[clientId]) {
-            axios.get(`http://localhost:8070/client/${clientId}`)
+            axios.get(`http://localhost:8070/client/v/${clientId}`)
               .then(response => {
                 setClientDetails(prevDetails => ({
                   ...prevDetails,
@@ -320,11 +344,13 @@ function Dashboard() {
             }
         </tbody>
         </table>
+
+        <a className="uam-view-button" href="/support-agent-dashboard/view-all-ticket-replies/">View Previous Replies</a>
+
  </div>
 
-{/* Generate PDF Button */}
-<button className="uam-generate-pdf-button" onClick={generatePDF}>
-    Generate PDF
+<button className="uam-generate-pdf-button"  onClick={generatePDF}>
+    Generate Report
 </button>
   
         <Footer />

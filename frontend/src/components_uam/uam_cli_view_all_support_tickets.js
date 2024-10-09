@@ -22,7 +22,7 @@ function ClientViewAllTickets () {
                 res.data.forEach(supportTicket => {
                     const clientId = supportTicket.clientId;
                     if (!clientDetails[clientId]) {
-                        axios.get(`http://localhost:8070/client/${clientId}`)
+                        axios.get(`http://localhost:8070/client/v/${clientId}`)
                             .then(response => {
                                 setClientDetails(prevDetails => ({
                                     ...prevDetails,

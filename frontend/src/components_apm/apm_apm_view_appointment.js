@@ -87,7 +87,7 @@ function Apm_View_Appointment() {
         axios.put(`http://localhost:8070/appointment/update/${id}`, appointment)
             .then((response) => {
                 alert("Appointment Updated Successfully");
-                navigate(`/lawyer-dashboard/appointments/${appointment.lawyerId}`);
+                navigate(`/appointment-manager-dashboard/appointments/${appointment.lawyerId}`);
             })
             .catch((err) => {
                 console.error("Error in updating appointment:", err);
@@ -101,7 +101,7 @@ function Apm_View_Appointment() {
       
           if (response.status === 200) {
             alert("Appointment deleted successfully!");
-            navigate(`/lawyer-dashboard/appointments/${appointment.lawyerId}`);  
+            navigate(`/appointment-manager-dashboard/appointments/${appointment.lawyerId}`);  
           } else {
             console.error("Unexpected response status:", response.status);
             alert("An error occurred during deletion. Please try again.");
@@ -125,11 +125,11 @@ function Apm_View_Appointment() {
             <div className="apm-form-group">
                 <label className='apm-form-label' htmlFor="appointmentCreationDate">Appointment Creation Date</label>
                 <input className='apm-form-input'
-                    type="date"
+                    type="text"
                     style={{ backgroundColor: '#EEEEEE' }}
                     id="appointmentCreationDate"
                     name="appointmentCreationDate"
-                    value={new Date(appointment.appointmentCreationDate).toISOString().split('T')[0]}
+                    value={new Date(appointment.appointmentCreationDate).toString().split('T')[0]}
                     onChange={handleChange}
                     readOnly
                 />
@@ -348,7 +348,7 @@ function Apm_View_Appointment() {
                     type="date"
                     id="nextAppointmentDate"
                     name="nextAppointmentDate"
-                    value={new Date(appointment.nextAppointmentDate).toISOString().split('T')[0]}
+                    value={new Date(appointment.nextAppointmentDate).toString().split('T')[0]}
                     onChange={handleChange}
                 />
             </div>

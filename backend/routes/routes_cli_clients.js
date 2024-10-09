@@ -125,6 +125,23 @@ router.route("/getClient/:id").get(async (req, res) => {
     }
 });
 
+router.route("/ :id").get(async (req, res) => {
+    const clientId = req.params.id;
+
+    Client.findOne({clientId : clientId})
+        .then((Client) => {
+            if (Client) {
+                res.json(Client);
+            } else {
+                res.status(404).json("Client Not Found");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json("Error in Retrieving Client");
+        });
+});
+
 
 router.route("/loginClient").post(async (req, res) => {
     const { email, password } = req.body;
@@ -182,4 +199,40 @@ router.post("/sendEmail", (req, res) => {
     });
 });
 
+
+router.route("/v/:id").get((req, res) => {
+    const clientId = req.params.id;
+
+    Client.findOne({clientId : clientId})
+        .then((Client) => {
+            if (Client) {
+                res.json(Client); 
+            } else {
+                res.status(404).json("Client Not Found");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json("Error in Retrieving Client");
+        });
+});
+
+
+
+router.route("/nic/:id").get((req, res) => {
+    const nic = req.params.id;
+
+    Client.findOne({nic : nic})
+        .then((Client) => {
+            if (Client) {
+                res.json(Client); 
+            } else {
+                res.status(404).json("Client Not Found");
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json("Error in Retrieving Client");
+        });
+});
 module.exports = router;

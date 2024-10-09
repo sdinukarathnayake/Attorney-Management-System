@@ -58,7 +58,7 @@ function AppointmentBarChart() {
 
 
 return (
-    <div>
+    <div className='apm-chart-container-3'>
         <h3>Appointments by Date</h3>
         {chartData.labels.length > 0 ? (
             <Bar

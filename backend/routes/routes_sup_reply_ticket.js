@@ -181,7 +181,7 @@ router.post('/reply-tickets', async (req, res) => {
             return res.status(400).json({ errors: error.errors });
         }
         res.status(500).json({ message: 'Internal Server Error' });
-    }
+    } 
 });
 
 

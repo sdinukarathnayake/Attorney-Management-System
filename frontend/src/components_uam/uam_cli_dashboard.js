@@ -77,9 +77,9 @@ function Dashboard() {
   //get details related to client 
   useEffect(() => { 
     function getClient(){
-      axios.get(`http://localhost:8070/client/${id}`).then((res) => {
+      axios.get(`http://localhost:8070/client/v/${id}`).then((res) => {
         console.log(res.data);
-        setClientDetails(res.data);
+        setClientDetails(res.data); 
       }).catch((err) => {
         alert(err.message);
       })

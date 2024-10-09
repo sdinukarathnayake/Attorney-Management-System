@@ -186,7 +186,7 @@ function App() {
           <Route path="/support-agent-dashboard/view-support-ticket/:id/:agentId" exact element={<SupportAgentViewSupportTicket />} />
           <Route path="/support-agent-dashboard/view-ticket-reply/:id" exact element={<SupportAgentViewTicketReply />} />
           <Route path="/support-agent-dashboard/view-all-support-tickets" exact element={<SupportAgentViewAllSupportTickets />} />
-          <Route path="/support-agent-dashboard/view-all-ticket-replies/:id" exact element={<SupportAgentViewAllTicketReplies />} />
+          <Route path="/support-agent-dashboard/view-all-ticket-replies" exact element={<SupportAgentViewAllTicketReplies />} />
 
 
           {/* Document Management */}

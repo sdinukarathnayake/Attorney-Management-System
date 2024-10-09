@@ -43,8 +43,9 @@ function Header() {
                             <ul className="dropdown-menu">
                                 <li><a className="dropdown-item" href={`/viewCase/${userNic}`}>Cases</a></li>
                                 <li><a className="dropdown-item" href={`/viewDeed/${userNic}`}>Deeds</a></li>
-                                <li><a className="dropdown-item" href="#">Appointments</a></li>
-                                <li><a className="dropdown-item" href="#">Documents</a></li>
+                                <li><a className="dropdown-item" href="/client-portal/support/CLI002">Support</a></li>
+                                <li><a className="dropdown-item" href="/client-portal/appointments/CLI002">Appointments</a></li>
+                                <li><a className="dropdown-item" href="/Dom_client_dashboard">Documents</a></li>
                                 <li><a className="dropdown-item" href="#">Payments</a></li>
                                 <li><hr className="dropdown-divider"></hr></li>
                                 <li><a className="dropdown-item" href={`/clientProfile/${userId}`}>Profile</a></li> {/* Dynamic Profile Link */}

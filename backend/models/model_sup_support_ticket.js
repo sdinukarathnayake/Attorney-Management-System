@@ -24,7 +24,7 @@ const supportTicketSchema = new Schema({
     supTicketType: {
         type: String,
         required: [true, 'Ticket type is required'],
-        enum: ['General Inquiry', 'Technical Support', 'Billing'], // Example of enum validation
+        enum: ['General Inquiry', 'Technical Support', 'Billing Issue'], // Example of enum validation
     },
     supTicketEmail: {
         type: String,

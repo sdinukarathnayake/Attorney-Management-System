@@ -332,7 +332,8 @@ router.route("/update/status/:id").put(async (req, res) => {
     };
 
     try {
-        const result = await appointmentRequest.findByIdAndUpdate(appointmentRequest, updatedAppointmentRequest, { new: true });
+        // Assuming you have imported the AppointmentRequest model
+        const result = await AppointmentRequest.findByIdAndUpdate(appointmentRequestId, updatedAppointmentRequest, { new: true });
 
         if (result) {
             res.json("Appointment Updated Successfully");

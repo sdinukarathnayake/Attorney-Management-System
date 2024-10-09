@@ -39,7 +39,7 @@ function Apm_View_Appointment() {
                     //client details
                     const clientId = res.data.clientId;
                     if (!clientDetails[clientId]) {
-                        axios.get(`http://localhost:8070/client/${clientId}`)
+                        axios.get(`http://localhost:8070/client/v/${clientId}`)
                             .then(response => {
                                 setClientDetails(prevDetails => ({
                                     ...prevDetails,
