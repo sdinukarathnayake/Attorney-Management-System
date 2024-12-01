@@ -9,7 +9,7 @@ router.route("/view-all-clients").get((req,res)=> {
     }).catch((err)=>{
         console.log(err)
     })
-
+  
 });
 
 // Get a client by NIC

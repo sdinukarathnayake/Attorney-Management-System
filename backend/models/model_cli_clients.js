@@ -17,7 +17,7 @@ const clientSchema = new Schema ({
         required: false 
     },
     nic: {
-        type: Number,
+        type: String,
         required: false
     },
     address: {
@@ -33,7 +33,7 @@ const clientSchema = new Schema ({
         required: false
     },
     phone: {
-        type: Number,
+        type: String,
         required: false 
     },
     email: {

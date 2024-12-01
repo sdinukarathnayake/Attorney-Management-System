@@ -121,7 +121,7 @@ function Dashboard() {
                                 return (
                                     <tr className="apm-summary-table-row" key={appointmentrequest._id}>
                                         <td className="apm-summary-table-data">{
-                                              new Date(appointmentrequest.appointmentRequestDate).toISOString().split('T')[0]
+                                              new Date(appointmentrequest.appointmentDate).toISOString().split('T')[0]
                                         }
                                         </td>
                                         <td className="apm-summary-table-data">{appointmentrequest.appointmentRequestName}</td> 

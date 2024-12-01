@@ -31,7 +31,7 @@ function SupportTicketView() {
   const [userType] = useState("Client");
   const [supAgentId] = useState(agentId); // New state for support agent ID
   const [replyTicketMsg, setReplyTicketMsg] = useState(""); // New state for reply ticket message
-  const [replyTicketStatus] = useState("Pending"); // Status set to "Pending"
+  const [replyTicketStatus] = useState("In Progress"); // Status set to "Pending"
 
 
   function sendData(e) {
@@ -303,7 +303,7 @@ function SupportTicketView() {
                     type="text"
                     id="supAgentId"
                     name="replyTicketStatus"
-                    value="Pending"
+                    value="In Progress"
                     readOnly
                 />
             </div>

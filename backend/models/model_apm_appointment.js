@@ -25,19 +25,13 @@ const appointmentSchema = new Schema({
     appointmentTitle: {
         type: String,
         required: true,
-        minlength: [3, 'Appointment title must be at least 3 characters long'],
-        maxlength: [100, 'Appointment title must be less than 100 characters long']
     },
     appointmentDescription: {
         type: String,
         required: true,
-        minlength: [3, 'Appointment description must be at least 10 characters long'],
-        maxlength: [500, 'Appointment description must be less than 500 characters long']
     },
     appointmentStatus: {
         type: String,
-        enum: ['Pending', 'Completed'], 
-        default: 'Pending'
     }
 });
 

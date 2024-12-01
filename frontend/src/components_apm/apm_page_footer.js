@@ -1,33 +1,32 @@
 import React from "react";
 
-const ApmFooter = () => {
+const UamFooter = () => {
   return (
     <div className="footer-wrapper">
       <div className="footer-section-one">
         <div className="footer-logo-container">
             <p className="logo-container">AMS</p>
             <p className="footer-logo-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius ut nisl nec dignissim. Lorem 
-                ipsum dolor sit amet, consectetur adipiscing elit. Praesent varius ut nisl nec dignissim.    
+                We are committed to providing exceptional legal services with expertise in various fields of law. Our team of professionals is dedicated to ensuring your legal matters are handled efficiently and effectively.
             </p>
         </div>        
       </div>
 
       <div className="footer-section-two">
         <div className="footer-section-columns">
-          <span>Qualtiy</span>
-          <span>Help</span>
-          <span>Share</span>
-          <span>Carrers</span>
-          <span>Testimonials</span>
-          <span>Work</span>
+          <span>Our Services</span>
+          <span>Contact Us</span>
+          <span>About Us</span>
+          <span>Careers</span>
+          <span>Client Testimonials</span>
+          <span>Case Studies</span>
         </div>
 
         <div className="footer-section-columns">
-          <span>244-5333-7783</span>
-          <span>hello@food.com</span>
-          <span>press@food.com</span>
-          <span>contact@food.com</span>
+          <span>+1-800-LAW-FIRM</span>
+          <span>info@lawfirm.com</span>
+          <span>support@lawfirm.com</span>
+          <span>careers@lawfirm.com</span>
         </div>
 
         <div className="footer-section-columns">
@@ -39,4 +38,4 @@ const ApmFooter = () => {
   );
 };
 
-export default ApmFooter;
+export default UamFooter;

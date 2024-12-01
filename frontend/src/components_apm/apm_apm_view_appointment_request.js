@@ -20,7 +20,7 @@ function Apm_View_AppointmentRequest() {
 
                     const clientId = res.data.clientId;
                     if (!clientDetails[clientId]) {
-                        axios.get(`http://localhost:8070/client/${clientId}`)
+                        axios.get(`http://localhost:8070/client/v/${clientId}`)
                             .then(response => {
                                 setClientDetails(prevDetails => ({
                                     ...prevDetails,
@@ -40,7 +40,7 @@ function Apm_View_AppointmentRequest() {
     }, [clientDetails, id]);
 
     const [appointmentManagerId] =useState(apManagerId)
-    const [appointmentCreationDate, setAppointmentCreationDate] = useState("");
+    const [appointmentCreationDate, setAppointmentCreationDate] = useState("2024-10-14T00:00:00.000+00:00");
     const [appointmentTitle, setAppointmentTitle] = useState("");
     const [appointmentDescription, setAppointmentDescription] = useState("");
     const [appointmentStatus] = useState("Pending");
@@ -62,19 +62,12 @@ function Apm_View_AppointmentRequest() {
           axios.post("http://localhost:8070/appointment/add-appointment", newAppointment)
             .then(() => {
               alert("Appointment Added..");
-            })
-            .catch((err) => {
-              alert(err);
-            });
-
-            axios.post(`http://localhost:8070/appointmentrequest/update/status/${id}`, newAppointment)
-            .then(() => {
-              alert("Appointment Added..");
               navigate(`/appointment-manager-dashboard/${apManagerId}`);
             })
             .catch((err) => {
               alert(err);
             });
+
     }
 
 
@@ -254,7 +247,7 @@ function Apm_View_AppointmentRequest() {
           
             <form className="apm-form" onSubmit={sendDataAppointment}>
 
-            <div className="apm-form-group">
+            <div className="apm-form-group" hidden>
                 <label className='apm-form-label' htmlFor="appointmentrequest">Appointment Request Id</label>
                 <input className='apm-form-input'
                     type="text"
@@ -273,7 +266,7 @@ function Apm_View_AppointmentRequest() {
                     style={{ backgroundColor: '#EEEEEE' }}
                     id="appointmentCreationDate"
                     name="appointmentCreationDate"
-                    value={new Date().toISOString().split('T')[0]}
+                    value={new Date(appointmentrequest.appointmentDate).toISOString().split('T')[0]}
                     onChange={(e) => setAppointmentCreationDate(e.target.value)}
                     readOnly
                 />

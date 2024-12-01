@@ -236,6 +236,51 @@ function Apm_Create_AppointmentRequest() {
                         readOnly
                     />
                 </div>
+               
+
+                <div className="apm-form-group">
+                    <label className="apm-form-label" htmlFor="clientId">Client Id</label>
+                    <input
+                        className="apm-form-input"
+                        type="text"
+                        id="clientId"
+                        style={{ backgroundColor: '#EEEEEE' }}
+                        name="clientId"
+                        value={clientId}
+                        onChange={(e) => setclientPhone(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div className="apm-form-group">
+                    <label className="apm-form-label" htmlFor="clientName">Client Name</label>
+                    <input
+                        className="apm-form-input"
+                        type="text"
+                        id="clientName"
+                        name="clientName"
+                        style={{ backgroundColor: '#EEEEEE' }}
+                        value={clientName}
+                        onChange={(e) => setclientPhone(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div className="apm-form-group">
+                    <label className="apm-form-label" htmlFor="clientPhone">Client Phone</label>
+                    <input
+                        className="apm-form-input"
+                        type="text"
+                        id="clientPhone"
+                        style={{ backgroundColor: '#EEEEEE' }}
+                        name="clientPhone"
+                        value={clientPhone}
+                        onChange={(e) => setclientPhone(e.target.value)}
+                        required
+                    />
+                </div>
+
+
                 <div className="apm-form-group">
                     <label className="apm-form-label" htmlFor="appointmentType">Appointment Type</label>
                     <input
@@ -285,20 +330,7 @@ function Apm_Create_AppointmentRequest() {
                         required
                     />
                 </div>
-  
-                <div className="apm-form-group">
-                    <label className="apm-form-label" htmlFor="clientPhone">Client Phone</label>
-                    <input
-                        className="apm-form-input"
-                        type="text"
-                        id="clientPhone"
-                        name="clientPhone"
-                        value={clientPhone}
-                        onChange={(e) => setclientPhone(e.target.value)}
-                        required
-                    />
-                    {errors.clientPhone && <span className="error">{errors.clientPhone}</span>}
-                </div>
+                
 
                 <button type="submit" className="apm-form-button">Submit</button>
             </form>

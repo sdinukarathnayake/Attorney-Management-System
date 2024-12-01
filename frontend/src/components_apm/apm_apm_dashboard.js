@@ -173,9 +173,9 @@ function Dashboard() {
         const columns = ["Request Date", "Request Name", "Lawyer Name", "Client Name"];
         const rows = [];
 
-        const search = appointment.filter(request => request.appointmentTitle == "Appointmnet Title 1113ZZZ33");
+        const search = appointment.filter();
 
-        search.forEach(request => {
+        appointment.forEach(request => {
             rows.push([
                 Date(request.appointmentRequestDate).toString().split('T')[0],
                 request.appointmentTitle,
@@ -185,7 +185,7 @@ function Dashboard() {
                 clientDetails[request.clientId]
                     ? `${clientDetails[request.clientId].fname} ${clientDetails[request.clientId].lname}`
                     : 'N/A'
-            ]);
+            ]); 
         });
 
 
@@ -241,7 +241,7 @@ function Dashboard() {
                                 return (
                                     <tr className="apm-summary-table-row" key={appointmentrequest._id}>
                                         <td className="apm-summary-table-data">{
-                                              new Date(appointmentrequest.appointmentRequestDate).toISOString().split('T')[0]
+                                              new Date(appointmentrequest.appointmentDate).toString().split('T')[0]
                                         }
                                         </td>
                                         <td className="apm-summary-table-data">{appointmentrequest.appointmentRequestName}</td>
@@ -295,7 +295,7 @@ function Dashboard() {
                                 return (
                                     <tr className="apm-summary-table-row" key={appointment._id}>
                                         <td className="apm-summary-table-data">{
-                                              new Date(appointment.appointmentCreationDate).toISOString().split('T')[0]
+                                              new Date(appointment.appointmentCreationDate).toString().split('T')[0]
                                         }
                                         </td>
                                         <td className="apm-summary-table-data">{appointment.appointmentTitle}</td>

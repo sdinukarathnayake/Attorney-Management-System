@@ -18,9 +18,7 @@ const replyTicketSchema = new Schema({
     },
     userType: {
         type: String,
-        required: [true, 'User type is required'], // Make it required
-        enum: ['Admin', 'Support Agent', 'User'], // Example of enum validation
-    },
+    }, 
     clientId: {
         type: String,
         required: [true, 'Client ID is required'], // Make it required
@@ -37,8 +35,6 @@ const replyTicketSchema = new Schema({
     },
     replyTicketStatus: {
         type: String,
-        enum: ['Pending', 'Resolved', 'Closed'], // Example of enum validation
-        default: 'Pending' // Default status
     }
 });
 
