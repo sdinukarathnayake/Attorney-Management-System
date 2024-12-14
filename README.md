@@ -55,3 +55,34 @@ The Attorney Management System is a full-featured platform that enables law firm
 - Filter by experience, expertise, and location
 - Open platform for lawyer registration
 - Enhanced accessibility to legal services
+
+## System Architecture
+
+### User Roles
+
+1. **Senior Lawyer** - System administrator with full access
+2. **Legal Case Manager** - Handles court cases and litigation
+3. **Deed Manager** - Manages property deeds and conveyancing
+4. **Document Manager** - Oversees document workflows and approvals
+5. **Finance Manager** - Handles billing, payments, and financial transactions
+6. **Appointment Manager** - Manages scheduling and appointments
+7. **Support Agent** - Provides technical and user support
+8. **Client** - End users accessing legal services
+
+### Workflow Overview
+
+1. **Firm Setup**: Developer creates firm profile and registers Senior Lawyer
+2. **User Management**: Senior Lawyer registers and assigns roles to team members
+3. **Case/Deed Creation**: Managers create cases or deeds and register clients
+4. **Document Workflow**: Automated document requests and approval processes
+5. **Appointment Scheduling**: Seamless appointment booking and management
+6. **Financial Processing**: Payment requests, tracking, and verification
+7. **Support System**: Ticket-based support with 24-hour response windows
+
+## Technology Stack
+
+- **Frontend**: React.js with modern UI/UX design
+- **Backend**: Node.js with Express.js framework
+- **Database**: MongoDB for flexible document storage
+- **Authentication**: JWT-based secure authentication
+- **Real-time Features**: Socket.io for notifications and updates
