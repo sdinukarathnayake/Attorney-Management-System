@@ -86,3 +86,51 @@ The Attorney Management System is a full-featured platform that enables law firm
 - **Database**: MongoDB for flexible document storage
 - **Authentication**: JWT-based secure authentication
 - **Real-time Features**: Socket.io for notifications and updates
+
+
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- MongoDB (v4.4 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/attorney-management-system.git
+cd attorney-management-system
+```
+
+2. Install backend dependencies
+```bash
+cd backend
+npm install
+```
+
+3. Install frontend dependencies
+```bash
+cd ../frontend
+npm install
+```
+
+4. Set up environment variables
+```bash
+# Create .env file in backend directory
+cp .env.example .env
+# Configure your MongoDB connection string and other variables
+```
+
+5. Start the application
+```bash
+# Start backend server
+cd backend
+npm start
+
+# Start frontend development server
+cd ../frontend
+npm start
+```
