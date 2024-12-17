@@ -6,6 +6,8 @@ A comprehensive web-based legal practice management solution built with the MERN
 
 The Attorney Management System is a full-featured platform that enables law firms to efficiently manage their operations, from case tracking and client management to document handling and billing. The system supports multiple user roles and provides a seamless workflow for legal professionals and their clients.
 
+![alt text](readme/0.jpg)
+
 ## Key Features
 
 ### Streamlined Case Management
@@ -56,6 +58,7 @@ The Attorney Management System is a full-featured platform that enables law firm
 - Open platform for lawyer registration
 - Enhanced accessibility to legal services
 
+
 ## System Architecture
 
 ### User Roles
@@ -68,6 +71,9 @@ The Attorney Management System is a full-featured platform that enables law firm
 6. **Appointment Manager** - Manages scheduling and appointments
 7. **Support Agent** - Provides technical and user support
 8. **Client** - End users accessing legal services
+
+![alt text](readme/7.jpg)
+
 
 ### Workflow Overview
 
@@ -87,7 +93,7 @@ The Attorney Management System is a full-featured platform that enables law firm
 - **Authentication**: JWT-based secure authentication
 - **Real-time Features**: Socket.io for notifications and updates
 
-
+![alt text](readme/8.jpg)
 
 ## Getting Started
 
@@ -134,6 +140,12 @@ npm start
 cd ../frontend
 npm start
 ```
+
+![alt text](readme/1.jpg)
+
+![alt text](readme/2.jpg)
+
+![alt text](readme/5.jpg)
 
 ## User Experience
 
